@@ -1,22 +1,38 @@
 [project]
-name = "ml-finance-suite"
 version = "0.1.0"
+name = "airsense-ml"
+description = "AirSense ML is a production-grade regression system that predicts Air Quality Index (AQI) and individual pollutant levels (PM2.5, NO2, etc.) for a target city."
 authors = [{ name = "Chitrank Agnihoti", email = "chitrank2050@gmail.com" }]
-description = "ML Finance Suite — End-to-end machine learning pipeline for financial data covering preprocessing, feature engineering, modeling, evaluation, explainability, and API deployment"
-readme = "README.md"
 requires-python = ">=3.12"
+license = { file = "LICENCE" }
+readme = { file = "README.md", content-type = "text/markdown" }
 
 # Production dependencies
 dependencies = [
-  "imbalanced-learn>=0.14.1",
+  # "imbalanced-learn>=0.14.1",
   "matplotlib>=3.10.8",
   "numpy>=2.4.2",
   "pandas>=3.0.1",
   "scikit-learn>=1.8.0",
   "seaborn>=0.13.2",
   "shap>=0.49.1",
-  "xgboost>=3.2.0",
+  # "xgboost>=3.2.0",
 ]
 
 [dependency-groups]
-dev = ["ruff>=0.14.13"]
+dev = [
+    "build>=1.4.0",
+    "ruff>=0.14.13",
+    "questionary>=2.0",
+    "pre-commit>=4.5.1",
+]
+
+[project.scripts]
+dev = "app.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
