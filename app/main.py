@@ -1,5 +1,5 @@
 def main():
-    print("Hello from ml-finance-suite!")
+    print("Hello from airsense-ml!")
 
 
 if __name__ == "__main__":

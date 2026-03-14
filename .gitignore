@@ -94,7 +94,7 @@ ipython_config.py
 # Datasets / Models / Outputs
 # -------------------------
 .DS_Store
-data/
+# data/
 datasets/
 # models/
 checkpoints/
@@ -131,7 +131,7 @@ cache/
 wandb/
 mlruns/
 .neptune/
-.dvc/
+# .dvc/
 
 # TensorBoard logs
 tensorboard/
@@ -155,6 +155,9 @@ Icon[
 # VSCode
 .vscode/
 *.code-workspace
+# But re-include these specific files
+!.vscode/mcp.json
+!.vscode/settings.json
 
 # JetBrains (PyCharm)
 .idea/
