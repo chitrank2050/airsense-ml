@@ -14,7 +14,7 @@ from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
 from xgboost import XGBRegressor
 
-from src.core import logger
+from src.core import bootstrap, logger
 from src.data import inverse_transform_target, transform_target
 from src.features.feature_pipeline import build_feature_pipeline
 from src.features.preprocessing import load_and_clean
@@ -211,4 +211,5 @@ def train(
 
 
 if __name__ == "__main__":
+    bootstrap()
     train()

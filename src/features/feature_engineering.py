@@ -9,7 +9,11 @@ def engineer_base_features(df: pd.DataFrame, target: str) -> pd.DataFrame:
     Cyclical encoding for time features — preserves circular relationships.
     """
     # AQI ceiling flag
-    df["aqi_capped"] = (df[target] == 500).astype(int)
+    # Only create aqi_capped if target exists — inference won't have it
+    if target in df.columns:
+        df["aqi_capped"] = (df[target] == 500).astype(int)
+    else:
+        df["aqi_capped"] = 0
 
     # Day of week: string → numeric → cyclical
     # map → numbers - tree models
