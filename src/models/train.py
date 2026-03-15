@@ -13,12 +13,9 @@ from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
 from xgboost import XGBRegressor
 
+from src.data import inverse_transform_target, transform_target
 from src.features.feature_pipeline import build_feature_pipeline
-from src.features.preprocessing import (
-    inverse_transform_target,
-    load_and_clean,
-    transform_target,
-)
+from src.features.preprocessing import load_and_clean
 from src.utils.paths import get_config_path
 
 # --- Metrics ---
