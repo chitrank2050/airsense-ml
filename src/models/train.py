@@ -4,52 +4,22 @@ from typing import Optional
 import joblib
 import mlflow
 import mlflow.sklearn
-import numpy as np
 import yaml
 from lightgbm import LGBMRegressor
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.linear_model import ElasticNet, Lasso, LinearRegression, Ridge
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
 from xgboost import XGBRegressor
 
 from src.core import bootstrap, logger
-from src.data import inverse_transform_target, transform_target
+from src.data import transform_target
 from src.features.feature_pipeline import build_feature_pipeline
 from src.features.preprocessing import load_and_clean
 from src.utils import print_model_results, print_summary_table
 from src.utils.paths import get_config_path
 
-# --- Metrics ---
-
-
-def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> dict:
-    """
-    Compute evaluation metrics on original AQI scale.
-    Inputs are log-transformed — inverse transform before computing.
-    """
-    y_true_orig = inverse_transform_target(y_true)
-    y_pred_orig = inverse_transform_target(y_pred)
-
-    rmse = np.sqrt(mean_squared_error(y_true_orig, y_pred_orig))
-    mae = mean_absolute_error(y_true_orig, y_pred_orig)
-    r2 = r2_score(y_true_orig, y_pred_orig)
-
-    # RMSLE on original scale
-    rmsle = np.sqrt(
-        mean_squared_error(
-            np.log1p(y_true_orig), np.log1p(np.clip(y_pred_orig, 0, None))
-        )
-    )
-
-    return {
-        "rmse": round(rmse, 4),
-        "mae": round(mae, 4),
-        "r2": round(r2, 4),
-        "rmsle": round(rmsle, 4),
-    }
-
+from .evaluate import compute_metrics
 
 # --- Model Registry ---
 
