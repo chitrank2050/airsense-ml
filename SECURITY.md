@@ -16,6 +16,6 @@ currently being supported with security updates.
 
 If you discover a security vulnerability, please report it to us as soon as possible. We will investigate all reports and do our best to fix the problem quickly.
 
-Please email us at chitrank2050@gmail.com. We will respond to your report within 48 hours.
+Please report potential security vulnerabilities privately to the maintainers and repository owners by using the **Report a vulnerability** feature on the **Security Advisories** tab of this repository. We will respond to your report within 48 hours.
 
 We request that you do not disclose the vulnerability publicly until we have had a chance to address it. We will work with you to make a public announcement at the appropriate time.
