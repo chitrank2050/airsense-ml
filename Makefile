@@ -86,7 +86,7 @@ api:
 # ─────────────────────────────────────────────────────────────────────────────
 lint:
 	@echo "🔍 Checking code quality..."
-	$(UV) run ruff check src/
+	$(UV) run ruff check src/ --fix
 
 format:
 	@echo "✨ Formatting code..."

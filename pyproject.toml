@@ -1,11 +1,11 @@
 [project]
-version = "0.1.0"
 name = "airsense-ml"
+version = "0.1.0"
 description = "AirSense ML is a production-grade regression system that predicts Air Quality Index (AQI) and individual pollutant levels (PM2.5, NO2, etc.) for a target city."
-authors = [{ name = "Chitrank Agnihoti", email = "chitrank2050@gmail.com" }]
-requires-python = ">=3.12"
-license = { file = "LICENCE" }
 readme = { file = "README.md", content-type = "text/markdown" }
+requires-python = ">=3.12"
+license = "MIT"
+authors = [{ name = "Chitrank Agnihoti", email = "chitrank2050@gmail.com" }]
 
 # Production dependencies
 dependencies = [
