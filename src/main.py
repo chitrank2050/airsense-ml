@@ -1,3 +1,5 @@
+import sys
+
 from src.core import bootstrap, logger
 from src.models.train import train
 
@@ -15,5 +17,9 @@ def main():
 
 
 if __name__ == "__main__":
-    # Run the main function
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        # Catch the hard interrupt from the terminal to prevent ugly tracebacks
+        logger.warning("🛑 AirSense ML interrupted by user (KeyboardInterrupt).")
+        sys.exit(0)
