@@ -134,6 +134,8 @@ mlruns/
 mlruns.db
 mlflow.db
 # .dvc/
+# DVC cache
+.dvc/cache/
 
 # TensorBoard logs
 tensorboard/
@@ -147,9 +149,9 @@ tb_logs/
 .LSOverride
 ._*
 # Icon files (macOS)
-Icon\r
-Icon[
-]
+# Icon\r
+# Icon[
+# ]
 
 # -------------------------
 # Editors / IDEs
