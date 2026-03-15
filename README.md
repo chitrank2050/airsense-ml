@@ -1,4 +1,4 @@
-# airsense-ml
+# AirSense ML
 AirSense ML is a production-grade regression system that predicts Air Quality Index (AQI) and individual pollutant levels (PM2.5, NO2, etc.) for a target city.
 
 ## Project Overview
@@ -8,6 +8,7 @@ AirSense ML is a production-grade regression system that predicts Air Quality In
 | Target Variables | AQI score (primary) + PM2.5, NO2, PM10 (secondary)            |
 | Initial Scope    | Single city (Delhi — relevant + data-rich)                    |
 | Future Scope     | Multi-city, real-time ingestion                               |
+
 
 ## Project Structure
 ```text
@@ -47,3 +48,17 @@ airsense-ml/
 ├── .dvc/                 # DVC config
 └── README.md
 ```
+
+
+## 🛠️ Tech Stack
+
+**See detailed documentation**: 🔗 [Tech Stack](docs/tech_stack.md)
+
+## 📚 Data Sources
+
+**See detailed documentation**: 🔗 [Data Sources](docs/data_sources.md)
+
+
+## 🚀 Development log
+
+**See detailed documentation**: 🔗 [Development log](docs/development_log.md)
