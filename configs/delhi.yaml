@@ -1,0 +1,39 @@
+dataset:
+  filepath: ../data/raw/kaggle_delhi_ncr_aqi_dataset.csv
+  target: aqi
+
+leakage_cols:
+  - pm25
+  - pm10
+  - no2
+  - so2
+  - co
+  - o3
+  - aqi_category
+  - datetime
+  - date
+  - year
+  - city
+
+features:
+  numerical:
+    - temperature
+    - humidity
+    - wind_speed
+    - visibility
+    - latitude
+    - longitude
+
+  categorical:
+    - season
+    - station
+
+  ordinal:
+    - month
+    - day
+    - hour
+    - day_of_week
+    - is_weekend
+    - aqi_capped
+
+log_transform_target: true
