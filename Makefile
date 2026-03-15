@@ -86,11 +86,11 @@ api:
 # ─────────────────────────────────────────────────────────────────────────────
 lint:
 	@echo "🔍 Checking code quality..."
-	$(UV) run ruff check src/ --fix
+	$(UV) run --no-sync ruff check src/ --fix
 
 format:
 	@echo "✨ Formatting code..."
-	$(UV) run ruff format src/
+	$(UV) run --no-sync ruff format src/
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Maintenance
