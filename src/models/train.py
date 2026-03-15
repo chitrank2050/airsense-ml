@@ -13,7 +13,7 @@ from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
 from xgboost import XGBRegressor
 
-from src.features.feature_engineering import build_feature_pipeline
+from src.features.feature_pipeline import build_feature_pipeline
 from src.features.preprocessing import (
     inverse_transform_target,
     load_and_clean,
@@ -208,3 +208,7 @@ def train(
     print(f"Saved to: {best_model_path}")
 
     return results, best_model_name
+
+
+if __name__ == "__main__":
+    train()

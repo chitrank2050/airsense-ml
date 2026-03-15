@@ -1,57 +1,45 @@
+import numpy as np
 import pandas as pd
-from sklearn.base import BaseEstimator, TransformerMixin
-from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 
-class FeatureNameResetter(BaseEstimator, TransformerMixin):
+def engineer_base_features(df: pd.DataFrame, target: str) -> pd.DataFrame:
     """
-    Resets feature names after ColumnTransformer.
-    Fixes LightGBM warning about missing feature names.
+    Create derived features from raw data.
+    Runs before leakage drop and validation.
+    Cyclical encoding for time features — preserves circular relationships.
     """
+    # AQI ceiling flag
+    df["aqi_capped"] = (df[target] == 500).astype(int)
 
-    def fit(self, X, y=None):
-        self.fitted_ = True  # add this line
-        return self
+    # Day of week: string → numeric → cyclical
+    # map → numbers - tree models
+    # get_dummies - linear models
+    # sin/cos -> best for cyclical time feature
+    day_map = {
+        "Monday": 0,
+        "Tuesday": 1,
+        "Wednesday": 2,
+        "Thursday": 3,
+        "Friday": 4,
+        "Saturday": 5,
+        "Sunday": 6,
+    }
 
-    def transform(self, X):
-        if hasattr(X, "toarray"):
-            X = X.toarray()
-        return pd.DataFrame(X).values
+    if df["day_of_week"].dtype == object:
+        df["day_of_week"] = df["day_of_week"].map(day_map)
 
+    df["dow_sin"] = np.sin(2 * np.pi * df["day_of_week"] / 7)
+    df["dow_cos"] = np.cos(2 * np.pi * df["day_of_week"] / 7)
+    df = df.drop(columns=["day_of_week"])
 
-def build_feature_pipeline(config: dict) -> ColumnTransformer:
-    """
-    Build feature pipeline from config definition.
-    Column names come from config, not hardcoded.
+    # Hour cyclical
+    df["hour_sin"] = np.sin(2 * np.pi * df["hour"] / 24)
+    df["hour_cos"] = np.cos(2 * np.pi * df["hour"] / 24)
+    df = df.drop(columns=["hour"])
 
-    Args:
-        config: loaded yaml config dict
+    # Month cyclical
+    df["month_sin"] = np.sin(2 * np.pi * df["month"] / 12)
+    df["month_cos"] = np.cos(2 * np.pi * df["month"] / 12)
+    df = df.drop(columns=["month"])
 
-    Returns:
-        ColumnTransformer ready to fit
-    """
-    features = config["features"]
-
-    numerical_pipeline = Pipeline(steps=[("scaler", StandardScaler())])
-
-    categorical_pipeline = Pipeline(
-        steps=[("encoder", OneHotEncoder(handle_unknown="ignore", sparse_output=False))]
-    )
-
-    column_transformer = ColumnTransformer(
-        transformers=[
-            ("numerical", numerical_pipeline, features["numerical"]),
-            ("categorical", categorical_pipeline, features["categorical"]),
-            ("ordinal", "passthrough", features["ordinal"]),
-        ],
-        remainder="drop",  # silently drops anything not listed — safety net
-    )
-
-    return Pipeline(
-        steps=[
-            ("transformer", column_transformer),
-            ("name_resetter", FeatureNameResetter()),
-        ]
-    )
+    return df

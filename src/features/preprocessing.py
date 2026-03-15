@@ -4,6 +4,8 @@ import yaml
 
 from src.utils.paths import PROJECT_ROOT
 
+from .feature_engineering import engineer_base_features
+
 
 def load_config(config_path: str) -> dict:
     """Load dataset config from yaml file."""
@@ -42,28 +44,6 @@ def inverse_transform_target(
 ) -> np.ndarray:
     """Reverse log-transform predictions back to original scale."""
     return np.expm1(y_pred) if log_transform else y_pred
-
-
-def engineer_base_features(df: pd.DataFrame, target: str) -> pd.DataFrame:
-    """
-    Create features that are derived from raw data.
-    Runs before leakage drop and validation.
-    """
-    df["aqi_capped"] = (df[target] == 500).astype(int)
-
-    # Convert day_of_week strings to numbers if needed
-    day_map = {
-        "Monday": 0,
-        "Tuesday": 1,
-        "Wednesday": 2,
-        "Thursday": 3,
-        "Friday": 4,
-        "Saturday": 5,
-        "Sunday": 6,
-    }
-    if df["day_of_week"].dtype == object:
-        df["day_of_week"] = df["day_of_week"].map(day_map)
-    return df
 
 
 def validate_features(df: pd.DataFrame, config: dict) -> None:
