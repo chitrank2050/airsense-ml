@@ -48,9 +48,13 @@ def setup_logger(log_level: str = "INFO") -> None:
     # Reset Loguru Configuration
     logger.remove()
 
-    # # Silence noisy dependencies
-    # for module in ["httpx", "httpcore", "urllib3"]:
-    #     logging.getLogger(module).setLevel(logging.WARNING)
+    # Silence noisy dependencies
+    for module in [
+        "mlflow.sklearn",
+        "mlflow.utils.environment",
+        "mlflow.models.model",
+    ]:
+        logging.getLogger(module).setLevel(logging.ERROR)
 
     # Console
     logger.add(

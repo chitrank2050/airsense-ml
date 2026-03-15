@@ -17,16 +17,6 @@ SUPPRESSED_WARNINGS: list[WarningEntry] = [
         "category": UserWarning,
         "reason": "LightGBM/sklearn interoperability issue during CV folds. Cosmetic only.",
     },
-    {
-        "message": r".*Saving scikit-learn models in the pickle.*",
-        "category": UserWarning,
-        "reason": "MLflow pickle safety warning. Models used internally only.",
-    },
-    {
-        "message": r".*Failed to resolve installed pip version.*",
-        "category": UserWarning,
-        "reason": "MLflow conda environment warning. Project does not use conda.",
-    },
 ]
 
 
