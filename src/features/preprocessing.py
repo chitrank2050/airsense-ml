@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 import yaml
 
+from src.utils.paths import PROJECT_ROOT
+
 
 def load_config(config_path: str) -> dict:
     """Load dataset config from yaml file."""
@@ -48,6 +50,19 @@ def engineer_base_features(df: pd.DataFrame, target: str) -> pd.DataFrame:
     Runs before leakage drop and validation.
     """
     df["aqi_capped"] = (df[target] == 500).astype(int)
+
+    # Convert day_of_week strings to numbers if needed
+    day_map = {
+        "Monday": 0,
+        "Tuesday": 1,
+        "Wednesday": 2,
+        "Thursday": 3,
+        "Friday": 4,
+        "Saturday": 5,
+        "Sunday": 6,
+    }
+    if df["day_of_week"].dtype == object:
+        df["day_of_week"] = df["day_of_week"].map(day_map)
     return df
 
 
@@ -78,7 +93,7 @@ def load_and_clean(config_path: str) -> tuple[pd.DataFrame, dict]:
         config: Loaded configuration dictionary
     """
     config = load_config(config_path)
-    df = pd.read_csv(config["dataset"]["filepath"])
+    df = pd.read_csv(PROJECT_ROOT / config["dataset"]["filepath"])
     df = engineer_base_features(df, config["dataset"]["target"])
     df = drop_leakage(df, config["leakage_cols"])
     validate_features(df, config)
