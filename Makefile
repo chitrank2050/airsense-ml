@@ -87,7 +87,7 @@ dev:
 		exit 1; \
 	fi
 	@echo "🚀 Starting development server..."
-	. $(VENV)/bin/activate && ENV=dev $(UV) run -m app.main
+	. $(VENV)/bin/activate && ENV=dev $(UV) run -m src.main
 
 # Lint - Check code quality with ruff
 lint:
