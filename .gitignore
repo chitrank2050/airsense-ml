@@ -135,6 +135,7 @@ mlruns.db
 mlflow.db
 # .dvc/
 # DVC cache
+.dvc/tmp/
 .dvc/cache/
 
 # TensorBoard logs

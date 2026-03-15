@@ -1,7 +1,6 @@
 import warnings
 
 # Registry of all suppressed warnings in the project.
-# Add new entries here as you encounter them — never suppress inline.
 SUPPRESSED_WARNINGS = [
     {
         "message": "X does not have valid feature names",
