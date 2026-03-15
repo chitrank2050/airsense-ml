@@ -128,10 +128,11 @@ huggingface/
 transformers_cache/
 cache/
 wandb/
-mlruns/
-mlruns.db
 *.db
 .neptune/
+mlruns/
+mlruns.db
+mlflow.db
 # .dvc/
 
 # TensorBoard logs

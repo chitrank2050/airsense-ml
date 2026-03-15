@@ -12,7 +12,7 @@ from pathlib import Path
 
 try:
     import questionary
-    from questionary import Choice, Separator
+    from questionary import Choice
 except ImportError:
     print("questionary not installed. Run: uv add questionary --dev")
     sys.exit(1)
@@ -46,54 +46,48 @@ def run_make(*targets: str) -> None:
             print(f"\n  ⚠️  make {target!r} exited with code {result.returncode}\n")
 
 
-def _clean_cache() -> None:
-    run_make("_clean_cache")
+# ── Execution order — never changes regardless of selection order ─────────────
+EXECUTION_ORDER = [
+    # Destructive first
+    ("venv", lambda: run_make("_clean_venv")),
+    ("cache", lambda: run_make("_clean_cache")),
+    ("models", lambda: run_make("_clean_models")),
+    ("mlflow_clean", lambda: run_make("_clean_mlflow")),
+    # Setup second
+    ("init", lambda: run_make("init")),
+    ("install", lambda: run_make("install")),
+    # Pipeline third
+    ("train", lambda: run_make("train")),
+    ("tune", lambda: run_make("tune")),
+    ("mlflow", lambda: run_make("mlflow")),
+    ("api", lambda: run_make("api")),
+    # Dev tools last
+    ("lint", lambda: run_make("lint")),
+    ("format", lambda: run_make("format")),
+]
 
 
-def _clean_models() -> None:
-    run_make("_clean_models")
-
-
-def _clean_venv() -> None:
-    run_make("_clean_venv")
+def execute_choices(choices: list[str]) -> None:
+    """Execute selected actions in fixed dependency order, never user-selection order."""
+    for key, fn in EXECUTION_ORDER:
+        if key in choices:
+            fn()
 
 
 def _nothing_selected() -> None:
     print("\n  Nothing selected — no action taken.\n")
 
 
-# ── Mode: make clean ─────────────────────────────────────────────────────────
-def mode_clean() -> None:
-    choices = questionary.checkbox(
-        "🧹  Clean — select what to remove",
-        choices=[
-            Choice(
-                "Cache files    (__pycache__, .pyc, dist, .ruff_cache…)", value="cache"
-            ),
-            Choice("Saved models   (models/)", value="models"),
-        ],
-        style=STYLE,
-    ).ask()
-
-    if not choices:
-        _nothing_selected()
-        return
-
-    if "cache" in choices:
-        _clean_cache()
-    if "models" in choices:
-        _clean_models()
-
-
-# ── Mode: make obliviate ─────────────────────────────────────────────────────
+# ── Mode: make obliviate or clean ─────────────────────────────────────────────────────
 def mode_obliviate() -> None:
     choices = questionary.checkbox(
-        "☠️   Obliviate — select what to obliterate",
+        "🧹 Obliviate — select what to obliterate",
         choices=[
             Choice(
                 "Cache files    (__pycache__, .pyc, dist, .ruff_cache…)", value="cache"
             ),
             Choice("Saved models   (models/)", value="models"),
+            Choice("MLflow data    (mlruns.db, mlruns/)", value="mlflow"),
             Choice("Virtual env    (.venv)", value="venv"),
         ],
         style=STYLE,
@@ -103,69 +97,12 @@ def mode_obliviate() -> None:
         _nothing_selected()
         return
 
-    # Always run in safe dependency order
-    if "venv" in choices:
-        _clean_venv()
-    if "cache" in choices:
-        _clean_cache()
-    if "models" in choices:
-        _clean_models()
-
-    print()
-    print("  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-    print("  To set up again:")
-    print("  → Run 'make init'    to create venv")
-    print("  → Run 'make install' to install deps")
-    print("  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━")
-    print()
-
-
-# ── Mode: make menu (full wizard) ────────────────────────────────────────────
-def mode_wizard() -> None:
-    choices = questionary.checkbox(
-        "⚡  ML-Notebook-Library — what would you like to do?",
-        choices=[
-            Choice("Init     – Create virtual environment", value="init"),
-            Choice("Install  – Sync dependencies", value="install"),
-            Choice("Dev      – Launch Jupyter Lab", value="dev"),
-            Choice("Lint     – Check code quality with ruff", value="lint"),
-            Choice("Format   – Auto-format code with ruff", value="format"),
-            Separator("── Cleanup ───────────────────────────────────"),
-            Choice("Cache    – Remove __pycache__, dist, caches…", value="cache"),
-            Choice("Models   – Remove saved models (models/)", value="models"),
-            Choice("Venv     – Remove virtual environment (.venv)", value="venv"),
-        ],
-        style=STYLE,
-    ).ask()
-
-    if not choices:
-        _nothing_selected()
-        return
-
-    # Execute in dependency order: destructive first → setup → dev tools
-    if "venv" in choices:
-        _clean_venv()
-    if "cache" in choices:
-        _clean_cache()
-    if "models" in choices:
-        _clean_models()
-    if "init" in choices:
-        run_make("init")
-    if "install" in choices:
-        run_make("install")
-    if "dev" in choices:
-        run_make("dev")
-    if "lint" in choices:
-        run_make("lint")
-    if "format" in choices:
-        run_make("format")
+    execute_choices(choices)
 
 
 # ── Entry point ──────────────────────────────────────────────────────────────
 MODES = {
-    "clean": mode_clean,
     "obliviate": mode_obliviate,
-    "wizard": mode_wizard,
 }
 
 if __name__ == "__main__":
