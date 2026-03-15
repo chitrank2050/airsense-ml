@@ -137,7 +137,7 @@ _clean_models:
 
 _clean_logs:
 	@echo "🧹 Removing log files..."
-	@find logs/ -name "*.log" -delete 2>/dev/null || true
+	@rm -rf logs/
 	@echo "✅ Log files removed"
 
 _clean_venv:
