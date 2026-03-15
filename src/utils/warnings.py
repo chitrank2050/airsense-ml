@@ -1,36 +1,39 @@
 import warnings
+from typing import TypedDict
+
+from src.core.logger import logger
+
+
+class WarningEntry(TypedDict):
+    message: str
+    category: type[Warning]
+    reason: str
+
 
 # Registry of all suppressed warnings in the project.
-SUPPRESSED_WARNINGS = [
+SUPPRESSED_WARNINGS: list[WarningEntry] = [
     {
-        "message": "X does not have valid feature names",
+        "message": r".*X does not have valid feature names.*",
         "category": UserWarning,
-        "reason": "LightGBM/sklearn interoperability issue during CV folds. Cosmetic only, does not affect results.",
+        "reason": "LightGBM/sklearn interoperability issue during CV folds. Cosmetic only.",
     },
     {
-        "message": "Saving scikit-learn models in the pickle",
+        "message": r".*Saving scikit-learn models in the pickle.*",
         "category": UserWarning,
-        "reason": "MLflow pickle safety warning. Acknowledged — models are for internal use only.",
+        "reason": "MLflow pickle safety warning. Models used internally only.",
     },
     {
-        "message": "Failed to resolve installed pip version",
+        "message": r".*Failed to resolve installed pip version.*",
         "category": UserWarning,
-        "reason": "MLflow conda env warning. Not using conda in this project.",
+        "reason": "MLflow conda environment warning. Project does not use conda.",
     },
 ]
 
 
 def suppress_known_warnings() -> None:
-    """
-    Suppress all known/acknowledged warnings in one call.
-    Call this at the top of any entry point (train.py, api/app.py etc).
-
-    To add a new suppression:
-        1. Add an entry to SUPPRESSED_WARNINGS above
-        2. Include message, category, and reason
-        3. Never suppress inline with warnings.filterwarnings outside this file
-    """
+    """Suppress all known/acknowledged warnings in one call."""
     for entry in SUPPRESSED_WARNINGS:
+        logger.info(f"⚠️ Suppressing warning: {entry['reason']}")
         warnings.filterwarnings(
             "ignore",
             message=entry["message"],

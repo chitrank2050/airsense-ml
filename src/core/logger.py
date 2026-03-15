@@ -17,11 +17,13 @@ class InterceptHandler(logging.Handler):
     """Redirect stdlib logging (httpx, mlflow etc) through Loguru."""
 
     def emit(self, record: logging.LogRecord) -> None:
+        # Get corresponding Loguru level if it exists
         try:
             level: Union[str, int] = logger.level(record.levelname).name
         except ValueError:
             level = record.levelno
 
+        # Find caller from where originated the logged message
         frame, depth = logging.currentframe(), 2
         while frame and frame.f_code.co_filename == logging.__file__:
             frame = frame.f_back
@@ -39,13 +41,16 @@ def setup_logger(log_level: str = "INFO") -> None:
     """
     # Intercept stdlib logs
     logging.root.handlers = [InterceptHandler()]
+
+    # Set the root logger level to the configured level to ensure interception works
     logging.root.setLevel(log_level)
 
-    # Silence noisy dependencies
-    for module in ["httpx", "httpcore", "urllib3"]:
-        logging.getLogger(module).setLevel(logging.WARNING)
-
+    # Reset Loguru Configuration
     logger.remove()
+
+    # # Silence noisy dependencies
+    # for module in ["httpx", "httpcore", "urllib3"]:
+    #     logging.getLogger(module).setLevel(logging.WARNING)
 
     # Console
     logger.add(
@@ -75,7 +80,3 @@ def setup_logger(log_level: str = "INFO") -> None:
         format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function} - {message}",
         enqueue=True,
     )
-
-
-# Singleton Logger Instance
-log = setup_logger()
