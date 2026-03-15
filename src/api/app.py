@@ -12,27 +12,28 @@ Usage:
     or via Makefile: make api
 """
 
+import sys
+
+import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.api.v1 import router as v1_router
-from src.core import api_lifespan
+from src.core import api_lifespan, bootstrap, logger, settings
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Application factory
 # ─────────────────────────────────────────────────────────────────────────────
 
 app = FastAPI(
-    title="AirSense ML API",
-    description=(
-        "Production-grade Air Quality Index prediction API for Delhi. "
-        "Predicts AQI and pollution category from weather and location features."
-    ),
-    version="1.0.0",
+    title=settings.API_TITLE,
+    description=settings.API_DESCRIPTION,
+    version=settings.API_VERSION,
     lifespan=api_lifespan,
-    docs_url="/docs",
-    redoc_url="/redoc",
-    openapi_url="/openapi.json",
+    debug=settings.API_DEBUG,
+    docs_url=settings.API_DOCS_URL,
+    redoc_url=settings.API_REDOC_URL,
+    openapi_url=settings.API_OPENAPI_URL,
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -40,12 +41,12 @@ app = FastAPI(
 # ─────────────────────────────────────────────────────────────────────────────
 
 app.add_middleware(
-    CORSMiddleware,  # ty:ignore[invalid-argument-type] Reason: false positive error by ty
+    CORSMiddleware,  # type: ignore[arg-type]
     # Restrict in production — expand only for known frontend origins
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=settings.API_ALLOWED_ORIGINS,
+    allow_credentials=settings.API_ALLOW_CREDENTIALS,
+    allow_methods=settings.API_ALLOWED_METHODS,
+    allow_headers=settings.API_ALLOWED_HEADERS,
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -53,4 +54,23 @@ app.add_middleware(
 # ─────────────────────────────────────────────────────────────────────────────
 
 # Mount v1 — all endpoints live under /v1
-app.include_router(v1_router, prefix="/v1")
+app.include_router(v1_router, prefix=settings.API_PREFIX)
+
+
+def main():
+    uvicorn.run(
+        "src.api.app:app",
+        host=settings.API_HOST,
+        port=settings.API_PORT,
+        reload=settings.API_RELOAD,
+        log_level=settings.LOG_LEVEL.lower(),
+    )
+
+
+if __name__ == "__main__":
+    try:
+        bootstrap()
+        main()
+    except KeyboardInterrupt:
+        logger.warning("🛑 Application interrupted by user.")
+        sys.exit(0)

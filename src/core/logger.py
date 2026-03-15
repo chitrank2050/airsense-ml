@@ -11,6 +11,8 @@ from loguru import logger
 
 from src.utils.paths import PROJECT_ROOT
 
+from .config import settings
+
 
 class InterceptHandler(logging.Handler):
     """Redirect stdlib logging (httpx, mlflow etc) through Loguru."""
@@ -48,23 +50,14 @@ def setup_logger(log_level: str = "INFO") -> None:
     logger.remove()
 
     # Silence noisy dependencies
-    for module in [
-        "mlflow.sklearn",
-        "mlflow.utils.environment",
-        "mlflow.models.model",
-    ]:
+    for module in settings.LOG_SILENCE_MODULES:
         logging.getLogger(module).setLevel(logging.ERROR)
 
     # Console
     logger.add(
         sys.stdout,
         level=log_level,
-        format=(
-            "<green>{time:HH:mm:ss}</green> | "
-            "<level>{level: <8}</level> | "
-            "<cyan>{name}</cyan>:<cyan>{function}</cyan> - "
-            "<level>{message}</level>"
-        ),
+        format=settings.LOG_FORMAT,
         colorize=True,
         enqueue=True,
         backtrace=True,
@@ -74,12 +67,13 @@ def setup_logger(log_level: str = "INFO") -> None:
     # File
     log_dir = PROJECT_ROOT / "logs"
     log_dir.mkdir(exist_ok=True)
-    logger.add(
-        log_dir / "airsense.log",
-        level=log_level,
-        rotation="10 MB",
-        retention="30 days",
-        compression="zip",
-        format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function} - {message}",
-        enqueue=True,
-    )
+    if settings.ENABLE_LOG_FILE:
+        logger.add(
+            log_dir / settings.LOG_FILE_NAME,
+            level=log_level,
+            rotation="10 MB",
+            retention=settings.LOG_FILE_RETENTION,
+            compression="zip",
+            format=settings.LOG_FILE_FORMAT,
+            enqueue=True,
+        )
