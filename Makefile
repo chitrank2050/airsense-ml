@@ -5,7 +5,7 @@ UV := uv
 PYTHON_VERSION := $(shell if [ -f .python-version ]; then cat .python-version; else echo "3.12"; fi)
 
 .DEFAULT_GOAL := help
-.PHONY: help init install train tune mlflow api lint format obliviate tree python-version
+.PHONY: help init install dev train tune mlflow api lint format obliviate tree python-version
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Help
@@ -58,6 +58,10 @@ install:
 # ─────────────────────────────────────────────────────────────────────────────
 # ML Pipeline
 # ─────────────────────────────────────────────────────────────────────────────
+dev:
+	@echo "🤖 Running full pipeline..."
+	$(UV) run python -m src.main
+
 train:
 	@echo "🤖 Running training pipeline..."
 	$(UV) run python -m src.models.train
