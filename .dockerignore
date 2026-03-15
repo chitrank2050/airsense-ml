@@ -1,0 +1,54 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+
+# Virtual environment — rebuilt inside container
+.venv/
+
+# Development tools
+.git/
+.gitignore
+.pre-commit-config.yaml
+.ruff_cache/
+.mypy_cache/
+.pytest_cache/
+
+# Notebooks and docs — never needed at runtime
+notebooks/
+docs/
+site/
+scripts/
+
+# Test artifacts
+htmlcov/
+.coverage
+tests/
+
+# ML experiment tracking — not needed at runtime
+mlruns/
+mlruns.db
+mlflow.db
+
+# All model artifacts except the one we need
+models/
+!models/best_model.pkl
+
+# All data — never in container
+data/
+
+# Environment secrets
+.env.dev
+.env.prod
+.env.local
+
+# Editor
+.vscode/
+.idea/
+.cursorignore
+
+# OS
+.DS_Store
+Thumbs.db

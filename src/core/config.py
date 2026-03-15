@@ -66,7 +66,7 @@ class _Settings(BaseSettings):
 
     # API Server settings
     API_PREFIX: str = "/v1"
-    API_HOST: str = "127.0.0.1"
+    API_HOST: str = "0.0.0.0"
     API_PORT: int = 8000
     API_RELOAD: bool = True  # reload on file change — dev only, override in .env.prod
     API_DEBUG: bool = False  # always opt-in to debug; never default True
