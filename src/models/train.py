@@ -5,12 +5,8 @@ import joblib
 import mlflow
 import mlflow.sklearn
 import yaml
-from lightgbm import LGBMRegressor
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.linear_model import ElasticNet, Lasso, LinearRegression, Ridge
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
-from xgboost import XGBRegressor
 
 from src.core import bootstrap, logger
 from src.data import transform_target
@@ -20,36 +16,7 @@ from src.utils import print_model_results, print_summary_table
 from src.utils.paths import get_config_path
 
 from .evaluate import compute_metrics
-
-# --- Model Registry ---
-
-
-def get_models(model_config: dict) -> dict:
-    """
-    Build model instances from config.
-    Only returns models where enabled: true.
-    """
-    model_map = {
-        "linear_regression": LinearRegression,
-        "ridge": Ridge,
-        "lasso": Lasso,
-        "elastic_net": ElasticNet,
-        "random_forest": RandomForestRegressor,
-        "xgboost": XGBRegressor,
-        "lightgbm": LGBMRegressor,
-    }
-
-    models = {}
-    for name, cfg in model_config["models"].items():
-        if cfg.get("enabled", True):
-            cls = model_map.get(name)
-            if cls:
-                models[name] = cls(**cfg.get("params", {}))
-
-    return models
-
-
-# --- Training ---
+from .registry import get_models
 
 
 def load_model_config(config_path: str) -> dict:
