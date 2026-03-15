@@ -73,9 +73,6 @@ venv.bak/
 .ruff_cache/
 .tox/
 
-# UV specific
-uv.lock
-
 # PyBuilder
 .pybuilder/
 target/
@@ -130,6 +127,8 @@ transformers_cache/
 cache/
 wandb/
 mlruns/
+mlruns.db
+*.db
 .neptune/
 # .dvc/
 

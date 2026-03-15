@@ -43,48 +43,6 @@ def compute_metrics(y_true: np.ndarray, y_pred: np.ndarray) -> dict:
         )
     )
 
-    """
-    CV RMSE (Cross-Validation RMSE)
-    Lower is better. But this number looks different because it's computed in log space (your target is log-transformed during training).
-    So CV RMSE: 0.2525 is not 0.25 AQI points — it's 0.25 in log(AQI) space. You can't directly compare it to Val RMSE. Its only purpose is comparing models against each other:
-
-    Linear CV RMSE: 0.2525
-    Random Forest CV RMSE: 0.1846
-    XGBoost CV RMSE: 0.1832
-
-    Lower CV RMSE = more consistent across different data splits = more reliable model.
-    """
-
-    """
-    R² (R-squared)
-    Higher is better. Range is 0 to 1.
-    It means "what percentage of AQI variation does the model explain?"
-
-    R²: 0.9449 = model explains 94.49% of AQI variation
-    R²: 0.9831 = model explains 98.31% of AQI variation
-
-    Anything above 0.95 is considered strong. Tree models are excellent here
-    """
-
-    """
-    RMSE (Root Mean Squared Error)
-    Lower is better. It's in the same unit as your target — AQI points.
-    So Val RMSE: 40.28 means on average your model's predictions are 40 AQI points off from reality.
-    On a 0-500 AQI scale that's roughly 8% error. Decent for a linear model, but not good enough for a real system — Delhi AQI swings between "Moderate (100)" and "Hazardous (400)" so being 40 points off is a meaningful error.
-    Compare across models — lower RMSE wins:
-
-    Linear: 40.28 — bad
-    Random Forest: 22.31 — nearly half the error
-    """
-
-    """
-    MAE (Mean Absolute Error)
-    Same unit as RMSE (AQI points), but simpler: average absolute difference.
-    MAE: 32.11 means on average your model is off by 32 AQI points.
-    Less sensitive to outliers than RMSE, but still shows the same trend:
-    Linear: 32.11 — bad
-    Random Forest: 17.89 — much better
-    """
     return {
         "rmse": round(rmse, 4),
         "mae": round(mae, 4),
@@ -176,13 +134,6 @@ def train(
     mlflow.set_tracking_uri(mlflow_cfg["tracking_uri"])
     mlflow.set_experiment(mlflow_cfg["experiment_name"])
 
-    """
-    How to decide which model wins — three rules:
-
-    Lowest Val RMSE — primary metric, real AQI points
-    Highest R² — confirms the model actually understands the pattern
-    Val RMSE ≈ Test RMSE — if they're far apart, the model is overfitting
-    """
     results = {}
     best_model_name = None
     best_metric = float("inf")
@@ -257,7 +208,3 @@ def train(
     print(f"Saved to: {best_model_path}")
 
     return results, best_model_name
-
-
-if __name__ == "__main__":
-    train()

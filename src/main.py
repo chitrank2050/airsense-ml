@@ -1,5 +1,11 @@
+from src.models.train import train
+from src.utils.warnings import suppress_known_warnings
+
+suppress_known_warnings()
+
+
 def main():
-    print("Hello from airsense-ml!")
+    train()
 
 
 if __name__ == "__main__":
