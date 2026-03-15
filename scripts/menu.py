@@ -53,6 +53,7 @@ EXECUTION_ORDER = [
     ("cache", lambda: run_make("_clean_cache")),
     ("models", lambda: run_make("_clean_models")),
     ("mlflow_clean", lambda: run_make("_clean_mlflow")),
+    ("logs", lambda: run_make("_clean_logs")),
     # Setup second
     ("init", lambda: run_make("init")),
     ("install", lambda: run_make("install")),
@@ -88,6 +89,7 @@ def mode_obliviate() -> None:
             ),
             Choice("Saved models   (models/)", value="models"),
             Choice("MLflow data    (mlruns.db, mlruns/)", value="mlflow_clean"),
+            Choice("Logs           (logs/)", value="logs"),
             Choice("Virtual env    (.venv)", value="venv"),
         ],
         style=STYLE,

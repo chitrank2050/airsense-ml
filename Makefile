@@ -135,6 +135,11 @@ _clean_models:
 	@find models/ -name "*.pickle" -delete 2>/dev/null || true
 	@echo "✅ Model artifacts removed (DVC pointer files preserved)"
 
+_clean_logs:
+	@echo "🧹 Removing log files..."
+	@find logs/ -name "*.log" -delete 2>/dev/null || true
+	@echo "✅ Log files removed"
+
 _clean_venv:
 	@echo "🗑️  Removing virtual environment..."
 	@rm -rf $(VENV)
