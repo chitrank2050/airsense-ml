@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Optional
 
 import joblib
 import mlflow
@@ -13,9 +14,11 @@ from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
 from xgboost import XGBRegressor
 
+from src.core import logger
 from src.data import inverse_transform_target, transform_target
 from src.features.feature_pipeline import build_feature_pipeline
 from src.features.preprocessing import load_and_clean
+from src.utils import print_model_results, print_summary_table
 from src.utils.paths import get_config_path
 
 # --- Metrics ---
@@ -119,7 +122,7 @@ def train(
         random_state=train_cfg["random_state"],
     )
 
-    print(f"Train: {X_train.shape} | Val: {X_val.shape} | Test: {X_test.shape}")
+    logger.info(f"Train: {X_train.shape} | Val: {X_val.shape} | Test: {X_test.shape}")
 
     # Feature pipeline
     feature_pipeline = build_feature_pipeline(dataset_config)
@@ -132,13 +135,13 @@ def train(
     mlflow.set_experiment(mlflow_cfg["experiment_name"])
 
     results = {}
-    best_model_name = None
+    best_model_name: Optional[str] = None
     best_metric = float("inf")
     best_pipeline = None
 
     # Training loop
     for model_name, model in models.items():
-        print(f"\nTraining {model_name}...")
+        logger.info(f"Training {model_name} ...")
 
         with mlflow.start_run(run_name=model_name):
             # Full pipeline: feature transform + model
@@ -174,9 +177,7 @@ def train(
             mlflow.log_metric("cv_rmse", cv_rmse)
             mlflow.sklearn.log_model(full_pipeline, name=model_name)
 
-            print(f"  Val  RMSE: {val_metrics['rmse']} | R2: {val_metrics['r2']}")
-            print(f"  Test RMSE: {test_metrics['rmse']} | R2: {test_metrics['r2']}")
-            print(f"  CV   RMSE: {cv_rmse}")
+            print_model_results(model_name, val_metrics, test_metrics, cv_rmse)
 
             results[model_name] = {
                 "val": val_metrics,
@@ -200,9 +201,11 @@ def train(
     # Save model using joblib
     joblib.dump(best_pipeline, best_model_path)
 
-    print(f"\nBest model: {best_model_name}")
-    print(f"Best val RMSE: {best_metric}")
-    print(f"Saved to: {best_model_path}")
+    if best_model_name:
+        print_summary_table(results, best_model_name)
+        logger.success(f"Best model: {best_model_name} — Val RMSE: {best_metric}")
+
+    logger.success(f"Saved best model to: {best_model_path}")
 
     return results, best_model_name
 
