@@ -99,6 +99,8 @@ saved_models/
 outputs/
 runs/
 logs/
+logs/
+*.log
 
 # Model files
 *.ckpt
