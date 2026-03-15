@@ -57,7 +57,6 @@ MANIFEST
 # -------------------------
 # Virtual Environments
 # -------------------------
-.env
 .envrc
 .venv
 venv/
@@ -68,6 +67,9 @@ ai-env/
 .python-version
 env.bak/
 venv.bak/
+.env.dev
+.env.prod
+.env.local
 
 # Ruff
 .ruff_cache/
