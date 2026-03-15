@@ -1,5 +1,4 @@
 from pathlib import Path
-from typing import Dict, Optional
 
 import joblib
 import mlflow
@@ -65,8 +64,8 @@ def train(
     mlflow.set_tracking_uri(mlflow_cfg["tracking_uri"])
     mlflow.set_experiment(mlflow_cfg["experiment_name"])
 
-    results: Dict = {}
-    best_model_name: Optional[str] = None
+    results: dict = {}
+    best_model_name: str | None = None
     best_metric = float("inf")
     best_pipeline = None
 

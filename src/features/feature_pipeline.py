@@ -24,7 +24,11 @@ def build_feature_pipeline(config: dict) -> Pipeline:
     column_transformer = ColumnTransformer(
         transformers=[
             ("numerical", build_numerical_pipeline(), features["numerical"]),
-            ("categorical", build_categorical_pipeline(), features["categorical"]),
+            (
+                "categorical",
+                build_categorical_pipeline(),
+                features["categorical"],
+            ),
             ("ordinal", "passthrough", features["ordinal"]),
         ],
         # silently drops anything not listed — safety net

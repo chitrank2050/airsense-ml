@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pandas as pd
 import yaml
 
@@ -6,7 +8,7 @@ from src.utils.paths import PROJECT_ROOT
 
 def load_config(config_path: str) -> dict:
     """Load dataset config from yaml file."""
-    with open(config_path, "r") as f:
+    with Path(config_path).open() as f:
         return yaml.safe_load(f)
 
 

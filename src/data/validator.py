@@ -29,11 +29,11 @@ def validate_no_nulls(df: pd.DataFrame, cols: list[str]) -> None:
         df: dataframe to check
         cols: list of column names to check
     """
-    null_cols = [c for c in cols if df[c].isnull().any()]
+    null_cols = [c for c in cols if df[c].isna().any()]
     if null_cols:
         raise ValueError(
             f"Null values found in columns: {null_cols}\n"
-            f"Null counts: {df[null_cols].isnull().sum().to_dict()}"
+            f"Null counts: {df[null_cols].isna().sum().to_dict()}"
         )
 
 

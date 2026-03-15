@@ -17,7 +17,7 @@ class FeatureNameResetter(BaseEstimator, TransformerMixin):
     def transform(self, x):
         if hasattr(x, "toarray"):
             x = x.toarray()
-        return pd.DataFrame(x).values
+        return pd.DataFrame(x).to_numpy()
 
 
 def build_numerical_pipeline() -> Pipeline:
