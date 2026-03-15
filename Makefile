@@ -78,11 +78,7 @@ mlflow:
 # API
 # ─────────────────────────────────────────────────────────────────────────────
 api:
-	@if [ ! -f .env.dev ]; then \
-		echo "⚠️  .env.dev not found — copying from .env.example"; \
-		cp .env.example .env.dev; \
-	fi
-	@echo "🚀 Starting FastAPI server..."
+	@echo "🚀 Starting API server..."
 	$(UV) run python -m src.api.app
 
 # ─────────────────────────────────────────────────────────────────────────────

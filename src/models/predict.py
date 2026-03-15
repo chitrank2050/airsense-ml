@@ -20,6 +20,7 @@ import joblib
 
 from src.api.adapters import PredictionAdapter
 from src.api.schemas import PredictionRequest, PredictionResponse
+from src.core.config import settings
 from src.core.logger import logger
 from src.data import inverse_transform_target, load_config
 from src.features import engineer_base_features
@@ -65,7 +66,7 @@ class AQIPredictor:
             FileNotFoundError: If model file does not exist at model_path.
                 Run 'make train' to generate the model artifact.
         """
-        self.model_path = model_path or get_model_path("best_model.pkl")
+        self.model_path = model_path or get_model_path(settings.MODEL_NAME)
         self.dataset_config_path = dataset_config_path or str(
             get_config_path("delhi.yaml")
         )
