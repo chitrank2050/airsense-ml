@@ -1,5 +1,4 @@
-"""src/api/adapters
-
+"""
 Adapter layer between the API schema layer and the inference layer.
 
 Decouples API request/response contracts from the ML pipeline internals.
