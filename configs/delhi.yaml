@@ -23,16 +23,19 @@ features:
     - visibility
     - latitude
     - longitude
+    - dow_sin
+    - dow_cos
+    - hour_sin
+    - hour_cos
+    - month_sin
+    - month_cos
 
   categorical:
     - season
     - station
 
   ordinal:
-    - month
     - day
-    - hour
-    - day_of_week
     - is_weekend
     - aqi_capped
 

@@ -20,6 +20,7 @@ help:
 	@echo "  make install       - Install/sync dependencies"
 	@echo ""
 	@echo "ML Pipeline:"
+	@echo "  make dev           - Run full pipeline (defined under src/main.py)"
 	@echo "  make train         - Run full training pipeline"
 	@echo "  make tune          - Run hyperparameter tuning (Optuna)"
 	@echo "  make mlflow        - Start MLflow UI"
