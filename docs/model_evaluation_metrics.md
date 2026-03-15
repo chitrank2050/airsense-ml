@@ -84,6 +84,6 @@ This confirms non-linear feature interactions dominate AQI prediction.
 ## How to Pick the Best Model
 
 1. **Lowest Val RMSE** — primary decision metric
-2. **Highest R²** — confirms pattern learning, not just memorisation  
+2. **Highest R²** — confirms pattern learning, not just memorisation
 3. **Val RMSE ≈ Test RMSE** — large gap = overfitting
 4. **CV RMSE consistency** — high variance across folds = unstable model
