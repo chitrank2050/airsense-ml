@@ -1,5 +1,4 @@
-"""src/api/schemas/prediction.py
-
+"""
 Request and response schemas for single AQI prediction endpoint.
 
 Responsibility: define and validate the shape of POST /v1/predict
