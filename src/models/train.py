@@ -1,15 +1,14 @@
 from pathlib import Path
-from typing import Optional
+from typing import Dict, Optional
 
 import joblib
 import mlflow
 import mlflow.sklearn
-import yaml
 from sklearn.model_selection import cross_val_score, train_test_split
 from sklearn.pipeline import Pipeline
 
 from src.core import bootstrap, logger
-from src.data import transform_target
+from src.data import load_config, transform_target
 from src.features.feature_pipeline import build_feature_pipeline
 from src.features.preprocessing import load_and_clean
 from src.utils import print_model_results, print_summary_table
@@ -19,17 +18,12 @@ from .evaluate import compute_metrics
 from .registry import get_models
 
 
-def load_model_config(config_path: str) -> dict:
-    with open(config_path, "r") as f:
-        return yaml.safe_load(f)
-
-
 def train(
     dataset_config_path: str = str(get_config_path("delhi.yaml")),
     model_config_path: str = str(get_config_path("model_config.yaml")),
 ):
     # Load configs
-    model_config = load_model_config(model_config_path)
+    model_config = load_config(model_config_path)
     train_cfg = model_config["training"]
     eval_cfg = model_config["evaluation"]
     mlflow_cfg = model_config["mlflow"]
@@ -71,7 +65,7 @@ def train(
     mlflow.set_tracking_uri(mlflow_cfg["tracking_uri"])
     mlflow.set_experiment(mlflow_cfg["experiment_name"])
 
-    results = {}
+    results: Dict = {}
     best_model_name: Optional[str] = None
     best_metric = float("inf")
     best_pipeline = None
