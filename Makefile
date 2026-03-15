@@ -78,8 +78,12 @@ mlflow:
 # API
 # ─────────────────────────────────────────────────────────────────────────────
 api:
+	@if [ ! -f .env.dev ]; then \
+		echo "⚠️  .env.dev not found — copying from .env.example"; \
+		cp .env.example .env.dev; \
+	fi
 	@echo "🚀 Starting FastAPI server..."
-	$(UV) run uvicorn src.api.app:app --reload --host 127.0.0.1 --port 8000
+	$(UV) run python -m src.api.app
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Code Quality

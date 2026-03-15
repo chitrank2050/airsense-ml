@@ -20,7 +20,7 @@ import joblib
 
 from src.api.adapters import PredictionAdapter
 from src.api.schemas import PredictionRequest, PredictionResponse
-from src.core import logger
+from src.core.logger import logger
 from src.data import inverse_transform_target, load_config
 from src.features import engineer_base_features
 from src.utils.paths import get_config_path, get_model_path
