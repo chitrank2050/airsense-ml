@@ -30,13 +30,16 @@ NUMERICAL_FEATURES = [
     "visibility",
     "latitude",
     "longitude",
-    "day",
-    "month",
-    "hour",
     "is_weekend",
+    "hour_sin",
+    "hour_cos",
+    "month_sin",
+    "month_cos",
+    "dow_sin",
+    "dow_cos",
 ]
 
-CATEGORICAL_FEATURES = ["station", "season", "day_of_week"]
+CATEGORICAL_FEATURES = ["station", "season"]
 
 
 def save_reference_dataset(X_train: pd.DataFrame, artifact_cfg: dict) -> None:
@@ -86,13 +89,15 @@ async def get_production_data(db: AsyncSession, limit: int = 1000) -> pd.DataFra
                 "visibility": log.visibility,
                 "latitude": log.latitude,
                 "longitude": log.longitude,
-                "day": log.day,
-                "month": log.month,
-                "hour": log.hour,
                 "is_weekend": log.is_weekend,
                 "station": log.station,
                 "season": log.season,
-                "day_of_week": log.day_of_week,
+                "hour_sin": log.hour_sin,
+                "hour_cos": log.hour_cos,
+                "month_sin": log.month_sin,
+                "month_cos": log.month_cos,
+                "dow_sin": log.dow_sin,
+                "dow_cos": log.dow_cos,
             }
             for log in logs
         ]

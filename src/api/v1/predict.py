@@ -69,7 +69,7 @@ async def predict(
         )
 
     try:
-        response = request.app.state.predictor.predict(body)
+        response, engineered = request.app.state.predictor.predict(body)
 
         # Log prediction to database
         log = PredictionLog(
@@ -90,6 +90,7 @@ async def predict(
             aqi_predicted=response.aqi_predicted,
             aqi_rounded=response.aqi_rounded,
             category=response.category,
+            **engineered,
         )
         db.add(log)
         await db.commit()

@@ -103,7 +103,7 @@ class AQIPredictor:
         logger.debug(f"Pipeline loaded from {self.model_path}")
         return pipeline
 
-    def predict(self, request: PredictionRequest) -> PredictionResponse:
+    def predict(self, request: PredictionRequest) -> tuple[PredictionResponse, dict]:
         """Run inference on a single prediction request.
 
         Converts the API request to a DataFrame, applies feature
@@ -137,10 +137,22 @@ class AQIPredictor:
         # target="aqi" triggers aqi_capped=0 fallback since column is absent
         df = engineer_base_features(df, target="aqi")
 
+        # Extract engineered features for monitoring before pipeline transforms them
+        engineered = {
+            "hour_sin": float(df["hour_sin"].iloc[0]),
+            "hour_cos": float(df["hour_cos"].iloc[0]),
+            "month_sin": float(df["month_sin"].iloc[0]),
+            "month_cos": float(df["month_cos"].iloc[0]),
+            "dow_sin": float(df["dow_sin"].iloc[0]),
+            "dow_cos": float(df["dow_cos"].iloc[0]),
+        }
+
         # Run sklearn pipeline — handles scaling, encoding, prediction internally
         log_prediction = self.pipeline.predict(df)
 
         # Inverse log-transform to get AQI on original 0-500 scale
         aqi_predicted = float(inverse_transform_target(log_prediction)[0])
 
-        return PredictionAdapter.to_response(aqi_predicted, self.model_version)
+        return PredictionAdapter.to_response(
+            aqi_predicted, self.model_version
+        ), engineered

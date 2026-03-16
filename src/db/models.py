@@ -60,6 +60,14 @@ class PredictionLog(Base):
     aqi_rounded: Mapped[int] = mapped_column(Integer)
     category: Mapped[str] = mapped_column(String(50))
 
+    # Engineered features — what the model actually sees
+    hour_sin: Mapped[float] = mapped_column(Float, nullable=True)
+    hour_cos: Mapped[float] = mapped_column(Float, nullable=True)
+    month_sin: Mapped[float] = mapped_column(Float, nullable=True)
+    month_cos: Mapped[float] = mapped_column(Float, nullable=True)
+    dow_sin: Mapped[float] = mapped_column(Float, nullable=True)
+    dow_cos: Mapped[float] = mapped_column(Float, nullable=True)
+
 
 class DriftReport(Base):
     """
