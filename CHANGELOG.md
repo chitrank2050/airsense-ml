@@ -4,6 +4,8 @@ All notable changes to AirSense ML.
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-03-16
+
 ### Documentation
 
 - Update security vulnerability reporting instructions to use GitHub's built-in feature.
@@ -12,6 +14,7 @@ All notable changes to AirSense ML.
 - Add new documentation for development log, tech stack, and data sources.
 - Update project documentation in README.md
 - Add descriptive comments to all Makefile targets for improved clarity.
+- Update changelog for v0.1.0
 
 ### Features
 
