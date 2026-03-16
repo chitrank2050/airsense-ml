@@ -18,7 +18,7 @@ MLOps pipeline for air quality prediction.
 | Model Registry        | MLflow                            | ✅ Done         |
 | Model Serving         | FastAPI + Docker                  | ✅ Done         |
 | Monitoring            | Evidently                         | ❌ Not started  |
-| Cloud Deploy          | Render / Railway                  | ❌ Not started  |
+| Cloud Deploy          | Render / Railway                  | ✅ Done         |
 
 
 ## Table for comparison of local vs production tech stack for MLOps
