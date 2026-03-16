@@ -11,7 +11,8 @@ IMAGE_NAME := airsense-ml
 .PHONY: help init install dev train tune mlflow api \
         docker-build docker-run docker-stop docker-logs docker-shell docker-prune docker-clean-build \
         lint format tree python-version obliviate \
-				changelog changelog-preview changelog-since git-tag git-release
+				changelog changelog-preview changelog-since git-tag git-release \
+				docs-build docs-deploy docs
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Help
@@ -265,3 +266,23 @@ git-release:
 		--title "v$$VERSION" \
 		--notes "$$($(UV) run git-cliff --unreleased --strip all 2>/dev/null)"; \
 	echo "✅ Released v$$VERSION"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Docs
+# ─────────────────────────────────────────────────────────────────────────────
+docs-build:
+	@echo "📚 Building docs site..."
+	@cp CHANGELOG.md docs/changelog.md
+	@$(UV) run mkdocs build
+	@echo "✅ Docs built in site/"
+
+docs-deploy:
+	@echo "📚 Deploying to GitHub Pages..."
+	@cp CHANGELOG.md docs/changelog.md
+	@$(UV) run mkdocs gh-deploy --force
+	@echo "✅ Deployed."
+
+docs:
+	@echo "📚 Starting MkDocs server..."
+	@cp CHANGELOG.md docs/changelog.md
+	@$(UV) run mkdocs serve

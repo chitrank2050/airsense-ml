@@ -306,3 +306,6 @@ __pypackages__/
 
 # Bruno — never commit production URLs or secrets
 bruno/environments/production.bru
+
+# MkDocs
+docs/changelog.md
