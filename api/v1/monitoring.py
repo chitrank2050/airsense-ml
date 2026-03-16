@@ -12,7 +12,7 @@ Endpoints:
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.api.schemas.monitoring import DriftReportResponse
+from api.schemas.monitoring import DriftReportResponse
 from src.core.logger import logger
 from src.db.connection import get_db
 from src.monitoring.drift import generate_drift_report

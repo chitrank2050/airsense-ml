@@ -11,8 +11,8 @@ Does NOT: run inference, modify model state, or expose training metrics.
 
 from fastapi import APIRouter, HTTPException, Request
 
-from src.api.adapters.prediction_adapter import AQI_CATEGORIES
-from src.api.schemas.model_info import ModelInfoResponse
+from api.adapters.prediction_adapter import AQI_CATEGORIES
+from api.schemas.model_info import ModelInfoResponse
 
 router = APIRouter()
 

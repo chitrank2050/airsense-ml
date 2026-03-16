@@ -17,9 +17,9 @@ Endpoints:
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.api.schemas.batch import BatchPredictionRequest, BatchPredictionResponse
-from src.api.schemas.prediction import PredictionRequest, PredictionResponse
-from src.api.utils.rate_limit import limiter
+from api.schemas.batch import BatchPredictionRequest, BatchPredictionResponse
+from api.schemas.prediction import PredictionRequest, PredictionResponse
+from api.utils.rate_limit import limiter
 from src.core.logger import logger
 from src.db.connection import get_db
 from src.db.models import PredictionLog

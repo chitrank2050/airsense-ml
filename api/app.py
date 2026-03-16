@@ -8,7 +8,7 @@ Responsibility: assemble the application. Nothing else.
 Does NOT: define endpoints, run inference, or manage model state.
 
 Usage:
-    uvicorn src.api.app:app --reload
+    uvicorn api.app:app --reload
     or via Makefile: make api
 """
 
@@ -20,9 +20,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from slowapi import _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 
-from src.api.utils.middleware import add_request_id
-from src.api.utils.rate_limit import limiter
-from src.api.v1 import router as v1_router
+from api.utils.middleware import add_request_id
+from api.utils.rate_limit import limiter
+from api.v1 import router as v1_router
 from src.core import bootstrap
 from src.core.api_lifespan import api_lifespan
 from src.core.config import settings
@@ -75,7 +75,7 @@ app.include_router(v1_router, prefix=settings.API_PREFIX)
 
 def main():
     uvicorn.run(
-        "src.api.app:app",
+        "api.app:app",
         host=settings.API_HOST,
         port=settings.API_PORT,
         reload=settings.API_RELOAD,

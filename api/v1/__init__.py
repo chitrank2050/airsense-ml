@@ -11,7 +11,7 @@ Does NOT: define endpoints, handle requests, or manage application state.
 
 from fastapi import APIRouter
 
-from src.api.v1 import health, model_info, monitoring, predict
+from api.v1 import health, model_info, monitoring, predict
 
 router = APIRouter()
 

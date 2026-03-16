@@ -5,8 +5,8 @@ Re-exports all request/response models for convenience.
 Consumers can import directly from submodules for clarity,
 or from this package for brevity.
 
-    from src.api.schemas import PredictionRequest     # brief
-    from src.api.schemas.prediction import PredictionRequest  # explicit
+    from api.schemas import PredictionRequest     # brief
+    from api.schemas.prediction import PredictionRequest  # explicit
 """
 
 from .batch import BatchPredictionRequest, BatchPredictionResponse

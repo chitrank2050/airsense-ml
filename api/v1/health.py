@@ -13,7 +13,7 @@ from datetime import UTC, datetime
 
 from fastapi import APIRouter, Request
 
-from src.api.schemas.health import HealthResponse
+from api.schemas.health import HealthResponse
 
 router = APIRouter()
 

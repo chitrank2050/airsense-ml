@@ -252,12 +252,12 @@ airsense-ml/
 ├── models/                   # Saved model artifacts (tracked by DVC)
 ├── notebooks/                # EDA only — never imported by src/
 ├── scripts/                  # Dev tooling (interactive menu)
+├── api/                      # FastAPI application
+│   ├── adapters/             # Adapter pattern — API schema ↔ predictor
+│   ├── schemas/              # Pydantic request/response schemas (v1)
+│   ├── v1/                   # Versioned route handlers
+│   └── app.py                # FastAPI application factory
 ├── src/
-│   ├── api/
-│   │   ├── adapters/         # Adapter pattern — API schema ↔ predictor
-│   │   ├── schemas/          # Pydantic request/response schemas (v1)
-│   │   ├── v1/               # Versioned route handlers
-│   │   └── app.py            # FastAPI application factory
 │   ├── core/
 │   │   ├── config.py         # Pydantic settings — single source of truth
 │   │   ├── logger.py         # Loguru setup, stdlib interception

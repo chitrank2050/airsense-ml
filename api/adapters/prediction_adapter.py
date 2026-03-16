@@ -17,7 +17,7 @@ from datetime import UTC, datetime
 
 import pandas as pd
 
-from src.api.schemas.prediction import PredictionRequest, PredictionResponse
+from api.schemas.prediction import PredictionRequest, PredictionResponse
 
 # Official CPCB India AQI category thresholds
 # Source: https://cpcb.nic.in/

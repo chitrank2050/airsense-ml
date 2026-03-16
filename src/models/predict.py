@@ -18,8 +18,8 @@ from pathlib import Path
 
 import joblib
 
-from src.api.adapters import PredictionAdapter
-from src.api.schemas import PredictionRequest, PredictionResponse
+from api.adapters import PredictionAdapter
+from api.schemas import PredictionRequest, PredictionResponse
 from src.core.config import settings
 from src.core.logger import logger
 from src.data import inverse_transform_target, load_config

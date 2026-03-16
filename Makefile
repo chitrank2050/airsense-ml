@@ -121,7 +121,7 @@ mlflow:
 # ─────────────────────────────────────────────────────────────────────────────
 api:
 	@echo "🚀 Starting API server..."
-	@APP_ENV=$(APP_ENV) $(UV) run python -m src.api.app
+	@APP_ENV=$(APP_ENV) $(UV) run python -m api.app
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Docker

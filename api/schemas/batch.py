@@ -8,7 +8,7 @@ Does NOT define single prediction logic — see prediction.py.
 
 from pydantic import BaseModel, Field
 
-from src.api.schemas.prediction import PredictionRequest, PredictionResponse
+from api.schemas.prediction import PredictionRequest, PredictionResponse
 
 
 class BatchPredictionRequest(BaseModel):

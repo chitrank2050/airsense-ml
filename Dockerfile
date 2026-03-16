@@ -145,4 +145,4 @@ HEALTHCHECK \
   CMD python -c \
   "import urllib.request; urllib.request.urlopen('http://localhost:8000/v1/health')"
 
-CMD ["python", "-m", "src.api.app"]
+CMD ["python", "-m", "api.app"]
