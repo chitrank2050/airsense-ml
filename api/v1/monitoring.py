@@ -13,6 +13,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.schemas.monitoring import DriftReportResponse
+from api.utils.rate_limit import limiter
 from src.core.logger import logger
 from src.db.connection import get_db
 from src.monitoring.drift import generate_drift_report
@@ -29,6 +30,7 @@ router = APIRouter()
         "Requires at least 10 production predictions in the database."
     ),
 )
+@limiter.limit("10/minute")
 async def drift_report(
     db: AsyncSession = Depends(get_db),
 ) -> DriftReportResponse:

@@ -19,6 +19,7 @@ dependencies = [
   "greenlet>=3.3.2",
   "lightgbm>=4.6.0",
   # Application
+  "limits>=5.8.0",
   "loguru>=0.7.3",
   "numpy>=2.4.2",
   "pandas>=2.2.0,<3.0.0",
