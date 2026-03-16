@@ -15,8 +15,9 @@
 
 | | URL |
 |---|---|
+| 🌐 Live API | https://airsense-ml.up.railway.app |
+| 📊 API Docs | https://airsense-ml.up.railway.app/docs |
 | 🐳 Docker Image | [Image](https://hub.docker.com/r/chitrank2050/airsense-ml) |
-| 🐳 Docker public repository | [Repository](https://hub.docker.com/r/chitrank2050/airsense-ml) |
 | 📚 Documentation | [Project Documentation](https://chitrank2050.github.io/airsense-ml/) |
 | 👤 Portfolio | [About me](https://chitrankagnihotri.com) |
 
