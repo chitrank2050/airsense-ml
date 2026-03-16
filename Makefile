@@ -264,8 +264,9 @@ git-release:
 	git push; \
 	gh release create "v$$VERSION" \
 		--title "v$$VERSION" \
-		--notes "$$($(UV) run git-cliff --unreleased --strip all 2>/dev/null)"; \
-	echo "✅ Released v$$VERSION"
+		--notes "$$($(UV) run git-cliff --current --strip all 2>/dev/null)"; \
+	echo "✅ Released v$$VERSION"; \
+	echo "   https://github.com/chitrank2050/airsense-ml/releases/tag/v$$VERSION"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Docs
