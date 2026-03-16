@@ -1,8 +1,6 @@
 import warnings
 from typing import TypedDict
 
-from src.core.logger import logger
-
 
 class WarningEntry(TypedDict):
     message: str
@@ -23,7 +21,6 @@ SUPPRESSED_WARNINGS: list[WarningEntry] = [
 def suppress_known_warnings() -> None:
     """Suppress all known/acknowledged warnings in one call."""
     for entry in SUPPRESSED_WARNINGS:
-        logger.info(f"⚠️ Suppressing warning: {entry['reason']}")
         warnings.filterwarnings(
             "ignore",
             message=entry["message"],

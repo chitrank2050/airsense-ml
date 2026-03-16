@@ -6,12 +6,9 @@ Intercepts stdlib logging to ensure consistent formatting across dependencies.
 
 import logging
 import sys
+from pathlib import Path
 
 from loguru import logger
-
-from src.utils.paths import PROJECT_ROOT
-
-from .config import settings
 
 
 class InterceptHandler(logging.Handler):
@@ -35,45 +32,61 @@ class InterceptHandler(logging.Handler):
         )
 
 
-def setup_logger(log_level: str = "INFO") -> None:
+def setup_logger(
+    log_level: str = "INFO",
+    log_format: str = (
+        "<green>{time:HH:mm:ss}</green> | "
+        "<level>{level: <8}</level> | "
+        "<cyan>{name}</cyan>:<cyan>{function}</cyan> - "
+        "<level>{message}</level>"
+    ),
+    enable_file: bool = False,
+    log_file_name: str = "airsense.log",
+    log_file_retention: str = "30 days",
+    log_file_format: str = (
+        "{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function} - {message}"
+    ),
+    silence_modules: list[str] | None = None,
+    log_dir: Path | None = None,
+) -> None:
     """
     Configure Loguru for the project.
     Call once at entry point only — main.py, never inside modules.
     """
-    # Intercept stdlib logs
+    # Intercept all stdlib logging through Loguru
     logging.root.handlers = [InterceptHandler()]
-
-    # Set the root logger level to the configured level to ensure interception works
     logging.root.setLevel(log_level)
 
-    # Reset Loguru Configuration
-    logger.remove()
-
-    # Silence noisy dependencies
-    for module in settings.LOG_SILENCE_MODULES:
+    # Silence noisy third-party dependencies
+    for module in silence_modules or []:
         logging.getLogger(module).setLevel(logging.ERROR)
 
-    # Console
+    logger.remove()
+
+    # Console handler
     logger.add(
         sys.stdout,
         level=log_level,
-        format=settings.LOG_FORMAT,
+        format=log_format,
         colorize=True,
         enqueue=True,
         backtrace=True,
         diagnose=True,
     )
 
-    # File
-    log_dir = PROJECT_ROOT / "logs"
-    log_dir.mkdir(exist_ok=True)
-    if settings.ENABLE_LOG_FILE:
+    # File handler — optional, disabled by default
+    if enable_file:
+        from src.utils.paths import PROJECT_ROOT
+
+        resolved_dir = log_dir or PROJECT_ROOT / "logs"
+        resolved_dir.mkdir(exist_ok=True)
+
         logger.add(
-            log_dir / settings.LOG_FILE_NAME,
+            resolved_dir / log_file_name,
             level=log_level,
             rotation="10 MB",
-            retention=settings.LOG_FILE_RETENTION,
+            retention=log_file_retention,
             compression="zip",
-            format=settings.LOG_FILE_FORMAT,
+            format=log_file_format,
             enqueue=True,
         )

@@ -19,8 +19,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.api.v1 import router as v1_router
-from src.core import bootstrap, logger, settings
 from src.core.api_lifespan import api_lifespan
+from src.core.bootstrap import bootstrap
+from src.core.config import settings
+from src.core.logger import logger
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Application factory
