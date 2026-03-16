@@ -2,6 +2,25 @@
 
 All notable changes to AirSense ML.
 
+## [0.2.0] - 2026-03-16
+
+### Documentation
+
+- Update tech stack status for Data Storage and Model Serving.
+- Update pre-commit hook documentation
+
+### Features
+
+- Enforce conventional commit standards and refine release note generation configuration.
+- Add comprehensive project overview, architecture, model results, quickstart, API reference, and detailed project structure to README.
+- Restructure development log, mark API & Docker phase as complete with detailed features, and add new planned phases for deployment and frontend.
+- Add MkDocs documentation setup with Material theme and API generation.
+
+### Maintenance
+
+- Configure dependabot and accept diskcache risk
+- Update Makefile to refine build and clean targets.
+
 ## [0.1.0] - 2026-03-16
 
 ### Build
