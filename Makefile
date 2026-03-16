@@ -6,12 +6,11 @@ UV   := uv
 PYTHON_VERSION := $(shell if [ -f .python-version ]; then cat .python-version; else echo "3.12"; fi)
 IMAGE_NAME := airsense-ml
 DOCKER_HUB_USER := chitrank2050
-IMAGE_NAME := airsense-ml
 DOCKER_HUB_IMAGE := $(DOCKER_HUB_USER)/$(IMAGE_NAME)
 
 .DEFAULT_GOAL := help
 .PHONY: help init install dev train tune mlflow api \
-        docker-build docker-run docker-stop docker-logs docker-shell docker-prune docker-clean-build docker-push deploy \
+        docker-build docker-run docker-stop docker-logs docker-shell docker-clean docker-clean-build docker-push docker-deploy \
         lint format tree python-version obliviate \
 				changelog changelog-preview changelog-since git-tag git-release \
 				docs-build docs-deploy docs
@@ -21,44 +20,51 @@ DOCKER_HUB_IMAGE := $(DOCKER_HUB_USER)/$(IMAGE_NAME)
 # ─────────────────────────────────────────────────────────────────────────────
 help:
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-	@echo "  AirSense ML Commands"
+	@echo "  AirSense ML"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 	@echo ""
 	@echo "Setup:"
-	@echo "  make init          - Create virtual environment"
-	@echo "  make install       - Install/sync dependencies"
-	@echo "  make install-prod  - Install production dependencies"
+	@echo "  make init           - Create virtual environment"
+	@echo "  make install        - Install all dependencies"
+	@echo "  make install-prod   - Install production dependencies only"
 	@echo ""
 	@echo "ML Pipeline:"
-	@echo "  make dev           - Run full pipeline (defined under src/main.py)"
-	@echo "  make train         - Run full training pipeline"
-	@echo "  make tune          - Run hyperparameter tuning (Optuna)"
-	@echo "  make mlflow        - Start MLflow UI"
+	@echo "  make dev            - Run full pipeline"
+	@echo "  make train          - Train all 7 models locally"
+	@echo "  make tune           - Hyperparameter tuning (Optuna)"
+	@echo "  make mlflow         - Start MLflow UI"
 	@echo ""
 	@echo "API:"
-	@echo "  make api           - Start FastAPI server (dev mode)"
+	@echo "  make api            - Start FastAPI server"
 	@echo ""
 	@echo "Docker:"
-	@echo "  make docker-build  - Build Docker image"
-	@echo "  make docker-run    - Run Docker container"
-	@echo "  make docker-stop   - Stop Docker container"
-	@echo "  make docker-logs   - Tail container logs"
-	@echo "  make docker-shell  - Open shell in running container"
+	@echo "  make docker-build   - Build image (linux/amd64)"
+	@echo "  make docker-run     - Run container locally"
+	@echo "  make docker-stop    - Stop container"
+	@echo "  make docker-logs    - Tail container logs"
+	@echo "  make docker-shell   - Shell into container"
+	@echo "  make docker-push    - Push to Docker Hub"
+	@echo "  make docker-deploy  - Build + push (full deploy)"
+	@echo "  make docker-clean   - Prune Docker system"
 	@echo ""
 	@echo "Code Quality:"
-	@echo "  make lint          - Check code with ruff"
-	@echo "  make format        - Format code with ruff"
+	@echo "  make lint           - Ruff check"
+	@echo "  make format         - Ruff format"
 	@echo ""
-	@echo "Maintenance:"
-	@echo "  make tree          - Print project structure"
-	@echo "  make obliviate     - Interactive obliviate menu"
+	@echo "Docs:"
+	@echo "  make docs           - Start MkDocs dev server"
+	@echo "  make docs-build     - Build static site"
+	@echo "  make docs-deploy    - Deploy to GitHub Pages"
 	@echo ""
 	@echo "Git:"
-	@echo "  make changelog     - Generate changelog"
+	@echo "  make changelog      - Generate CHANGELOG.md"
 	@echo "  make changelog-preview - Preview unreleased changes"
-	@echo "  make changelog-since - Generate changelog since a tag"
-	@echo "  make git-tag       - Tag current version"
-	@echo "  make git-release   - Release current version"
+	@echo "  make git-tag        - Tag version from pyproject.toml"
+	@echo "  make git-release    - Tag + changelog + GitHub release"
+	@echo ""
+	@echo "Maintenance:"
+	@echo "  make tree           - Print project structure"
+	@echo "  make obliviate      - Interactive reset menu"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -115,8 +121,10 @@ api:
 # ─────────────────────────────────────────────────────────────────────────────
 docker-build:
 	@echo "🐳 Building Docker image: $(IMAGE_NAME)..."
-	@docker build -t $(IMAGE_NAME) .
-	@echo "✅ Image built. Run 'make docker-run' to start."
+	@docker build --platform linux/amd64 -t $(IMAGE_NAME) .
+	@echo "✅ Build complete. Image size:"
+	@docker images $(IMAGE_NAME) --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}"
+	@echo "🚀 Run 'make docker-run' to start."
 
 docker-run:
 	@if [ ! -f .env.prod ]; then \
@@ -141,14 +149,14 @@ docker-shell:
 	@echo "🐚 Opening shell in: $(IMAGE_NAME)..."
 	@docker exec -it $(IMAGE_NAME) /bin/bash
 
-docker-prune:
+docker-clean:
 	@echo "🧹 Pruning Docker system..."
 	@docker system prune -a -f --volumes
 	@echo "✅ Docker system cleaned."
 
 docker-clean-build:
 	@make docker-stop
-	@make docker-prune
+	@make docker-clean
 	@make docker-build
 
 docker-push:
@@ -159,9 +167,9 @@ docker-push:
 	@docker push $(DOCKER_HUB_IMAGE):v$(shell grep '^version' pyproject.toml | head -1 | tr -d '"' | tr -d ' ' | cut -d'=' -f2)
 	@echo "✅ Pushed — $(DOCKER_HUB_IMAGE):latest"
 
-deploy:
+docker-deploy:
 	@echo "🚀 Building and deploying..."
-	@$(MAKE) docker-build
+	@$(MAKE) docker-clean-build
 	@$(MAKE) docker-push
 	@echo "✅ Deployed — Render will pull latest automatically"
 

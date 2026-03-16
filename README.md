@@ -7,7 +7,7 @@
 ![Docker](https://img.shields.io/badge/Docker-ready-blue)
 ![MLflow](https://img.shields.io/badge/MLflow-tracked-orange)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
-![Version](https://img.shields.io/badge/version-0.1.0-brightgreen)
+![Version](https://img.shields.io/badge/version-0.2.0-brightgreen)
 
 ---
 
@@ -16,8 +16,8 @@
 | | URL |
 |---|---|
 <!-- | 🌐 Live API | https://airsense-ml.onrender.com | -->
-| 📚 Documentation | https://chitrank2050.github.io/airsense-ml |
 <!-- | 📊 API Docs (Swagger) | https://airsense-ml.onrender.com/docs | -->
+| 📚 Documentation | https://chitrank2050.github.io/airsense-ml |
 | 👤 Portfolio | https://chitrankagnihotri.com |
 <!-- | 🗺️ Frontend | https://airsense.vercel.app | -->
 
