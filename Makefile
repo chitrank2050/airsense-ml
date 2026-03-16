@@ -11,7 +11,7 @@ IMAGE_NAME := airsense-ml
 .PHONY: help init install dev train tune mlflow api \
         docker-build docker-run docker-stop docker-logs docker-shell docker-prune docker-clean-build \
         lint format tree python-version obliviate \
-				git-release
+				git-tag git-release
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Help
@@ -221,16 +221,24 @@ python-version:
 	@$(UV) python list 2>/dev/null || true
 
 # ─────────────────────────────────────────────────────────────────────────────
-# Git Release
+# Git Command
 # ─────────────────────────────────────────────────────────────────────────────
+
+git-tag:
+	@VERSION=$$(grep '^version' pyproject.toml | head -1 | tr -d '"' | tr -d ' ' | cut -d'=' -f2); \
+	echo "🏷️  Tagging v$$VERSION..."; \
+	git tag "v$$VERSION" -m "Release v$$VERSION"; \
+	git push --tags; \
+	echo "✅ Tagged v$$VERSION"
 
 git-release:
 	@VERSION=$$(grep '^version' pyproject.toml | head -1 | tr -d '"' | tr -d ' ' | cut -d'=' -f2); \
 	echo "📦 Releasing v$$VERSION..."; \
 	$(UV) run git-cliff --output CHANGELOG.md; \
-	git add CHANGELOG.md pyproject.toml; \
-	git diff --cached --quiet || git commit -m "docs: update changelog for v$$VERSION"; \
-	git tag "v$$VERSION" -m "Release v$$VERSION"; \
-	git push && git push --tags; \
-	echo "✅ Released v$$VERSION"; \
-	echo "   https://github.com/chitrank2050/airsense-ml/releases/new?tag=v$$VERSION"
+	git add CHANGELOG.md; \
+	git diff --cached --quiet || git commit --no-verify -m "docs: update changelog for v$$VERSION"; \
+	git push; \
+	gh release create "v$$VERSION" \
+		--title "v$$VERSION" \
+		--notes "$$($(UV) run git-cliff --unreleased --strip all 2>/dev/null)"; \
+	echo "✅ Released v$$VERSION"
