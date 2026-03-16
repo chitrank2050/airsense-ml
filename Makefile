@@ -270,6 +270,11 @@ git-release:
 # ─────────────────────────────────────────────────────────────────────────────
 # Docs
 # ─────────────────────────────────────────────────────────────────────────────
+docs:
+	@echo "📚 Starting MkDocs server..."
+	@cp CHANGELOG.md docs/changelog.md
+	@$(UV) run mkdocs serve
+
 docs-build:
 	@echo "📚 Building docs site..."
 	@cp CHANGELOG.md docs/changelog.md
@@ -280,9 +285,4 @@ docs-deploy:
 	@echo "📚 Deploying to GitHub Pages..."
 	@cp CHANGELOG.md docs/changelog.md
 	@$(UV) run mkdocs gh-deploy --force
-	@echo "✅ Deployed."
-
-docs:
-	@echo "📚 Starting MkDocs server..."
-	@cp CHANGELOG.md docs/changelog.md
-	@$(UV) run mkdocs serve
+	@echo "✅ Deployed to https://chitrank2050.github.io/airsense-ml"
