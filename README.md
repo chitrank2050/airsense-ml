@@ -7,7 +7,7 @@
 ![Docker](https://img.shields.io/badge/Docker-ready-blue)
 ![MLflow](https://img.shields.io/badge/MLflow-tracked-orange)
 ![License](https://img.shields.io/badge/License-MIT-yellow)
-![Version](https://img.shields.io/badge/version-0.2.0-brightgreen)
+![Version](https://img.shields.io/badge/version-0.3.0-brightgreen)
 
 ---
 
