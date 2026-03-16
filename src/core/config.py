@@ -23,8 +23,6 @@ from typing import ClassVar, Literal
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from src.utils.decode_meta import decode_meta
-
 # Read package metadata from pyproject.toml — single source of truth
 _meta = metadata("airsense-ml")
 
@@ -48,7 +46,7 @@ class _Settings(BaseSettings):
     # ----------------------------------------------------------------
     APP_NAME: str = _meta["Name"].replace("-", " ").title()
     APP_VERSION: str = _meta["Version"]
-    APP_DESCRIPTION: str = decode_meta(_meta["Summary"])
+    APP_DESCRIPTION: str = _meta["Summary"]
 
     # ----------------------------------------------------------------
     # 🌐  API
