@@ -9,6 +9,8 @@ authors = [{ name = "Chitrank Agnihoti", email = "chitrank2050@gmail.com" }]
 
 # Production dependencies
 dependencies = [
+  "alembic>=1.18.4",
+  "asyncpg>=0.31.0",
   # Data versioning
   "dvc>=3.66.1",
   # API serving
@@ -19,11 +21,16 @@ dependencies = [
   "loguru>=0.7.3",
   "numpy>=2.4.2",
   "pandas>=2.2.0,<3.0.0",
+  "psycopg2-binary>=2.9.11",
   "pydantic>=2.0.0",
   "pydantic-settings>=2.13.1",
   "rich>=14.3.3",
   "scikit-learn>=1.8.0",
   "setuptools>=75.0.0",
+  "slowapi>=0.1.9",
+  "sqlalchemy>=2.0.48",
+  "supabase>=2.0.0",
+  "tenacity>=9.1.4",
   "uvicorn[standard]>=0.34.0",
   "xgboost>=3.2.0",
 ]
@@ -33,6 +40,8 @@ dev = "src.main:main"
 
 [dependency-groups]
 training = [
+  # Monitoring
+  "evidently>=0.7.21",
   # Visualisation
   "matplotlib>=3.10.8",
   # Experiment tracking

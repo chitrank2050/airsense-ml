@@ -87,6 +87,14 @@ class _Settings(BaseSettings):
     MODEL_CONFIG: str = "configs/model_config.yaml"
 
     # ----------------------------------------------------------------
+    # 🗄️  Database
+    # ----------------------------------------------------------------
+    DATABASE_URL: str = ""
+    DATABASE_URL_SYNC: str = ""
+    SUPABASE_URL: str = ""
+    SUPABASE_KEY: str = ""
+
+    # ----------------------------------------------------------------
     # ⚙️  Environment
     # ----------------------------------------------------------------
     ENV: ClassVar[str] = os.getenv("ENV", "dev")
