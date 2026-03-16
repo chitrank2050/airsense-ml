@@ -1,6 +1,6 @@
 # AirSense ML
 
-> Production-grade Air Quality Index regression system for Delhi — trained pipeline, modular feature engineering, and a live FastAPI inference API.
+> Production-grade Air Quality Index regression system for Delhi — trained pipeline, modular feature engineering, and a FastAPI inference API.
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115-green)
@@ -15,13 +15,13 @@
 
 | | URL |
 |---|---|
-<!-- | 🌐 Live API | https://airsense-ml.onrender.com | -->
-<!-- | 📊 API Docs (Swagger) | https://airsense-ml.onrender.com/docs | -->
-| 📚 Documentation | https://chitrank2050.github.io/airsense-ml |
-| 👤 Portfolio | https://chitrankagnihotri.com |
-<!-- | 🗺️ Frontend | https://airsense.vercel.app | -->
+| 🐳 Docker Image | [Image](https://hub.docker.com/r/chitrank2050/airsense-ml) |
+| 🐳 Docker public repository | [Repository](https://hub.docker.com/r/chitrank2050/airsense-ml) |
+| 📚 Documentation | [Project Documentation](https://chitrank2050.github.io/airsense-ml/) |
+| 👤 Portfolio | [About me](https://chitrankagnihotri.com) |
 
 ---
+
 ## What It Does
 
 AirSense ML predicts Air Quality Index (AQI) for Delhi from weather and location features — temperature, humidity, wind speed, visibility, station, and time. It is not a Kaggle notebook. It is an end-to-end ML system built to production engineering standards.
@@ -84,7 +84,7 @@ FastAPI Inference API            src/api/
     GET  /v1/health
     GET  /v1/model/info
     ↓
-Docker Container
+Docker Container → Docker Hub
 ```
 
 ---
@@ -103,7 +103,7 @@ Docker Container
 
 Tree models outperform linear by **~45% on RMSE**. The non-linear interactions between season, hour, temperature, and AQI cannot be learned by linear models without manual feature engineering.
 
-> See [docs/model_evaluation_metrics.md](docs/model_evaluation_metrics.md) for full metric explanations.
+> See [Evaluation Metrics](https://chitrank2050.github.io/airsense-ml/ml/metrics/) for full metric explanations.
 
 ---
 
@@ -128,8 +128,8 @@ make init
 # Install all dependencies (including training group)
 uv sync --all-groups
 
-# Download dataset
-# Place Delhi AQI CSV in data/raw/
+# Download dataset — place Delhi AQI CSV in data/raw/
+# https://www.kaggle.com/datasets/sohails07/delhi-weather-and-aqi-dataset-2025
 ```
 
 ### Train
@@ -157,10 +157,12 @@ make api
 ### Run with Docker
 
 ```bash
-# Build
-make docker-build
+# Pull from Docker Hub
+docker pull chitrank2050/airsense-ml:latest
+docker run -p 8000:8000 chitrank2050/airsense-ml:latest
 
-# Run
+# Or build locally
+make docker-build
 make docker-run
 
 # Test
@@ -239,12 +241,13 @@ airsense-ml/
 ├── bruno/                    # API client collection (Bruno)
 ├── configs/
 │   ├── delhi.yaml            # Dataset config — features, leakage, target
-│   └── model_config.yaml     # Model params, training config, MLflow settings
+│   ├── model_config.yaml     # Model params, training config, MLflow settings
+│   └── model_config.prod.yaml # Production config — memory-optimised models
 ├── data/
 │   ├── raw/                  # Original data — never modified, tracked by DVC
 │   ├── processed/            # Cleaned data
 │   └── features/             # Engineered feature sets
-├── docs/                     # Project documentation
+├── docs/                     # MkDocs documentation source
 ├── models/                   # Saved model artifacts (tracked by DVC)
 ├── notebooks/                # EDA only — never imported by src/
 ├── scripts/                  # Dev tooling (interactive menu)
@@ -263,23 +266,23 @@ airsense-ml/
 │   │   ├── loader.py         # load_config, load_raw, drop_leakage
 │   │   └── validator.py      # validate_features, validate_no_nulls
 │   ├── features/
-│   │   ├── preprocessing.py      # transform_target, load_and_clean
+│   │   ├── preprocessing.py       # transform_target, load_and_clean
 │   │   ├── feature_engineering.py # cyclical encoding, aqi_capped
-│   │   ├── encoding.py           # sklearn numerical/categorical pipelines
-│   │   └── pipeline.py           # ColumnTransformer assembly
+│   │   ├── encoding.py            # sklearn numerical/categorical pipelines
+│   │   └── pipeline.py            # ColumnTransformer assembly
 │   ├── models/
 │   │   ├── registry.py       # MODEL_MAP, get_models, get_model_class
 │   │   ├── evaluate.py       # compute_metrics → ModelMetrics (Pydantic)
 │   │   ├── train.py          # Training orchestration + MLflow logging
 │   │   ├── predict.py        # AQIPredictor — inference engine
-│   │   └── tune.py           # Optuna hyperparameter tuning (Phase 3)
+│   │   └── tune.py           # Optuna hyperparameter tuning
 │   └── utils/
-│       ├── paths.py               # PROJECT_ROOT, get_config_path, get_model_path
-│       ├── warnings.py            # Centralised warning suppression registry
+│       ├── paths.py                 # PROJECT_ROOT, get_config_path, get_model_path
+│       ├── warnings.py              # Centralised warning suppression registry
 │       └── model_results_display.py # Rich tables for training output
 ├── tests/
 ├── .env.example              # Environment config template
-├── Dockerfile                # Multi-stage, optimised production image
+├── Dockerfile                # Multi-stage, optimised production image (~400MB)
 ├── pyproject.toml            # uv manages dependencies
 └── Makefile                  # All commands — make help
 ```
@@ -289,38 +292,47 @@ airsense-ml/
 ## Make Commands
 
 ```bash
-make help          # Show all commands
+make help           # Show all commands
 
 # Setup
-make init          # Create virtual environment
-make install       # Install all dependencies
+make init           # Create virtual environment
+make install        # Install all dependencies
+make install-prod   # Install production dependencies only
 
 # ML Pipeline
-make train         # Run training pipeline
-make tune          # Run hyperparameter tuning (Optuna)
-make mlflow        # Start MLflow UI
+make train          # Train all 7 models
+make train-prod     # Train production models only (XGBoost + LightGBM)
+make tune           # Hyperparameter tuning (Optuna)
+make mlflow         # Start MLflow UI
 
 # API
-make api           # Start FastAPI server locally
+make api            # Start FastAPI server locally
 
 # Docker
-make docker-build  # Build Docker image
-make docker-run    # Run container
-make docker-stop   # Stop container
-make docker-logs   # Tail container logs
-make docker-shell  # Shell into running container
+make docker-build   # Build image (linux/amd64)
+make docker-run     # Run container locally
+make docker-stop    # Stop container
+make docker-logs    # Tail container logs
+make docker-shell   # Shell into container
+make docker-push    # Push to Docker Hub
+make docker-deploy  # Build + push in one command
+
+# Docs
+make docs           # Start MkDocs dev server
+make docs-build     # Build static site
+make docs-deploy    # Deploy to GitHub Pages
 
 # Code Quality
-make lint          # Ruff check
-make format        # Ruff format
+make lint           # Ruff check
+make format         # Ruff format
 
 # Release
-make git-tag       # Tag current version from pyproject.toml
-make git-release   # Tag + generate changelog + push
+make git-tag        # Tag version from pyproject.toml
+make git-release    # Tag + changelog + GitHub release
 
 # Maintenance
-make tree          # Print project structure
-make obliviate     # Interactive reset menu
+make tree           # Print project structure
+make obliviate      # Interactive reset menu
 ```
 
 ---
@@ -338,11 +350,13 @@ make obliviate     # Interactive reset menu
 | Config | pydantic-settings | Type-safe, env var override |
 | Logging | Loguru | Structured, stdlib interception |
 | Containerisation | Docker (multi-stage) | Reproducible, ~400MB image |
+| Registry | Docker Hub | Public image hosting |
 | API Client | Bruno | Git-native, no cloud account |
+| Documentation | MkDocs + Material | Static site on GitHub Pages |
 | Code Quality | Ruff | Linter + formatter, fast |
 | Changelog | git-cliff | Conventional commit changelog |
 
-> See [docs/tech_stack.md](docs/tech_stack.md) for full local vs production comparison.
+> See [Tech Stack](https://chitrank2050.github.io/airsense-ml/development/tech_stack/) for full local vs production comparison.
 
 ---
 
@@ -361,22 +375,23 @@ All configuration is driven by YAML files and environment variables — no hardc
 ## Known Limitations
 
 - `aqi_capped` feature defaults to `0` at inference time — the model may slightly underestimate AQI during peak winter pollution events (Oct–Feb) where true AQI exceeds 500.
-- Single city (Delhi) — multi-city expansion planned for Phase 4.
-- Weather-only features — real-time pollutant data integration planned for Phase 4.
+- Single city (Delhi) — multi-city expansion planned for Phase 6.
+- Weather-only features — real-time pollutant data integration planned for Phase 6.
+- Random Forest model (best performer at 22.23 RMSE) is 216MB on disk — requires 400MB+ RAM when loaded. Use `make train-prod` for a memory-optimised LightGBM model for deployment on free-tier hosting.
 
 ---
 
 ## Roadmap
 
 - [x] Phase 1 — Data pipeline, feature engineering, 7-model training, MLflow tracking
-- [x] Phase 2 — FastAPI inference API, Docker, Bruno collection
-- [ ] Phase 3 — Render deployment, live public URL
+- [x] Phase 2 — FastAPI inference API, Docker, Bruno collection, Docker Hub
+- [x] Phase 3 — MkDocs documentation site on GitHub Pages
 - [ ] Phase 4 — Optuna hyperparameter tuning, Evidently drift monitoring
-- [ ] Phase 5 — MkDocs documentation site
+- [ ] Phase 5 — Cloud deployment (live public URL)
 - [ ] Phase 6 — Multi-city expansion, real-time OpenAQ ingestion
 - [ ] Phase 7 — Next.js frontend, map visualisation, LLM chatbot
 
-> See [docs/development_log.md](docs/development_log.md) for detailed phase progress.
+> See [Development Log](https://chitrank2050.github.io/airsense-ml/development/log/) for detailed phase progress.
 
 ---
 
@@ -386,7 +401,13 @@ Dataset: [Delhi NCR Air Quality & Pollution Dataset 2020–2025](https://www.kag
 
 201,664 rows × 25 columns. Hourly readings across multiple Delhi stations. 22.5% of AQI values are capped at 500 — concentrated in October–February winter smog season.
 
-> See [docs/data_sources.md](docs/data_sources.md) for full source list.
+> See [Data Sources](https://chitrank2050.github.io/airsense-ml/data/sources/) for full source list.
+
+---
+
+## Contributing
+
+This is a learning project built in public. Issues and PRs are welcome.
 
 ---
 
