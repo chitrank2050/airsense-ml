@@ -229,7 +229,7 @@ git-release:
 	echo "📦 Releasing v$$VERSION..."; \
 	$(UV) run git-cliff --output CHANGELOG.md; \
 	git add CHANGELOG.md pyproject.toml; \
-	git diff --cached --quiet || git commit -m "chore: release v$$VERSION"; \
+	git diff --cached --quiet || git commit -m "docs: update changelog for v$$VERSION"; \
 	git tag "v$$VERSION" -m "Release v$$VERSION"; \
 	git push && git push --tags; \
 	echo "✅ Released v$$VERSION"; \
