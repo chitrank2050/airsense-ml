@@ -21,11 +21,15 @@
 - Centralised config via pydantic-settings + .env files
 - Structured logging via Loguru with stdlib interception
 
-## [⏳ In Progress] Phase 3 — Deployment
+## [✅ Complete] Phase 3 — Documentation & Infrastructure
 
-- [✔︎] Deploy to Railway (free tier) — live public URL
-- [ ] Evidently data drift monitoring
-- [ ] MkDocs documentation site hosted on GitHub Pages
+- MkDocs documentation site on GitHub Pages
+- PostgreSQL database layer via Supabase
+- Alembic migrations for schema versioning
+- Prediction logging — every request stored with engineered features
+- Evidently drift monitoring — GET /v1/monitoring/report
+- Rate limiting via slowapi
+- Docker Hub public image
 
 ## [📋 Planned] Phase 4 — Hyperparameter Tuning
 

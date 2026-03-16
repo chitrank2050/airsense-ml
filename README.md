@@ -386,9 +386,9 @@ All configuration is driven by YAML files and environment variables — no hardc
 
 - [x] Phase 1 — Data pipeline, feature engineering, 7-model training, MLflow tracking
 - [x] Phase 2 — FastAPI inference API, Docker, Bruno collection, Docker Hub
-- [x] Phase 3 — MkDocs documentation site on GitHub Pages
-- [ ] Phase 4 — Optuna hyperparameter tuning, Evidently drift monitoring
-- [ ] Phase 5 — Cloud deployment (live public URL)
+- [x] Phase 3 — MkDocs docs, PostgreSQL + Supabase, prediction logging, Evidently monitoring, Railway deployment, rate limiting
+- [ ] Phase 4 — Optuna hyperparameter tuning
+- [ ] Phase 5 — Tests, security hardening
 - [ ] Phase 6 — Multi-city expansion, real-time OpenAQ ingestion
 - [ ] Phase 7 — Next.js frontend, map visualisation, LLM chatbot
 

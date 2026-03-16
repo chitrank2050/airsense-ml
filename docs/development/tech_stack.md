@@ -17,8 +17,8 @@ MLOps pipeline for air quality prediction.
 | Hyperparameter Tuning | Optuna                            | ❌ Not started  |
 | Model Registry        | MLflow                            | ✅ Done         |
 | Model Serving         | FastAPI + Docker                  | ✅ Done         |
-| Monitoring            | Evidently                         | ❌ Not started  |
-| Cloud Deploy          | Render / Railway                  | ✅ Done         |
+| Monitoring            | Evidently                         | ✅ Done         |
+| Cloud Deploy          | Railway                           | ✅ Done         |
 
 
 ## Table for comparison of local vs production tech stack for MLOps
