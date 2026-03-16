@@ -14,11 +14,14 @@ Endpoints:
     POST /v1/predict/batch    — up to 100 predictions per call
 """
 
-from fastapi import APIRouter, HTTPException, Request
+from fastapi import APIRouter, Depends, HTTPException, Request
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.api.schemas.batch import BatchPredictionRequest, BatchPredictionResponse
 from src.api.schemas.prediction import PredictionRequest, PredictionResponse
 from src.core.logger import logger
+from src.db.connection import get_db
+from src.db.models import PredictionLog
 
 router = APIRouter()
 
@@ -35,6 +38,7 @@ router = APIRouter()
 async def predict(
     request: Request,
     body: PredictionRequest,
+    db: AsyncSession = Depends(get_db),
 ) -> PredictionResponse:
     """Predict AQI for a single input.
 
@@ -66,6 +70,30 @@ async def predict(
 
     try:
         response = request.app.state.predictor.predict(body)
+
+        # Log prediction to database
+        log = PredictionLog(
+            model_version=response.model_version,
+            station=body.station,
+            season=body.season,
+            latitude=body.latitude,
+            longitude=body.longitude,
+            temperature=body.temperature,
+            humidity=body.humidity,
+            wind_speed=body.wind_speed,
+            visibility=body.visibility,
+            day=body.day,
+            month=body.month,
+            hour=body.hour,
+            day_of_week=body.day_of_week,
+            is_weekend=body.is_weekend,
+            aqi_predicted=response.aqi_predicted,
+            aqi_rounded=response.aqi_rounded,
+            category=response.category,
+        )
+        db.add(log)
+        await db.commit()
+
         logger.info(
             f"Prediction — station: {body.station} "
             f"AQI: {response.aqi_rounded} "
