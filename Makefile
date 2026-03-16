@@ -108,6 +108,11 @@ docker-build:
 	@echo "✅ Image built. Run 'make docker-run' to start."
 
 docker-run:
+	@if [ ! -f .env.prod ]; then \
+		echo "⚠️  .env.prod not found — copying from .env.example"; \
+		cp .env.example .env.prod; \
+		echo "⚠️  Update .env.prod with production values before deploying."; \
+	fi
 	@echo "🐳 Running container: $(IMAGE_NAME)..."
 	@docker run -p 8000:8000 --env-file .env.prod --name $(IMAGE_NAME) $(IMAGE_NAME)
 

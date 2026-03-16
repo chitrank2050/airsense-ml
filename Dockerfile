@@ -82,6 +82,19 @@ RUN /app/.venv/bin/pip uninstall -y \
   nvidia-nvtx-cu12 \
   2>/dev/null || true
 
+# ── Strip nvidia namespace package ────────────────────────────────────────────
+# 385MB of CUDA libraries with zero value on CPU-only inference container.
+# XGBoost installs these as transitive deps — removed directly since
+# pip uninstall cannot target namespace packages.
+RUN rm -rf /app/.venv/lib/python3.12/site-packages/nvidia \
+  && find /app/.venv/lib/python3.12/site-packages/ \
+  -name "nvidia_*.dist-info" -exec rm -rf {} + 2>/dev/null || true
+
+# Strip XGBoost unnecessary components — 224MB lib is the core, rest is removable
+RUN rm -rf /app/.venv/lib/python3.12/site-packages/xgboost/testing \
+  && rm -rf /app/.venv/lib/python3.12/site-packages/xgboost/spark \
+  && rm -rf /app/.venv/lib/python3.12/site-packages/xgboost/dask
+
 # ── Stage 2: Runtime ──────────────────────────────────────────────────────────
 FROM python:3.12-slim-bookworm AS runtime
 

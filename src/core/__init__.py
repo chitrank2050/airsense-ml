@@ -1,3 +1,5 @@
+"""Core application package."""
+
 from .api_lifespan import api_lifespan
 from .bootstrap import bootstrap
 from .config import settings

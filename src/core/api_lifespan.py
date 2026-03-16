@@ -18,8 +18,9 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from src.core.logger import logger
 from src.models.predict import AQIPredictor
+
+from .logger import logger
 
 
 @asynccontextmanager
