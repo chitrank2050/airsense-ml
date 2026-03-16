@@ -2,8 +2,6 @@
 
 All notable changes to AirSense ML.
 
-## [Unreleased]
-
 ## [0.1.0] - 2026-03-16
 
 ### Build
@@ -58,10 +56,6 @@ All notable changes to AirSense ML.
 - Update Makefile.
 - Update Makefile.
 - Update Makefile to adjust build process or dependencies.
-
-### Refactor
-
-- Extract `compute_metrics` into a new `evaluate.py` module and import it in `train.py`.
 
 ### Refactoring
 
