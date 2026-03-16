@@ -4,7 +4,18 @@ All notable changes to AirSense ML.
 
 ## [Unreleased]
 
+### Documentation
+
+- Update changelog for v0.1.0
+
 ## [0.1.0] - 2026-03-16
+
+### Build
+
+- Add  to
+- Update Makefile configuration
+- Update build environment and Docker image configuration.
+- Update Makefile targets and commands.
 
 ### Documentation
 
@@ -50,12 +61,7 @@ All notable changes to AirSense ML.
 - Update project configuration and dependencies.
 - Update project dependencies and streamline build configuration.
 - Update Makefile.
-- Release v
 - Update Makefile.
-- Release v
-- Release v
-- Release v0.1.0
-- Release v0.1.0
 - Update Makefile to adjust build process or dependencies.
 
 ### Refactor
@@ -73,12 +79,5 @@ All notable changes to AirSense ML.
 - Parameterize logger configuration in `setup_logger` and remove `api_lifespan` from core exports.
 - Remove `decode_meta` utility and simplify `APP_DESCRIPTION` assignment.
 - Consolidate the bootstrap function into `__init__.py` with lazy imports and remove the dedicated `bootstrap.py` module.
-
-### Build
-
-- Add  to
-- Update Makefile configuration
-- Update build environment and Docker image configuration.
-- Update Makefile targets and commands.
 
 
