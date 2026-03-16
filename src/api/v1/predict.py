@@ -118,6 +118,7 @@ async def predict(
 async def predict_batch(
     request: Request,
     body: BatchPredictionRequest,
+    db: AsyncSession = Depends(get_db),
 ) -> BatchPredictionResponse:
     """Predict AQI for multiple inputs in a single call.
 
@@ -147,9 +148,35 @@ async def predict_batch(
         )
 
     try:
-        predictions = [
-            request.app.state.predictor.predict(req) for req in body.requests
-        ]
+        predictions = []
+
+        for req in body.requests:
+            response, engineered = request.app.state.predictor.predict(req)
+
+            log = PredictionLog(
+                model_version=response.model_version,
+                station=req.station,
+                season=req.season,
+                latitude=req.latitude,
+                longitude=req.longitude,
+                temperature=req.temperature,
+                humidity=req.humidity,
+                wind_speed=req.wind_speed,
+                visibility=req.visibility,
+                day=req.day,
+                month=req.month,
+                hour=req.hour,
+                day_of_week=req.day_of_week,
+                is_weekend=req.is_weekend,
+                aqi_predicted=response.aqi_predicted,
+                aqi_rounded=response.aqi_rounded,
+                category=response.category,
+                **engineered,
+            )
+            db.add(log)
+            predictions.append(response)
+
+        await db.commit()
         logger.info(f"Batch prediction — count: {len(predictions)}")
         return BatchPredictionResponse(
             predictions=predictions,

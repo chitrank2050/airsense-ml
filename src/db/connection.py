@@ -70,5 +70,7 @@ async def init_db() -> None:
     Does NOT run migrations — use Alembic for schema changes.
     """
     async with engine.begin() as conn:
+        # Dispose any cached connections first
+        await engine.dispose()
         await conn.run_sync(Base.metadata.create_all)
     logger.info("Database tables initialised")
