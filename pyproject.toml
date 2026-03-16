@@ -48,6 +48,7 @@ dev = [
   # Code quality
   "build>=1.4.0",
   # Notebooks — local exploration only
+  "git-cliff>=2.12.0",
   "jupyter>=1.1.1",
   "pre-commit>=4.5.1",
   "questionary>=2.0",
