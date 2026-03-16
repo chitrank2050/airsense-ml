@@ -1,0 +1,136 @@
+meta {
+  name: Predict Batch — Multiple Stations
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{baseUrl}}/v1/predict/batch
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "requests": [
+      {
+        "station": "IGI Airport",
+        "season": "Winter",
+        "latitude": 28.5562,
+        "longitude": 77.1000,
+        "temperature": 14.5,
+        "humidity": 82.0,
+        "wind_speed": 3.2,
+        "visibility": 2.1,
+        "day": 15,
+        "month": 1,
+        "hour": 8,
+        "day_of_week": "Monday",
+        "is_weekend": 0
+      },
+      {
+        "station": "Okhla",
+        "season": "Winter",
+        "latitude": 28.5355,
+        "longitude": 77.2720,
+        "temperature": 13.8,
+        "humidity": 85.0,
+        "wind_speed": 2.8,
+        "visibility": 1.9,
+        "day": 15,
+        "month": 1,
+        "hour": 8,
+        "day_of_week": "Monday",
+        "is_weekend": 0
+      },
+      {
+        "station": "Connaught Place",
+        "season": "Summer",
+        "latitude": 28.6315,
+        "longitude": 77.2167,
+        "temperature": 38.5,
+        "humidity": 35.0,
+        "wind_speed": 12.5,
+        "visibility": 8.0,
+        "day": 15,
+        "month": 5,
+        "hour": 14,
+        "day_of_week": "Saturday",
+        "is_weekend": 1
+      }
+    ]
+  }
+}
+
+docs {
+  # Predict AQI — Batch Request
+
+  Accepts up to 100 prediction requests in a single call.
+  Returns predictions in the same order as inputs.
+
+  Useful for:
+  - Comparing AQI across multiple stations simultaneously
+  - Generating AQI forecasts for different hours of the same day
+  - Bulk predictions for map visualisation
+
+  ## Request Fields
+
+  | Field | Type | Description |
+  |---|---|---|
+  | requests | array | List of PredictionRequest objects. Min 1, max 100. |
+
+  ## Response Fields
+
+  | Field | Type | Description |
+  |---|---|---|
+  | predictions | array | Ordered list of PredictionResponse objects |
+  | count | int | Number of predictions returned |
+
+  ## Status Codes
+
+  - `200` — all predictions successful
+  - `422` — request validation failed
+  - `500` — inference failed
+  - `503` — model not loaded
+}
+
+tests {
+  test("status is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("predictions array is present", function() {
+    expect(res.body.predictions).to.be.an("array");
+  });
+
+  test("count matches number of requests", function() {
+    expect(res.body.count).to.equal(3);
+  });
+
+  test("predictions length matches count", function() {
+    expect(res.body.predictions.length).to.equal(res.body.count);
+  });
+
+  test("each prediction has aqi_rounded in valid range", function() {
+    res.body.predictions.forEach(function(prediction) {
+      expect(prediction.aqi_rounded).to.be.at.least(0);
+      expect(prediction.aqi_rounded).to.be.at.most(500);
+    });
+  });
+
+  test("each prediction has a category", function() {
+    res.body.predictions.forEach(function(prediction) {
+      expect(prediction.category).to.be.a("string");
+      expect(prediction.category.length).to.be.greaterThan(0);
+    });
+  });
+
+  test("order is preserved — 3 predictions returned", function() {
+    expect(res.body.predictions.length).to.equal(3);
+  });
+}

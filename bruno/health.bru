@@ -1,0 +1,51 @@
+meta {
+  name: Health Check
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/v1/health
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+docs {
+  # Health Check
+
+  Verifies the service is running and the model is loaded.
+
+  ## Response
+
+  | Field | Type | Description |
+  |---|---|---|
+  | status | string | "healthy" or "degraded" |
+  | model_loaded | boolean | true if model is ready to serve |
+  | timestamp | string | UTC ISO timestamp |
+
+  ## Status Codes
+
+  - `200` — service is running (check model_loaded for readiness)
+}
+
+tests {
+  test("status is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("response has status field", function() {
+    expect(res.body.status).to.be.oneOf(["healthy", "degraded"]);
+  });
+
+  test("model_loaded is boolean", function() {
+    expect(res.body.model_loaded).to.be.a("boolean");
+  });
+
+  test("timestamp is present", function() {
+    expect(res.body.timestamp).to.be.a("string");
+  });
+}

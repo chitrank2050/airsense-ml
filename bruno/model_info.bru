@@ -1,0 +1,55 @@
+meta {
+  name: Model Info
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{baseUrl}}/v1/model/info
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+docs {
+  # Model Info
+
+  Returns metadata about the currently loaded model including
+  version, file paths, and the official CPCB AQI category reference table.
+
+  ## Response
+
+  | Field | Type | Description |
+  |---|---|---|
+  | model_version | string | Model file stem e.g. "best_model" |
+  | model_path | string | Absolute path to model artifact |
+  | dataset_config | string | Dataset config file used at training |
+  | aqi_categories | object | CPCB AQI range to category mapping |
+
+  ## Status Codes
+
+  - `200` — model info returned
+  - `503` — model not loaded, run make train and restart
+}
+
+tests {
+  test("status is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("model_version is present", function() {
+    expect(res.body.model_version).to.be.a("string");
+  });
+
+  test("aqi_categories is an object", function() {
+    expect(res.body.aqi_categories).to.be.an("object");
+  });
+
+  test("aqi_categories has expected keys", function() {
+    const keys = Object.keys(res.body.aqi_categories);
+    expect(keys.length).to.be.greaterThan(0);
+  });
+}

@@ -1,0 +1,116 @@
+meta {
+  name: Predict Single — Delhi Winter Morning
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{baseUrl}}/v1/predict
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Accept: application/json
+}
+
+body:json {
+  {
+    "station": "IGI Airport",
+    "season": "Winter",
+    "latitude": 28.5562,
+    "longitude": 77.1000,
+    "temperature": 14.5,
+    "humidity": 82.0,
+    "wind_speed": 3.2,
+    "visibility": 2.1,
+    "day": 15,
+    "month": 1,
+    "hour": 8,
+    "day_of_week": "Monday",
+    "is_weekend": 0
+  }
+}
+
+docs {
+  # Predict AQI — Single Request
+
+  Predicts Air Quality Index for a single location and time.
+  All fields mirror raw dataset columns before feature engineering —
+  the pipeline applies the same transformations as training internally.
+
+  ## Request Fields
+
+  | Field | Type | Constraints | Description |
+  |---|---|---|---|
+  | station | string | required | Monitoring station name |
+  | season | string | required | Winter / Summer / Monsoon / Post-Monsoon |
+  | latitude | float | required | Station latitude |
+  | longitude | float | required | Station longitude |
+  | temperature | float | required | Temperature in Celsius |
+  | humidity | float | 0-100 | Relative humidity % |
+  | wind_speed | float | >= 0 | Wind speed in km/h |
+  | visibility | float | >= 0 | Visibility in km |
+  | day | int | 1-31 | Day of month |
+  | month | int | 1-12 | Month number |
+  | hour | int | 0-23 | Hour of day (24h) |
+  | day_of_week | string | required | Full day name e.g. Monday |
+  | is_weekend | int | 0 or 1 | 1 if weekend, 0 if weekday |
+
+  ## Response Fields
+
+  | Field | Type | Description |
+  |---|---|---|
+  | aqi_predicted | float | Raw predicted AQI value |
+  | aqi_rounded | int | AQI clipped to 0-500 and rounded |
+  | category | string | CPCB category label |
+  | model_version | string | Model used for prediction |
+  | prediction_timestamp | string | UTC ISO timestamp |
+
+  ## AQI Categories (CPCB India)
+
+  | Range | Category |
+  |---|---|
+  | 0-50 | Good |
+  | 51-100 | Satisfactory |
+  | 101-200 | Moderate |
+  | 201-300 | Poor |
+  | 301-400 | Very Poor |
+  | 401-500 | Severe |
+
+  ## Status Codes
+
+  - `200` — prediction successful
+  - `422` — request validation failed
+  - `500` — inference failed
+  - `503` — model not loaded
+}
+
+tests {
+  test("status is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("aqi_predicted is a number", function() {
+    expect(res.body.aqi_predicted).to.be.a("number");
+  });
+
+  test("aqi_rounded is within valid range", function() {
+    expect(res.body.aqi_rounded).to.be.at.least(0);
+    expect(res.body.aqi_rounded).to.be.at.most(500);
+  });
+
+  test("category is a non-empty string", function() {
+    expect(res.body.category).to.be.a("string");
+    expect(res.body.category.length).to.be.greaterThan(0);
+  });
+
+  test("model_version is present", function() {
+    expect(res.body.model_version).to.be.a("string");
+  });
+
+  test("prediction_timestamp is present", function() {
+    expect(res.body.prediction_timestamp).to.be.a("string");
+  });
+}

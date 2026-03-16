@@ -303,3 +303,6 @@ __pypackages__/
 #pdm.toml
 .pdm-python
 .pdm-build/
+
+# Bruno — never commit production URLs or secrets
+bruno/environments/production.bru
