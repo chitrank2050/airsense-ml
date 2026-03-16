@@ -137,7 +137,7 @@ class AQIPredictor:
         # target="aqi" triggers aqi_capped=0 fallback since column is absent
         df = engineer_base_features(df, target="aqi")
 
-        # Extract engineered features for monitoring before pipeline transforms them
+        # Extract engineered features before pipeline transforms them
         engineered = {
             "hour_sin": float(df["hour_sin"].iloc[0]),
             "hour_cos": float(df["hour_cos"].iloc[0]),

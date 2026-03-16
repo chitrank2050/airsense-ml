@@ -15,7 +15,8 @@ APP_ENV = dev
         docker-build docker-run docker-stop docker-logs docker-shell docker-clean docker-clean-build docker-push docker-deploy \
         lint format tree python-version obliviate \
 				changelog changelog-preview changelog-since git-tag git-release \
-				docs-build docs-deploy docs
+				docs-build docs-deploy docs \
+				db-migrate db-migration db-rollback
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Help
@@ -67,6 +68,10 @@ help:
 	@echo "Maintenance:"
 	@echo "  make tree           - Print project structure"
 	@echo "  make obliviate      - Interactive reset menu"
+	@echo ""
+	@echo "  make db-migrate     - Run database migrations"
+	@echo "  make db-migration   - Create new migration"
+	@echo "  make db-rollback    - Rollback last migration"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -317,3 +322,22 @@ docs-deploy:
 	@cp CHANGELOG.md docs/changelog.md
 	@$(UV) run mkdocs gh-deploy --force
 	@echo "✅ Deployed to https://chitrank2050.github.io/airsense-ml"
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Database
+# ─────────────────────────────────────────────────────────────────────────────
+db-migrate:
+	@echo "🗄️  Running database migrations..."
+	@APP_ENV=dev $(UV) run alembic upgrade head
+	@echo "✅ Migrations complete."
+
+db-migration:
+	@read -p "Migration name: " name; \
+	echo "🗄️  Creating migration: $$name..."; \
+	APP_ENV=dev $(UV) run alembic revision --autogenerate -m "$$name"; \
+	echo "✅ Migration created."
+
+db-rollback:
+	@echo "🗄️  Rolling back last migration..."
+	@APP_ENV=dev $(UV) run alembic downgrade -1
+	@echo "✅ Rolled back."

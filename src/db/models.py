@@ -29,18 +29,14 @@ class PredictionLog(Base):
     __tablename__ = "prediction_logs"
 
     id: Mapped[uuid.UUID] = mapped_column(
-        UUID(as_uuid=True),
-        primary_key=True,
-        default=uuid.uuid4,
+        UUID(as_uuid=True), primary_key=True, default=uuid.uuid4
     )
     timestamp: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True),
-        default=lambda: datetime.now(UTC),
-        index=True,
+        DateTime(timezone=True), default=lambda: datetime.now(UTC), index=True
     )
     model_version: Mapped[str] = mapped_column(String(100))
 
-    # Input features
+    # Raw input features
     station: Mapped[str] = mapped_column(String(100))
     season: Mapped[str] = mapped_column(String(50))
     latitude: Mapped[float] = mapped_column(Float)
@@ -55,11 +51,6 @@ class PredictionLog(Base):
     day_of_week: Mapped[str] = mapped_column(String(20))
     is_weekend: Mapped[int] = mapped_column(Integer)
 
-    # Output
-    aqi_predicted: Mapped[float] = mapped_column(Float)
-    aqi_rounded: Mapped[int] = mapped_column(Integer)
-    category: Mapped[str] = mapped_column(String(50))
-
     # Engineered features — what the model actually sees
     hour_sin: Mapped[float] = mapped_column(Float, nullable=True)
     hour_cos: Mapped[float] = mapped_column(Float, nullable=True)
@@ -67,6 +58,11 @@ class PredictionLog(Base):
     month_cos: Mapped[float] = mapped_column(Float, nullable=True)
     dow_sin: Mapped[float] = mapped_column(Float, nullable=True)
     dow_cos: Mapped[float] = mapped_column(Float, nullable=True)
+
+    # Output
+    aqi_predicted: Mapped[float] = mapped_column(Float)
+    aqi_rounded: Mapped[int] = mapped_column(Integer)
+    category: Mapped[str] = mapped_column(String(50))
 
 
 class DriftReport(Base):
