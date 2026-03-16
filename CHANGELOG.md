@@ -2,6 +2,32 @@
 
 All notable changes to AirSense ML.
 
+## [0.4.0] - 2026-03-16
+
+### Documentation
+
+- Add comments to Makefile targets for improved clarity.
+- Update deployment target from Render to Railway and track deployment progress.
+- Update Cloud Deploy status to done in the tech stack documentation.
+- Add security documentation detailing Row Level Security status for prediction_logs and drift_reports tables.
+- Update `SECURITY.md` with simplified supported versions, clearer vulnerability reporting instructions, and a new section detailing project scope and limitations.
+
+### Features
+
+- Introduce SQLAlchemy ORM for database connection, session management, and models for prediction logging and drift reports.
+- Add greenlet dependency, introduce APP_ENV for environment configuration, and remove unused ClassVar import.
+- Add PostgreSQL database layer with Supabase — prediction logging
+- Implement API endpoint to generate and return data drift reports.
+- Add sinusoidal time features to prediction model, log, and drift monitoring.
+- Set up Alembic for database migrations and adjust model field order.
+- Implement prediction logging for batch predictions, clean up Alembic configuration, and dispose of connections during database initialization.
+- Add rate limiting to prediction endpoints, enforce stricter types in the prediction schema, and update MLflow tracking URI configuration.
+- Introduce `utils` package for rate limiting configuration and request ID middleware.
+
+### Maintenance
+
+- Bump project version to 0.4.0.
+
 ## [0.3.0] - 2026-03-16
 
 ### Build
