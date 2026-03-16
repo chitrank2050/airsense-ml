@@ -3,22 +3,22 @@
 MLOps pipeline for air quality prediction.
 
 ## Table of status of each step
-| Step                  | Tool                               | Status                                        |
-|-----------------------|------------------------------------|-----------------------------------------------|
-| Package Manager       | uv                                 | ✅ Done                                       |
-| Data Storage          | CSV → Parquet                      | 🔶 Half done — still on CSV, Parquet not yet. |
-| Data Processing       | Pandas                             | ✅ Done                                       |
-| Data Versioning       | DVC                                | ✅ Done                                       |
-| Data Validation       | Great Expectations                 | ❌ Not started                                |
-| Feature Store         | Local Parquet                      | ❌ Not started                                |
-| Experiment Tracking   | MLflow                             | ✅ Done                                       |
-| Orchestration         | Python scripts                     | ✅ Done                                       |
-| Model Training        | Scikit-learn + XGBoost + LightGBM  | ✅ Done                                       |
-| Hyperparameter Tuning | Optuna                             | ❌ Not started                                |
-| Model Registry        | MLflow                             | ✅ Done                                       |
-| Model Serving         | FastAPI + Docker                   | ❌ Not started                                |
-| Monitoring            | Evidently                          | ❌ Not started                                |
-| Cloud Deploy          | Render / Railway                   | ❌ Not started                                |
+| Step                  | Tool                              | Status          |
+|-----------------------|-----------------------------------|-----------------|
+| Package Manager       | uv                                | ✅ Done         |
+| Data Storage          | CSV → Parquet                     | 🔶 CSV only     |
+| Data Processing       | Pandas                            | ✅ Done         |
+| Data Versioning       | DVC                               | ✅ Done         |
+| Data Validation       | Great Expectations                | ❌ Not started  |
+| Feature Store         | Local Parquet                     | ❌ Not started  |
+| Experiment Tracking   | MLflow                            | ✅ Done         |
+| Orchestration         | Python scripts                    | ✅ Done         |
+| Model Training        | Scikit-learn + XGBoost + LightGBM | ✅ Done         |
+| Hyperparameter Tuning | Optuna                            | ❌ Not started  |
+| Model Registry        | MLflow                            | ✅ Done         |
+| Model Serving         | FastAPI + Docker                  | ✅ Done         |
+| Monitoring            | Evidently                         | ❌ Not started  |
+| Cloud Deploy          | Render / Railway                  | ❌ Not started  |
 
 
 ## Table for comparison of local vs production tech stack for MLOps
