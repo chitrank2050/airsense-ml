@@ -4,23 +4,6 @@ All notable changes to AirSense ML.
 
 ## [Unreleased]
 
-### Features
-
-- Add git-cliff for automated changelog generation and configure its settings.
-
-### Maintenance
-
-- Update Makefile.
-- Release v
-- Update Makefile.
-- Release v
-
-### Build
-
-- Update Makefile targets and commands.
-
-## [0.1.0] - 2026-03-16
-
 ### Documentation
 
 - Update security vulnerability reporting instructions to use GitHub's built-in feature.
@@ -56,12 +39,18 @@ All notable changes to AirSense ML.
 - Add Dockerfile and .dockerignore, and update API host to 0.0.0.0 for containerization.
 - Add FastAPI and Uvicorn dependencies, and reorganize ML/training dependencies into a new dedicated group.
 - Add Bruno collection with health, model info, and single/batch prediction API requests.
+- Add git-cliff for automated changelog generation and configure its settings.
 
 ### Maintenance
 
 - Configure Dependabot to ignore specific `diskcache` versions and update `.gitignore` to exclude DVC cache and comment out old macOS icon patterns.
 - Update project configuration and dependencies.
 - Update project dependencies and streamline build configuration.
+- Update Makefile.
+- Release v
+- Update Makefile.
+- Release v
+- Release v
 
 ### Refactor
 
@@ -84,5 +73,6 @@ All notable changes to AirSense ML.
 - Add  to
 - Update Makefile configuration
 - Update build environment and Docker image configuration.
+- Update Makefile targets and commands.
 
 
