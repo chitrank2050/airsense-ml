@@ -21,11 +21,11 @@
 - Centralised config via pydantic-settings + .env files
 - Structured logging via Loguru with stdlib interception
 
-## [📋 Planned] Phase 3 — Deployment
+## [⏳ In Progress] Phase 3 — Deployment
 
-- Deploy to Render (free tier) — live public URL
-- Evidently data drift monitoring
-- MkDocs documentation site hosted on GitHub Pages
+- [✔︎] Deploy to Railway (free tier) — live public URL
+- [ ] Evidently data drift monitoring
+- [ ] MkDocs documentation site hosted on GitHub Pages
 
 ## [📋 Planned] Phase 4 — Hyperparameter Tuning
 

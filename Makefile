@@ -7,6 +7,7 @@ PYTHON_VERSION := $(shell if [ -f .python-version ]; then cat .python-version; e
 IMAGE_NAME := airsense-ml
 DOCKER_HUB_USER := chitrank2050
 DOCKER_HUB_IMAGE := $(DOCKER_HUB_USER)/$(IMAGE_NAME)
+API_DEPLOYMENT_PLATFORM := Railway
 
 .DEFAULT_GOAL := help
 .PHONY: help init install dev train tune mlflow api \
@@ -171,7 +172,7 @@ docker-deploy:
 	@echo "🚀 Building and deploying..."
 	@$(MAKE) docker-clean-build
 	@$(MAKE) docker-push
-	@echo "✅ Deployed — Render will pull latest automatically"
+	@echo "✅ Deployed — $(API_DEPLOYMENT_PLATFORM) will pull latest automatically"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Code Quality
