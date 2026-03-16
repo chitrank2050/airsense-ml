@@ -41,7 +41,6 @@ dev = "src.main:main"
 
 [dependency-groups]
 training = [
-  # Monitoring
   "evidently>=0.7.21",
   # Visualisation
   "matplotlib>=3.10.8",

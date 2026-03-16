@@ -12,11 +12,13 @@ or from this package for brevity.
 from .batch import BatchPredictionRequest, BatchPredictionResponse
 from .health import HealthResponse
 from .model_info import ModelInfoResponse
+from .monitoring import DriftReportResponse
 from .prediction import PredictionRequest, PredictionResponse
 
 __all__ = [
     "BatchPredictionRequest",
     "BatchPredictionResponse",
+    "DriftReportResponse",
     "HealthResponse",
     "ModelInfoResponse",
     "PredictionRequest",

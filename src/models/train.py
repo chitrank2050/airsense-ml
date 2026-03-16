@@ -10,6 +10,7 @@ from src.core import bootstrap, logger
 from src.data import load_config, transform_target
 from src.features.feature_pipeline import build_feature_pipeline
 from src.features.preprocessing import load_and_clean
+from src.monitoring.drift import save_reference_dataset
 from src.utils import print_model_results, print_summary_table
 from src.utils.paths import get_config_path
 
@@ -134,6 +135,8 @@ def train(
     if best_model_name:
         print_summary_table(results, best_model_name)
         logger.success(f"Best model: {best_model_name} — Val RMSE: {best_metric}")
+        # Monitoring reference — separate concern, imported from monitoring module
+        save_reference_dataset(X_train, artifact_cfg)
 
     logger.success(f"Saved best model to: {best_model_path}")
 
