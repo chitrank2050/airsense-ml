@@ -51,6 +51,7 @@ All notable changes to AirSense ML.
 - Update Makefile.
 - Release v
 - Release v
+- Release v0.1.0
 
 ### Refactor
 
