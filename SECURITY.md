@@ -2,20 +2,25 @@
 
 ## Supported Versions
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+| Version | Supported |
+|---|---|
+| 0.x.x | ✅ |
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability, please report it to us as soon as possible. We will investigate all reports and do our best to fix the problem quickly.
+Please do not report security vulnerabilities via public GitHub issues.
 
-Please report potential security vulnerabilities privately to the maintainers and repository owners by using the **Report a vulnerability** feature on the **Security Advisories** tab of this repository. We will respond to your report within 48 hours.
+Use GitHub's built-in vulnerability reporting:
+1. Go to the Security tab on this repository
+2. Click "Report a vulnerability"
+3. Fill in the details
 
-We request that you do not disclose the vulnerability publicly until we have had a chance to address it. We will work with you to make a public announcement at the appropriate time.
+You will receive a response within 48 hours.
+
+## Scope
+
+This project is a learning/portfolio ML system. Known limitations:
+
+- No authentication on API endpoints — do not deploy with sensitive data
+- Rate limiting is basic — not suitable for high-traffic production without additional infrastructure
+- Model predictions are probabilistic — not suitable for safety-critical decisions

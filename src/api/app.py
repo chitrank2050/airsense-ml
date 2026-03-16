@@ -13,10 +13,14 @@ Usage:
 """
 
 import sys
+from uuid import uuid4
 
 import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
+from slowapi.util import get_remote_address
 
 from src.api.v1 import router as v1_router
 from src.core import bootstrap
@@ -50,6 +54,24 @@ app.add_middleware(
     allow_credentials=settings.API_ALLOW_CREDENTIALS,
     allow_methods=settings.API_ALLOWED_METHODS,
     allow_headers=settings.API_ALLOWED_HEADERS,
+)
+
+
+@app.middleware("http")
+async def add_request_id(request: Request, call_next):
+    """Add unique request ID to every request for tracing."""
+    request_id = str(uuid4())[:8]
+    request.state.request_id = request_id
+    response = await call_next(request)
+    response.headers["X-Request-ID"] = request_id
+    return response
+
+
+limiter = Limiter(key_func=get_remote_address)
+app.state.limiter = limiter
+app.add_exception_handler(
+    RateLimitExceeded,
+    _rate_limit_exceeded_handler,  # type: ignore[arg-type]
 )
 
 # ─────────────────────────────────────────────────────────────────────────────
