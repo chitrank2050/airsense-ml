@@ -18,13 +18,15 @@ Usage:
 
 import os
 from importlib.metadata import metadata
-from typing import ClassVar, Literal
+from typing import Literal
 
 from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # Read package metadata from pyproject.toml — single source of truth
 _meta = metadata("airsense-ml")
+
+_APP_ENV = os.getenv("APP_ENV", "dev")
 
 
 class _Settings(BaseSettings):
@@ -97,8 +99,7 @@ class _Settings(BaseSettings):
     # ----------------------------------------------------------------
     # ⚙️  Environment
     # ----------------------------------------------------------------
-    ENV: ClassVar[str] = os.getenv("ENV", "dev")
-    ENV_FILE: ClassVar[str] = f".env.{ENV}"
+    ENV_FILE: str = f".env.{_APP_ENV}"
 
     model_config = SettingsConfigDict(
         env_file=ENV_FILE,
@@ -115,7 +116,7 @@ class _Settings(BaseSettings):
         "mlflow.utils.environment",
         "mlflow.models.model",
     ]
-    LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "INFO"
+    LOG_LEVEL: Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"] = "DEBUG"
     LOG_FORMAT: str = (
         "<green>{time:HH:mm:ss}</green> | "
         "<level>{level: <8}</level> | "

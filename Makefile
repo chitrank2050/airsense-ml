@@ -8,6 +8,7 @@ IMAGE_NAME := airsense-ml
 DOCKER_HUB_USER := chitrank2050
 DOCKER_HUB_IMAGE := $(DOCKER_HUB_USER)/$(IMAGE_NAME)
 API_DEPLOYMENT_PLATFORM := Railway
+APP_ENV = dev
 
 .DEFAULT_GOAL := help
 .PHONY: help init install dev train tune mlflow api \
@@ -115,7 +116,7 @@ mlflow:
 # ─────────────────────────────────────────────────────────────────────────────
 api:
 	@echo "🚀 Starting API server..."
-	$(UV) run python -m src.api.app
+	@APP_ENV=$(APP_ENV) $(UV) run python -m src.api.app
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Docker

@@ -16,6 +16,7 @@ dependencies = [
   # API serving
   "fastapi>=0.115.0",
   # Core ML inference
+  "greenlet>=3.3.2",
   "lightgbm>=4.6.0",
   # Application
   "loguru>=0.7.3",
