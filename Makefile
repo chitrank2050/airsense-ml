@@ -5,11 +5,13 @@ VENV := .venv
 UV   := uv
 PYTHON_VERSION := $(shell if [ -f .python-version ]; then cat .python-version; else echo "3.12"; fi)
 IMAGE_NAME := airsense-ml
-
+DOCKER_HUB_USER := chitrank2050
+IMAGE_NAME := airsense-ml
+DOCKER_HUB_IMAGE := $(DOCKER_HUB_USER)/$(IMAGE_NAME)
 
 .DEFAULT_GOAL := help
 .PHONY: help init install dev train tune mlflow api \
-        docker-build docker-run docker-stop docker-logs docker-shell docker-prune docker-clean-build \
+        docker-build docker-run docker-stop docker-logs docker-shell docker-prune docker-clean-build docker-push deploy \
         lint format tree python-version obliviate \
 				changelog changelog-preview changelog-since git-tag git-release \
 				docs-build docs-deploy docs
@@ -148,6 +150,20 @@ docker-clean-build:
 	@make docker-stop
 	@make docker-prune
 	@make docker-build
+
+docker-push:
+	@echo "🐳 Pushing image to Docker Hub..."
+	@docker tag $(IMAGE_NAME) $(DOCKER_HUB_IMAGE):latest
+	@docker tag $(IMAGE_NAME) $(DOCKER_HUB_IMAGE):v$(shell grep '^version' pyproject.toml | head -1 | tr -d '"' | tr -d ' ' | cut -d'=' -f2)
+	@docker push $(DOCKER_HUB_IMAGE):latest
+	@docker push $(DOCKER_HUB_IMAGE):v$(shell grep '^version' pyproject.toml | head -1 | tr -d '"' | tr -d ' ' | cut -d'=' -f2)
+	@echo "✅ Pushed — $(DOCKER_HUB_IMAGE):latest"
+
+deploy:
+	@echo "🚀 Building and deploying..."
+	@$(MAKE) docker-build
+	@$(MAKE) docker-push
+	@echo "✅ Deployed — Render will pull latest automatically"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Code Quality
