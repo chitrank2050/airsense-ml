@@ -10,5 +10,9 @@ updates:
     schedule:
       interval: "weekly"
     ignore:
+      # diskcache is a transitive dependency of dvc.
+      # Unsafe pickle deserialization only exploitable with write access
+      # to local DVC cache. Never included in production Docker image.
+      # Risk accepted for local development only.
+      # Monitor: https://github.com/grantjenks/python-diskcache/releases
       - dependency-name: "diskcache"
-        versions: ["<= 5.6.3"]
