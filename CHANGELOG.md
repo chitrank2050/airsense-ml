@@ -2,6 +2,29 @@
 
 All notable changes to AirSense ML.
 
+## [0.3.0] - 2026-03-16
+
+### Build
+
+- Update Makefile configuration.
+
+### Documentation
+
+- Add a links section to the README and update the changelog path in mkdocs.yml.
+- Update README with Docker Hub integration, MkDocs documentation details, and refined project information.
+- Add live API and API docs links to README and remove duplicate Docker public repository entry.
+- Add initial architecture overview and project structure documentation.
+- Add comprehensive API endpoint documentation for health, model info, and prediction routes.
+
+### Features
+
+- Add initial getting started documentation including installation and quickstart guides
+- Add initial documentation for the ML data pipeline, feature engineering, and model training processes.
+
+### Maintenance
+
+- Bump project version to 0.2.0 and update README.
+
 ## [0.2.0] - 2026-03-16
 
 ### Documentation
