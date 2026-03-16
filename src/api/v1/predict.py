@@ -17,6 +17,7 @@ Endpoints:
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from src.api.app import limiter
 from src.api.schemas.batch import BatchPredictionRequest, BatchPredictionResponse
 from src.api.schemas.prediction import PredictionRequest, PredictionResponse
 from src.core.logger import logger
@@ -35,6 +36,7 @@ router = APIRouter()
         "Returns AQI on the official CPCB India 0-500 scale with category label."
     ),
 )
+@limiter.limit("60/minute")
 async def predict(
     request: Request,
     body: PredictionRequest,
@@ -115,6 +117,7 @@ async def predict(
         "Returns predictions in the same order as inputs."
     ),
 )
+@limiter.limit("20/minute")
 async def predict_batch(
     request: Request,
     body: BatchPredictionRequest,

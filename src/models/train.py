@@ -12,7 +12,7 @@ from src.features.feature_pipeline import build_feature_pipeline
 from src.features.preprocessing import load_and_clean
 from src.monitoring.drift import save_reference_dataset
 from src.utils import print_model_results, print_summary_table
-from src.utils.paths import get_config_path
+from src.utils.paths import PROJECT_ROOT, get_config_path
 
 from .evaluate import compute_metrics
 from .registry import get_models
@@ -62,7 +62,7 @@ def train(
     models = get_models(model_config)
 
     # MLflow setup
-    mlflow.set_tracking_uri(mlflow_cfg["tracking_uri"])
+    mlflow.set_tracking_uri(f"sqlite:///{PROJECT_ROOT / mlflow_cfg['tracking_uri']}")
     mlflow.set_experiment(mlflow_cfg["experiment_name"])
 
     results: dict = {}

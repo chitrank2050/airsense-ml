@@ -72,7 +72,7 @@ evaluation:
 
 mlflow:
   experiment_name: airsense-aqi-regression
-  tracking_uri: sqlite:///mlruns.db
+  tracking_uri: mlruns.db
 
 artifacts:
   model_dir: models/

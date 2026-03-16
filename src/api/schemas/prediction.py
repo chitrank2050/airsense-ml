@@ -5,7 +5,20 @@ Responsibility: define and validate the shape of POST /v1/predict
 requests and responses. Nothing else.
 """
 
+from typing import Literal
+
 from pydantic import BaseModel, Field
+
+SeasonType = Literal["Winter", "Summer", "Monsoon", "Post-Monsoon"]
+DayOfWeekType = Literal[
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+]
 
 
 class PredictionRequest(BaseModel):
@@ -32,29 +45,19 @@ class PredictionRequest(BaseModel):
         ... )
     """
 
-    station: str = Field(
-        ..., description="Monitoring station name", examples=["IGI Airport"]
-    )
-    season: str = Field(..., description="Season name", examples=["Winter"])
-    latitude: float = Field(..., description="Station latitude", examples=[28.5562])
-    longitude: float = Field(..., description="Station longitude", examples=[77.1000])
-    temperature: float = Field(
-        ..., description="Temperature in Celsius", examples=[14.5]
-    )
-    humidity: float = Field(
-        ..., ge=0, le=100, description="Relative humidity %", examples=[82.0]
-    )
-    wind_speed: float = Field(
-        ..., ge=0, description="Wind speed in km/h", examples=[3.2]
-    )
-    visibility: float = Field(..., ge=0, description="Visibility in km", examples=[2.1])
-    day: int = Field(..., ge=1, le=31, description="Day of month", examples=[15])
-    month: int = Field(..., ge=1, le=12, description="Month number", examples=[1])
-    hour: int = Field(..., ge=0, le=23, description="Hour of day 24h", examples=[8])
-    day_of_week: str = Field(..., description="Full day name", examples=["Monday"])
-    is_weekend: int = Field(
-        ..., ge=0, le=1, description="1 if weekend else 0", examples=[0]
-    )
+    station: str = Field(..., examples=["IGI Airport"])
+    season: SeasonType = Field(..., examples=["Winter"])
+    latitude: float = Field(..., examples=[28.5562])
+    longitude: float = Field(..., examples=[77.1000])
+    temperature: float = Field(..., examples=[14.5])
+    humidity: float = Field(..., ge=0, le=100, examples=[82.0])
+    wind_speed: float = Field(..., ge=0, examples=[3.2])
+    visibility: float = Field(..., ge=0, examples=[2.1])
+    day: int = Field(..., ge=1, le=31, examples=[15])
+    month: int = Field(..., ge=1, le=12, examples=[1])
+    hour: int = Field(..., ge=0, le=23, examples=[8])
+    day_of_week: DayOfWeekType = Field(..., examples=["Monday"])
+    is_weekend: Literal[0, 1] = Field(..., examples=[0])
 
 
 class PredictionResponse(BaseModel):
