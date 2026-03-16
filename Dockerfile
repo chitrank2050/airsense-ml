@@ -22,12 +22,12 @@ FROM python:3.12-slim-bookworm AS builder
 # git       — some packages reference git during install
 # No curl, wget, or other unnecessary tools
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libgomp1 \
-        gcc \
-        git \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && apt-get install -y --no-install-recommends \
+  libgomp1 \
+  gcc \
+  git \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Install uv from official image — pinned version for reproducibility
 COPY --from=ghcr.io/astral-sh/uv:0.6.6 /uv /usr/local/bin/uv
@@ -36,26 +36,33 @@ COPY --from=ghcr.io/astral-sh/uv:0.6.6 /uv /usr/local/bin/uv
 # UV_COMPILE_BYTECODE  — pre-compiles .pyc files at build time, faster startup
 # UV_LINK_MODE=copy    — copy files instead of symlinks (required in containers)
 ENV UV_COMPILE_BYTECODE=1 \
-    UV_LINK_MODE=copy \
-    UV_PYTHON_DOWNLOADS=never
+  UV_LINK_MODE=copy \
+  UV_PYTHON_DOWNLOADS=never
+
+# XGBoost ships CUDA libraries by default. Force CPU-only build in the Dockerfile:
+ENV XGBOOST_BUILD_CUDA=0
 
 WORKDIR /app
 
 # Install dependencies first — separate from code copy for layer caching
 # This layer only rebuilds when pyproject.toml or uv.lock changes
 COPY pyproject.toml uv.lock ./
+COPY README.md ./
+COPY LICENCE ./
 RUN uv sync \
-    --frozen \
-    --no-dev \
-    --no-install-project \
-    --no-editable
+  --frozen \
+  --no-dev \
+  --no-group training \
+  --no-install-project \
+  --no-editable
 
-# Now copy and install the project itself
+# Install production dependencies only — no training, no dev tools
 COPY src/ ./src/
 RUN uv sync \
-    --frozen \
-    --no-dev \
-    --no-editable
+  --frozen \
+  --no-dev \
+  --no-group training \
+  --no-editable
 
 # ── Stage 2: Runtime ──────────────────────────────────────────────────────────
 FROM python:3.12-slim-bookworm AS runtime
@@ -63,10 +70,10 @@ FROM python:3.12-slim-bookworm AS runtime
 # Runtime system dependencies only — no gcc, no git
 # libgomp1  — LightGBM requires OpenMP at inference time
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        libgomp1 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+  && apt-get install -y --no-install-recommends \
+  libgomp1 \
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Non-root user — security best practice, required by some platforms
 RUN useradd --create-home --no-log-init --shell /bin/bash appuser
@@ -88,10 +95,10 @@ COPY --chown=appuser:appuser models/best_model.pkl ./models/best_model.pkl
 # PYTHONDONTWRITEBYTECODE — don't write .pyc at runtime (already compiled)
 # ENV           — triggers .env.prod loading in pydantic-settings
 ENV PATH="/app/.venv/bin:$PATH" \
-    PYTHONPATH="/app" \
-    PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1 \
-    ENV=prod
+  PYTHONPATH="/app" \
+  PYTHONUNBUFFERED=1 \
+  PYTHONDONTWRITEBYTECODE=1 \
+  ENV=prod
 
 USER appuser
 
@@ -100,11 +107,11 @@ EXPOSE 8000
 # Health check — used by Docker, Render, and Railway to verify readiness
 # start-period=60s — allows model loading time before health checks begin
 HEALTHCHECK \
-    --interval=30s \
-    --timeout=10s \
-    --start-period=60s \
-    --retries=3 \
-    CMD python -c \
-        "import urllib.request; urllib.request.urlopen('http://localhost:8000/v1/health')"
+  --interval=30s \
+  --timeout=10s \
+  --start-period=60s \
+  --retries=3 \
+  CMD python -c \
+  "import urllib.request; urllib.request.urlopen('http://localhost:8000/v1/health')"
 
 CMD ["python", "-m", "src.api.app"]

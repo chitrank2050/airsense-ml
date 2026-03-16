@@ -1,12 +1,15 @@
+# ─────────────────────────────────────────────────────────────────────────────
 # Makefile for AirSense ML
-
+# ─────────────────────────────────────────────────────────────────────────────
 VENV := .venv
-UV := uv
+UV   := uv
 PYTHON_VERSION := $(shell if [ -f .python-version ]; then cat .python-version; else echo "3.12"; fi)
+IMAGE_NAME := airsense-ml
+
 
 .DEFAULT_GOAL := help
 .PHONY: help init install dev train tune mlflow api \
-        docker-build docker-run docker-stop docker-logs docker-shell \
+        docker-build docker-run docker-stop docker-logs docker-shell docker-prune \
         lint format tree python-version obliviate
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -20,6 +23,7 @@ help:
 	@echo "Setup:"
 	@echo "  make init          - Create virtual environment"
 	@echo "  make install       - Install/sync dependencies"
+	@echo "  make install-prod  - Install production dependencies"
 	@echo ""
 	@echo "ML Pipeline:"
 	@echo "  make dev           - Run full pipeline (defined under src/main.py)"
@@ -61,7 +65,12 @@ init:
 
 install:
 	@echo "📥 Installing dependencies..."
-	$(UV) sync
+	$(UV) sync --all-groups
+	@echo "✅ Done. Run 'make train' to start the pipeline."
+
+install-prod:
+	@echo "📥 Installing production dependencies..."
+	@$(UV) sync --no-dev --no-group training
 	@echo "✅ Done. Run 'make train' to start the pipeline."
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -115,6 +124,11 @@ docker-logs:
 docker-shell:
 	@echo "🐚 Opening shell in: $(IMAGE_NAME)..."
 	@docker exec -it $(IMAGE_NAME) /bin/bash
+
+docker-prune:
+	@echo "🧹 Pruning Docker system..."
+	@docker system prune -a -f --volumes
+	@echo "✅ Docker system cleaned."
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Code Quality
