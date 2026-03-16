@@ -23,6 +23,9 @@ footer = ""
 conventional_commits = true
 filter_unconventional = false
 commit_parsers = [
+  { message = "^docs: update changelog", skip = true },
+  { message = "^chore: release", skip = true },
+  { message = "^chore: bump", skip = true },
   { message = "^feat", group = "Features" },
   { message = "^fix", group = "Bug Fixes" },
   { message = "^chore", group = "Maintenance" },
@@ -30,6 +33,7 @@ commit_parsers = [
   { message = "^refactor", group = "Refactoring" },
   { message = "^perf", group = "Performance" },
   { message = "^test", group = "Testing" },
+  { message = "^build", group = "Build" },
 ]
-filter_commits = false
+filter_commits = true
 tag_pattern = "v[0-9]*"

@@ -11,7 +11,7 @@ IMAGE_NAME := airsense-ml
 .PHONY: help init install dev train tune mlflow api \
         docker-build docker-run docker-stop docker-logs docker-shell docker-prune docker-clean-build \
         lint format tree python-version obliviate \
-				git-tag git-release
+				changelog changelog-preview changelog-since git-tag git-release
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Help
@@ -49,6 +49,13 @@ help:
 	@echo "Maintenance:"
 	@echo "  make tree          - Print project structure"
 	@echo "  make obliviate     - Interactive obliviate menu"
+	@echo ""
+	@echo "Git:"
+	@echo "  make changelog     - Generate changelog"
+	@echo "  make changelog-preview - Preview unreleased changes"
+	@echo "  make changelog-since - Generate changelog since a tag"
+	@echo "  make git-tag       - Tag current version"
+	@echo "  make git-release   - Release current version"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -223,6 +230,22 @@ python-version:
 # ─────────────────────────────────────────────────────────────────────────────
 # Git Command
 # ─────────────────────────────────────────────────────────────────────────────
+changelog:
+	@echo "📝 Generating changelog..."
+	@$(UV) run git-cliff --output CHANGELOG.md
+	@git add CHANGELOG.md
+	@git diff --cached --quiet || git commit --no-verify -m "docs: update changelog"
+	@git push
+	@echo "✅ Changelog updated."
+
+changelog-preview:
+	@echo "📝 Preview unreleased changes..."
+	@$(UV) run git-cliff --unreleased --strip all
+
+changelog-since:
+	@read -p "Since tag (e.g. v0.1.0): " tag; \
+	echo "📝 Changelog since $$tag..."; \
+	$(UV) run git-cliff "$$tag"..HEAD --strip all
 
 git-tag:
 	@VERSION=$$(grep '^version' pyproject.toml | head -1 | tr -d '"' | tr -d ' ' | cut -d'=' -f2); \
