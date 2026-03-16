@@ -9,7 +9,7 @@ IMAGE_NAME := airsense-ml
 
 .DEFAULT_GOAL := help
 .PHONY: help init install dev train tune mlflow api \
-        docker-build docker-run docker-stop docker-logs docker-shell docker-prune \
+        docker-build docker-run docker-stop docker-logs docker-shell docker-prune docker-clean-build \
         lint format tree python-version obliviate
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -129,6 +129,11 @@ docker-prune:
 	@echo "🧹 Pruning Docker system..."
 	@docker system prune -a -f --volumes
 	@echo "✅ Docker system cleaned."
+
+docker-clean-build:
+	@make docker-stop
+	@make docker-prune
+	@make docker-build
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Code Quality

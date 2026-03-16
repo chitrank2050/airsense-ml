@@ -39,9 +39,6 @@ ENV UV_COMPILE_BYTECODE=1 \
   UV_LINK_MODE=copy \
   UV_PYTHON_DOWNLOADS=never
 
-# XGBoost ships CUDA libraries by default. Force CPU-only build in the Dockerfile:
-ENV XGBOOST_BUILD_CUDA=0
-
 WORKDIR /app
 
 # Install dependencies first — separate from code copy for layer caching
@@ -63,6 +60,27 @@ RUN uv sync \
   --no-dev \
   --no-group training \
   --no-editable
+
+# XGBoost ships CUDA libraries by default. Force CPU-only build in the Dockerfile:
+ENV XGBOOST_BUILD_CUDA=0
+
+# ── Strip GPU libraries — CPU-only inference ──────────────────────────────────
+# XGBoost pulls nvidia CUDA packages as transitive dependencies.
+# These are 385MB of GPU libraries with zero value on a CPU container.
+RUN /app/.venv/bin/pip uninstall -y \
+  nvidia-cublas-cu12 \
+  nvidia-cuda-cupti-cu12 \
+  nvidia-cuda-nvrtc-cu12 \
+  nvidia-cuda-runtime-cu12 \
+  nvidia-cudnn-cu12 \
+  nvidia-cufft-cu12 \
+  nvidia-curand-cu12 \
+  nvidia-cusolver-cu12 \
+  nvidia-cusparse-cu12 \
+  nvidia-nccl-cu12 \
+  nvidia-nvjitlink-cu12 \
+  nvidia-nvtx-cu12 \
+  2>/dev/null || true
 
 # ── Stage 2: Runtime ──────────────────────────────────────────────────────────
 FROM python:3.12-slim-bookworm AS runtime
