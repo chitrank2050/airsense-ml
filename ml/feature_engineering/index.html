@@ -12,13 +12,13 @@
         <meta name="author" content="Chitrank Agnihoti">
       
       
-        <link rel="canonical" href="https://chitrank2050.github.io/airsense-ml/development/pre_commit/">
+        <link rel="canonical" href="https://chitrank2050.github.io/airsense-ml/ml/feature_engineering/">
       
       
-        <link rel="prev" href="../log/">
+        <link rel="prev" href="../data_pipeline/">
       
       
-        <link rel="next" href="../../changelog/">
+        <link rel="next" href="../training/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Pre-commit Hooks - AirSense ML</title>
+        <title>Feature Engineering - AirSense ML</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pre-commit-hooks" class="md-skip">
+        <a href="#feature-engineering" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pre-commit Hooks
+              Feature Engineering
             
           </span>
         </div>
@@ -306,11 +306,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../ml/data_pipeline/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../data_pipeline/" class="md-tabs__link">
           
   
   
@@ -346,13 +348,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../tech_stack/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../development/tech_stack/" class="md-tabs__link">
           
   
   
@@ -782,28 +782,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -821,7 +824,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -839,7 +842,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ml/data_pipeline/" class="md-nav__link">
+      <a href="../data_pipeline/" class="md-nav__link">
         
   
   
@@ -864,10 +867,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../ml/feature_engineering/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Feature Engineering
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -883,6 +913,142 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#feature-set" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Feature Set
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Feature Set">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#numerical-features-standardscaler-applied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Numerical Features (StandardScaler applied)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categorical-features-onehotencoder-applied" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Categorical Features (OneHotEncoder applied)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ordinal-features-passthrough" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ordinal Features (Passthrough)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cyclical-encoding" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cyclical Encoding
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-not-month-as-a-raw-integer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Not Month as a Raw Integer?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-standardscaler-on-numerical-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why StandardScaler on Numerical Features?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-onehotencoder-on-station-and-season" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why OneHotEncoder on Station and Season?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-was-excluded-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Was Excluded and Why
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sklearn-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sklearn Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -895,7 +1061,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ml/training/" class="md-nav__link">
+      <a href="../training/" class="md-nav__link">
         
   
   
@@ -923,7 +1089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ml/metrics/" class="md-nav__link">
+      <a href="../metrics/" class="md-nav__link">
         
   
   
@@ -1044,31 +1210,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -1086,7 +1249,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1104,7 +1267,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tech_stack/" class="md-nav__link">
+      <a href="../../development/tech_stack/" class="md-nav__link">
         
   
   
@@ -1132,7 +1295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../log/" class="md-nav__link">
+      <a href="../../development/log/" class="md-nav__link">
         
   
   
@@ -1157,37 +1320,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pre-commit Hooks
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../development/pre_commit/" class="md-nav__link">
         
   
   
@@ -1203,131 +1339,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#hooks-configured" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hooks Configured
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Installation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-install-dev-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Install dev dependencies
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-install-pre-commit-hooks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Install pre-commit hooks
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-install-commit-msg-hook-conventional-commits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Install commit-msg hook (conventional commits)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#conventional-commit-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conventional Commit Format
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Configuration
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#skipping-hooks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Skipping Hooks
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1394,33 +1405,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#hooks-configured" class="md-nav__link">
+  <a href="#feature-set" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Hooks Configured
+        Feature Set
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Installation">
+    <nav class="md-nav" aria-label="Feature Set">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-install-dev-dependencies" class="md-nav__link">
+  <a href="#numerical-features-standardscaler-applied" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Install dev dependencies
+        Numerical Features (StandardScaler applied)
       
     </span>
   </a>
@@ -1428,10 +1428,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-install-pre-commit-hooks" class="md-nav__link">
+  <a href="#categorical-features-onehotencoder-applied" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Install pre-commit hooks
+        Categorical Features (OneHotEncoder applied)
       
     </span>
   </a>
@@ -1439,10 +1439,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-install-commit-msg-hook-conventional-commits" class="md-nav__link">
+  <a href="#ordinal-features-passthrough" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Install commit-msg hook (conventional commits)
+        Ordinal Features (Passthrough)
       
     </span>
   </a>
@@ -1455,10 +1455,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#cyclical-encoding" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Usage
+        Cyclical Encoding
       
     </span>
   </a>
@@ -1466,10 +1466,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#conventional-commit-format" class="md-nav__link">
+  <a href="#why-not-month-as-a-raw-integer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conventional Commit Format
+        Why Not Month as a Raw Integer?
       
     </span>
   </a>
@@ -1477,10 +1477,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#why-standardscaler-on-numerical-features" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration
+        Why StandardScaler on Numerical Features?
       
     </span>
   </a>
@@ -1488,10 +1488,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#skipping-hooks" class="md-nav__link">
+  <a href="#why-onehotencoder-on-station-and-season" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Skipping Hooks
+        Why OneHotEncoder on Station and Season?
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-was-excluded-and-why" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What Was Excluded and Why
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sklearn-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sklearn Pipeline
       
     </span>
   </a>
@@ -1518,138 +1540,217 @@
   
 
 
-<h1 id="pre-commit-hooks">Pre-commit Hooks<a class="headerlink" href="#pre-commit-hooks" title="Permanent link">&para;</a></h1>
-<p>AirSense ML uses pre-commit hooks to enforce code quality and conventional
-commit messages on every commit automatically.</p>
+<h1 id="feature-engineering">Feature Engineering<a class="headerlink" href="#feature-engineering" title="Permanent link">&para;</a></h1>
+<p>AirSense ML uses weather and temporal features to predict AQI. The key engineering challenge is representing time correctly and avoiding data leakage.</p>
 <hr />
-<h2 id="hooks-configured">Hooks Configured<a class="headerlink" href="#hooks-configured" title="Permanent link">&para;</a></h2>
+<h2 id="feature-set">Feature Set<a class="headerlink" href="#feature-set" title="Permanent link">&para;</a></h2>
+<p>After leakage removal, the model uses 15 features across three categories:</p>
+<h3 id="numerical-features-standardscaler-applied">Numerical Features (StandardScaler applied)<a class="headerlink" href="#numerical-features-standardscaler-applied" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Hook</th>
-<th>Purpose</th>
+<th>Feature</th>
+<th>Description</th>
+<th>Engineering</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>ruff</code></td>
-<td>Lint Python files, auto-fix where possible</td>
+<td><code>temperature</code></td>
+<td>Celsius</td>
+<td>Raw</td>
 </tr>
 <tr>
-<td><code>ruff-format</code></td>
-<td>Format Python files</td>
+<td><code>humidity</code></td>
+<td>Relative humidity %</td>
+<td>Raw</td>
 </tr>
 <tr>
-<td><code>conventional-pre-commit</code></td>
-<td>Enforce conventional commit message format</td>
+<td><code>wind_speed</code></td>
+<td>km/h</td>
+<td>Raw</td>
+</tr>
+<tr>
+<td><code>visibility</code></td>
+<td>km</td>
+<td>Raw</td>
+</tr>
+<tr>
+<td><code>latitude</code></td>
+<td>Station latitude</td>
+<td>Raw</td>
+</tr>
+<tr>
+<td><code>longitude</code></td>
+<td>Station longitude</td>
+<td>Raw</td>
+</tr>
+<tr>
+<td><code>hour_sin</code></td>
+<td>Sine of hour</td>
+<td>Cyclical encoding</td>
+</tr>
+<tr>
+<td><code>hour_cos</code></td>
+<td>Cosine of hour</td>
+<td>Cyclical encoding</td>
+</tr>
+<tr>
+<td><code>month_sin</code></td>
+<td>Sine of month</td>
+<td>Cyclical encoding</td>
+</tr>
+<tr>
+<td><code>month_cos</code></td>
+<td>Cosine of month</td>
+<td>Cyclical encoding</td>
+</tr>
+<tr>
+<td><code>dow_sin</code></td>
+<td>Sine of day of week</td>
+<td>Cyclical encoding</td>
+</tr>
+<tr>
+<td><code>dow_cos</code></td>
+<td>Cosine of day of week</td>
+<td>Cyclical encoding</td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<h3 id="1-install-dev-dependencies">1. Install dev dependencies<a class="headerlink" href="#1-install-dev-dependencies" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uv<span class="w"> </span>sync<span class="w"> </span>--all-groups
-</code></pre></div>
-<h3 id="2-install-pre-commit-hooks">2. Install pre-commit hooks<a class="headerlink" href="#2-install-pre-commit-hooks" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install
-</code></pre></div>
-<h3 id="3-install-commit-msg-hook-conventional-commits">3. Install commit-msg hook (conventional commits)<a class="headerlink" href="#3-install-commit-msg-hook-conventional-commits" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install<span class="w"> </span>--hook-type<span class="w"> </span>commit-msg
-</code></pre></div>
-<hr />
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p>Hooks run automatically on every <code>git commit</code>. No manual steps needed.</p>
-<p>To run hooks manually against all files:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
-</code></pre></div></p>
-<p>To update hook versions:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>autoupdate
-</code></pre></div></p>
-<hr />
-<h2 id="conventional-commit-format">Conventional Commit Format<a class="headerlink" href="#conventional-commit-format" title="Permanent link">&para;</a></h2>
-<p>All commit messages must follow this format:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;type&gt;: &lt;description&gt;
-</code></pre></div></p>
-<p><strong>Allowed types:</strong></p>
+<h3 id="categorical-features-onehotencoder-applied">Categorical Features (OneHotEncoder applied)<a class="headerlink" href="#categorical-features-onehotencoder-applied" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Type</th>
-<th>When to use</th>
+<th>Feature</th>
+<th>Description</th>
+<th>Values</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>feat</code></td>
-<td>New feature</td>
+<td><code>season</code></td>
+<td>Season name</td>
+<td>Winter / Summer / Monsoon / Post-Monsoon</td>
 </tr>
 <tr>
-<td><code>fix</code></td>
-<td>Bug fix</td>
-</tr>
-<tr>
-<td><code>chore</code></td>
-<td>Maintenance, dependency updates</td>
-</tr>
-<tr>
-<td><code>docs</code></td>
-<td>Documentation changes</td>
-</tr>
-<tr>
-<td><code>refactor</code></td>
-<td>Code restructuring, no behaviour change</td>
-</tr>
-<tr>
-<td><code>perf</code></td>
-<td>Performance improvement</td>
-</tr>
-<tr>
-<td><code>test</code></td>
-<td>Adding or updating tests</td>
-</tr>
-<tr>
-<td><code>build</code></td>
-<td>Build system, Docker, Makefile changes</td>
+<td><code>station</code></td>
+<td>Monitoring station</td>
+<td>IGI Airport, Okhla, etc.</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Examples:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>feat: add batch prediction endpoint
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>fix: resolve circular import in core.__init__
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>chore: update ruff to v0.15.6
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>docs: update development log phases
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>refactor: split feature_engineering into separate modules
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>build: optimise Docker image — strip nvidia packages
-</code></pre></div></p>
-<p><strong>Rejected examples:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Update Makefile          ← no type prefix
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>fixed bug                ← no type prefix
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>WIP                      ← not descriptive
-</code></pre></div></p>
+<h3 id="ordinal-features-passthrough">Ordinal Features (Passthrough)<a class="headerlink" href="#ordinal-features-passthrough" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Description</th>
+<th>Range</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>day</code></td>
+<td>Day of month</td>
+<td>1–31</td>
+</tr>
+<tr>
+<td><code>is_weekend</code></td>
+<td>Weekend flag</td>
+<td>0 or 1</td>
+</tr>
+<tr>
+<td><code>aqi_capped</code></td>
+<td>Sensor ceiling flag</td>
+<td>0 or 1</td>
+</tr>
+</tbody>
+</table>
 <hr />
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<p>Hooks are defined in <code>.pre-commit-config.yaml</code> at project root:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">repos</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/astral-sh/ruff-pre-commit</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.15.6</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">--fix</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff-format</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/compilerla/conventional-pre-commit</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v3.4.0</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conventional-pre-commit</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">        </span><span class="nt">stages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">commit-msg</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">feat</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">fix</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">chore</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">docs</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">refactor</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">perf</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">test</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">build</span><span class="p p-Indicator">]</span>
-</code></pre></div></p>
+<h2 id="cyclical-encoding">Cyclical Encoding<a class="headerlink" href="#cyclical-encoding" title="Permanent link">&para;</a></h2>
+<p>Hour, month, and day of week are all cyclical — hour 23 and hour 0 are one hour apart, but numerically they're 23 apart. A model treating them as raw integers learns the wrong relationship.</p>
+<p>Cyclical encoding maps each value onto a circle using sine and cosine:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Hour (0–23 cycle)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;hour_sin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;hour&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">24</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;hour_cos&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;hour&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">24</span><span class="p">)</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Month (1–12 cycle)</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;month_sin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;month_cos&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Day of week (0–6 cycle)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;dow_sin&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;day_of_week&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">7</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">df</span><span class="p">[</span><span class="s2">&quot;dow_cos&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;day_of_week&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">7</span><span class="p">)</span>
+</code></pre></div>
+<p>Two values (sin + cos) are needed to uniquely represent each position on the circle. Using sin alone is insufficient — sin(0) and sin(π) are both 0, which would make midnight and noon identical.</p>
+<p><strong>Result:</strong> The model correctly understands that December → January is a continuous transition, not a jump from 12 back to 1.</p>
 <hr />
-<h2 id="skipping-hooks">Skipping Hooks<a class="headerlink" href="#skipping-hooks" title="Permanent link">&para;</a></h2>
-<p>For generated files like changelogs — skip pre-commit with <code>--no-verify</code>:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>git<span class="w"> </span>commit<span class="w"> </span>--no-verify<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;docs: update changelog for v0.2.0&quot;</span>
-</code></pre></div></p>
-<p>Use sparingly. Never skip on feature commits.</p>
+<h2 id="why-not-month-as-a-raw-integer">Why Not Month as a Raw Integer?<a class="headerlink" href="#why-not-month-as-a-raw-integer" title="Permanent link">&para;</a></h2>
+<p>Without cyclical encoding:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>January  = 1
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>December = 12
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>Gap between them = 11
+</code></pre></div>
+<p>With cyclical encoding:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>January  = (sin: 0.00, cos: 1.00)
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>December = (sin: -0.50, cos: 0.87)
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>Distance ≈ 0.54  — correctly close
+</code></pre></div>
+<p>This matters for AQI because the worst pollution is in November–January — spanning the year boundary. Raw month encoding would make the model think November (11) and January (1) are far apart.</p>
+<hr />
+<h2 id="why-standardscaler-on-numerical-features">Why StandardScaler on Numerical Features?<a class="headerlink" href="#why-standardscaler-on-numerical-features" title="Permanent link">&para;</a></h2>
+<p>Linear models require feature scaling — without it, temperature (range: -5 to 45) dominates humidity (range: 0 to 100) simply due to magnitude differences.</p>
+<p>Tree models are scale-invariant — scaling has no effect on their predictions. But since the same pipeline serves both model families, scaling is applied uniformly. It costs nothing for tree models and is required for linear models.</p>
+<hr />
+<h2 id="why-onehotencoder-on-station-and-season">Why OneHotEncoder on Station and Season?<a class="headerlink" href="#why-onehotencoder-on-station-and-season" title="Permanent link">&para;</a></h2>
+<p><code>station</code> and <code>season</code> are nominal categorical variables — there's no natural ordering between IGI Airport and Okhla, or between Winter and Summer.</p>
+<p>OrdinalEncoder would imply <code>Winter &lt; Summer &lt; Monsoon</code> which is meaningless. OneHotEncoder creates a binary column per category, treating each as independent.</p>
+<p><code>handle_unknown='ignore'</code> ensures the API doesn't crash if a new station name appears at inference time.</p>
+<hr />
+<h2 id="what-was-excluded-and-why">What Was Excluded and Why<a class="headerlink" href="#what-was-excluded-and-why" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Reason Excluded</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pm25</code>, <code>pm10</code>, <code>no2</code>, <code>so2</code>, <code>co</code>, <code>o3</code></td>
+<td>Leakage — components of AQI formula</td>
+</tr>
+<tr>
+<td><code>aqi_category</code></td>
+<td>Leakage — derived directly from AQI</td>
+</tr>
+<tr>
+<td><code>datetime</code>, <code>date</code></td>
+<td>Replaced by granular time features</td>
+</tr>
+<tr>
+<td><code>year</code></td>
+<td>No predictive value for future forecasting</td>
+</tr>
+<tr>
+<td><code>city</code></td>
+<td>Single city dataset — zero variance</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="sklearn-pipeline">sklearn Pipeline<a class="headerlink" href="#sklearn-pipeline" title="Permanent link">&para;</a></h2>
+<p>All transformations are encapsulated in a <code>ColumnTransformer</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">ColumnTransformer</span><span class="p">(</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">transformers</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="p">(</span><span class="s2">&quot;numerical&quot;</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">numerical_features</span><span class="p">),</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="p">(</span><span class="s2">&quot;categorical&quot;</span><span class="p">,</span> <span class="n">OneHotEncoder</span><span class="p">(</span><span class="n">handle_unknown</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">),</span> <span class="n">categorical_features</span><span class="p">),</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="p">(</span><span class="s2">&quot;ordinal&quot;</span><span class="p">,</span> <span class="s2">&quot;passthrough&quot;</span><span class="p">,</span> <span class="n">ordinal_features</span><span class="p">),</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="p">],</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">remainder</span><span class="o">=</span><span class="s2">&quot;drop&quot;</span>  <span class="c1"># safety — drops any unlisted columns</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">)</span>
+</code></pre></div>
+<p><code>remainder="drop"</code> ensures no accidental leakage if new columns appear in the data. The transformer is serialised as part of the full pipeline artifact — guaranteeing identical transformations at training and inference time.</p>
 
 
 

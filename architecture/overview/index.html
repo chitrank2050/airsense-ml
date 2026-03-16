@@ -12,13 +12,13 @@
         <meta name="author" content="Chitrank Agnihoti">
       
       
-        <link rel="canonical" href="https://chitrank2050.github.io/airsense-ml/development/pre_commit/">
+        <link rel="canonical" href="https://chitrank2050.github.io/airsense-ml/architecture/overview/">
       
       
-        <link rel="prev" href="../log/">
+        <link rel="prev" href="../../getting_started/quickstart/">
       
       
-        <link rel="next" href="../../changelog/">
+        <link rel="next" href="../structure/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Pre-commit Hooks - AirSense ML</title>
+        <title>Overview - AirSense ML</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pre-commit-hooks" class="md-skip">
+        <a href="#architecture-overview" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pre-commit Hooks
+              Overview
             
           </span>
         </div>
@@ -266,11 +266,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../architecture/overview/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   
@@ -346,13 +348,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../tech_stack/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../development/tech_stack/" class="md-tabs__link">
           
   
   
@@ -576,28 +576,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
             
   
   
@@ -615,7 +618,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             
@@ -630,10 +633,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../architecture/overview/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -649,6 +679,142 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#system-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        System Overview
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency-direction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency Direction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Design Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Design Patterns">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-driven-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Config-driven pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adapter-pattern-api-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adapter pattern (API ↔ Inference)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sklearn-pipeline-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        sklearn Pipeline objects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#singleton-predictor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Singleton predictor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Flow — Training
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow-inference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Flow — Inference
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration Architecture
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -661,7 +827,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/structure/" class="md-nav__link">
+      <a href="../structure/" class="md-nav__link">
         
   
   
@@ -1044,31 +1210,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -1086,7 +1249,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1104,7 +1267,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tech_stack/" class="md-nav__link">
+      <a href="../../development/tech_stack/" class="md-nav__link">
         
   
   
@@ -1132,7 +1295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../log/" class="md-nav__link">
+      <a href="../../development/log/" class="md-nav__link">
         
   
   
@@ -1157,37 +1320,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pre-commit Hooks
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../development/pre_commit/" class="md-nav__link">
         
   
   
@@ -1203,131 +1339,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#hooks-configured" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hooks Configured
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Installation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-install-dev-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Install dev dependencies
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-install-pre-commit-hooks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Install pre-commit hooks
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-install-commit-msg-hook-conventional-commits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Install commit-msg hook (conventional commits)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#conventional-commit-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conventional Commit Format
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Configuration
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#skipping-hooks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Skipping Hooks
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1394,10 +1405,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#hooks-configured" class="md-nav__link">
+  <a href="#system-overview" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Hooks Configured
+        System Overview
       
     </span>
   </a>
@@ -1405,22 +1416,33 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
+  <a href="#dependency-direction" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation
+        Dependency Direction
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Installation">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#key-design-patterns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Key Design Patterns
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Key Design Patterns">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-install-dev-dependencies" class="md-nav__link">
+  <a href="#config-driven-pipeline" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Install dev dependencies
+        Config-driven pipeline
       
     </span>
   </a>
@@ -1428,10 +1450,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-install-pre-commit-hooks" class="md-nav__link">
+  <a href="#adapter-pattern-api-inference" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Install pre-commit hooks
+        Adapter pattern (API ↔ Inference)
       
     </span>
   </a>
@@ -1439,10 +1461,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-install-commit-msg-hook-conventional-commits" class="md-nav__link">
+  <a href="#sklearn-pipeline-objects" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Install commit-msg hook (conventional commits)
+        sklearn Pipeline objects
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#singleton-predictor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Singleton predictor
       
     </span>
   </a>
@@ -1455,10 +1488,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#data-flow-training" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Usage
+        Data Flow — Training
       
     </span>
   </a>
@@ -1466,10 +1499,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#conventional-commit-format" class="md-nav__link">
+  <a href="#data-flow-inference" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conventional Commit Format
+        Data Flow — Inference
       
     </span>
   </a>
@@ -1477,21 +1510,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
+  <a href="#configuration-architecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Configuration
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#skipping-hooks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Skipping Hooks
+        Configuration Architecture
       
     </span>
   </a>
@@ -1518,138 +1540,120 @@
   
 
 
-<h1 id="pre-commit-hooks">Pre-commit Hooks<a class="headerlink" href="#pre-commit-hooks" title="Permanent link">&para;</a></h1>
-<p>AirSense ML uses pre-commit hooks to enforce code quality and conventional
-commit messages on every commit automatically.</p>
+<h1 id="architecture-overview">Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permanent link">&para;</a></h1>
+<p>AirSense ML is structured as a layered ML system — each layer has a single responsibility and strict import direction.</p>
 <hr />
-<h2 id="hooks-configured">Hooks Configured<a class="headerlink" href="#hooks-configured" title="Permanent link">&para;</a></h2>
-<table>
-<thead>
-<tr>
-<th>Hook</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ruff</code></td>
-<td>Lint Python files, auto-fix where possible</td>
-</tr>
-<tr>
-<td><code>ruff-format</code></td>
-<td>Format Python files</td>
-</tr>
-<tr>
-<td><code>conventional-pre-commit</code></td>
-<td>Enforce conventional commit message format</td>
-</tr>
-</tbody>
-</table>
-<hr />
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<h3 id="1-install-dev-dependencies">1. Install dev dependencies<a class="headerlink" href="#1-install-dev-dependencies" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uv<span class="w"> </span>sync<span class="w"> </span>--all-groups
-</code></pre></div>
-<h3 id="2-install-pre-commit-hooks">2. Install pre-commit hooks<a class="headerlink" href="#2-install-pre-commit-hooks" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install
-</code></pre></div>
-<h3 id="3-install-commit-msg-hook-conventional-commits">3. Install commit-msg hook (conventional commits)<a class="headerlink" href="#3-install-commit-msg-hook-conventional-commits" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install<span class="w"> </span>--hook-type<span class="w"> </span>commit-msg
+<h2 id="system-overview">System Overview<a class="headerlink" href="#system-overview" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>┌─────────────────────────────────────────────────────┐
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>│                   Data Layer                         │
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>│   Raw CSV → Loader → Validator → Feature Engineering │
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>└─────────────────────┬───────────────────────────────┘
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>                      │
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>┌─────────────────────▼───────────────────────────────┐
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│                 Training Layer                       │
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   sklearn Pipeline → 7 Models → MLflow → Best Model │
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>└─────────────────────┬───────────────────────────────┘
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>                      │
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>┌─────────────────────▼───────────────────────────────┐
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│                  Inference Layer                     │
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   AQIPredictor → PredictionAdapter → Response       │
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>└─────────────────────┬───────────────────────────────┘
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>                      │
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>┌─────────────────────▼───────────────────────────────┐
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│                    API Layer                         │
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│   FastAPI → /v1 Routes → Pydantic Schemas           │
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>└─────────────────────┬───────────────────────────────┘
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>                      │
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>┌─────────────────────▼───────────────────────────────┐
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>│                 Container Layer                      │
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>│   Docker (multi-stage, linux/amd64) → Docker Hub    │
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>└─────────────────────────────────────────────────────┘
 </code></pre></div>
 <hr />
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p>Hooks run automatically on every <code>git commit</code>. No manual steps needed.</p>
-<p>To run hooks manually against all files:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
-</code></pre></div></p>
-<p>To update hook versions:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>autoupdate
-</code></pre></div></p>
+<h2 id="dependency-direction">Dependency Direction<a class="headerlink" href="#dependency-direction" title="Permanent link">&para;</a></h2>
+<p>The most important architectural rule — imports flow strictly downward. No layer imports from a layer above it:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Level 0 — imports nothing from src
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    src/core/config.py
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    src/core/logger.py
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    src/utils/paths.py
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>Level 1 — imports from Level 0 only
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    src/utils/warnings.py
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    src/core/__init__.py
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>Level 2 — imports from Level 0 + 1
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    src/data/loader.py
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    src/data/validator.py
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    src/features/*
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>Level 3 — imports from Level 0, 1, 2
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    src/models/*
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>Level 4 — imports from everything below
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    src/api/*
+</code></pre></div>
+<p>Violating this rule creates circular imports. Every circular import we encountered during development was caused by a Level N module importing from Level N+1.</p>
 <hr />
-<h2 id="conventional-commit-format">Conventional Commit Format<a class="headerlink" href="#conventional-commit-format" title="Permanent link">&para;</a></h2>
-<p>All commit messages must follow this format:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;type&gt;: &lt;description&gt;
-</code></pre></div></p>
-<p><strong>Allowed types:</strong></p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>When to use</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>feat</code></td>
-<td>New feature</td>
-</tr>
-<tr>
-<td><code>fix</code></td>
-<td>Bug fix</td>
-</tr>
-<tr>
-<td><code>chore</code></td>
-<td>Maintenance, dependency updates</td>
-</tr>
-<tr>
-<td><code>docs</code></td>
-<td>Documentation changes</td>
-</tr>
-<tr>
-<td><code>refactor</code></td>
-<td>Code restructuring, no behaviour change</td>
-</tr>
-<tr>
-<td><code>perf</code></td>
-<td>Performance improvement</td>
-</tr>
-<tr>
-<td><code>test</code></td>
-<td>Adding or updating tests</td>
-</tr>
-<tr>
-<td><code>build</code></td>
-<td>Build system, Docker, Makefile changes</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Examples:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>feat: add batch prediction endpoint
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>fix: resolve circular import in core.__init__
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>chore: update ruff to v0.15.6
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>docs: update development log phases
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>refactor: split feature_engineering into separate modules
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>build: optimise Docker image — strip nvidia packages
-</code></pre></div></p>
-<p><strong>Rejected examples:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Update Makefile          ← no type prefix
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>fixed bug                ← no type prefix
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>WIP                      ← not descriptive
-</code></pre></div></p>
+<h2 id="key-design-patterns">Key Design Patterns<a class="headerlink" href="#key-design-patterns" title="Permanent link">&para;</a></h2>
+<h3 id="config-driven-pipeline">Config-driven pipeline<a class="headerlink" href="#config-driven-pipeline" title="Permanent link">&para;</a></h3>
+<p>No hardcoded column names, model parameters, or file paths in code. Everything flows from YAML:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>configs/delhi.yaml          → data pipeline
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>configs/model_config.yaml   → training pipeline
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>.env.dev / .env.prod        → application settings
+</code></pre></div>
+<p>Adding a new city requires only a new YAML file — zero code changes.</p>
+<h3 id="adapter-pattern-api-inference">Adapter pattern (API ↔ Inference)<a class="headerlink" href="#adapter-pattern-api-inference" title="Permanent link">&para;</a></h3>
+<p><code>PredictionRequest</code> (API schema) never touches <code>AQIPredictor</code> directly. The adapter translates between them:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>PredictionRequest → PredictionAdapter.to_dataframe() → AQIPredictor
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>AQIPredictor      → PredictionAdapter.to_response()  → PredictionResponse
+</code></pre></div>
+<p>This means the API contract and the ML pipeline can evolve independently.</p>
+<h3 id="sklearn-pipeline-objects">sklearn Pipeline objects<a class="headerlink" href="#sklearn-pipeline-objects" title="Permanent link">&para;</a></h3>
+<p>Feature transformations are encapsulated in sklearn <code>Pipeline</code> and <code>ColumnTransformer</code> objects — not applied as raw functions. This means:</p>
+<ul>
+<li>The same transformations are guaranteed at training and inference time</li>
+<li>No training/serving skew</li>
+<li>The full pipeline (features + model) is serialised as a single artifact</li>
+</ul>
+<h3 id="singleton-predictor">Singleton predictor<a class="headerlink" href="#singleton-predictor" title="Permanent link">&para;</a></h3>
+<p><code>AQIPredictor</code> is instantiated once at API startup via FastAPI's lifespan context manager and stored on <code>app.state</code>. All requests share the same loaded model — no per-request model loading overhead.</p>
 <hr />
-<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<p>Hooks are defined in <code>.pre-commit-config.yaml</code> at project root:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">repos</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/astral-sh/ruff-pre-commit</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.15.6</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">--fix</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff-format</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/compilerla/conventional-pre-commit</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v3.4.0</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conventional-pre-commit</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">        </span><span class="nt">stages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">commit-msg</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">feat</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">fix</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">chore</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">docs</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">refactor</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">perf</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">test</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">build</span><span class="p p-Indicator">]</span>
-</code></pre></div></p>
+<h2 id="data-flow-training">Data Flow — Training<a class="headerlink" href="#data-flow-training" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>1. load_config(&quot;configs/delhi.yaml&quot;)
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>2. load_raw(config)                  — reads CSV
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>3. engineer_base_features(df)        — cyclical encoding, aqi_capped
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>4. drop_leakage(df, config)          — removes PM2.5, NO2 etc
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>5. validate_features(df, config)     — raises if columns missing
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>6. transform_target(df)              — log1p(AQI), separate X and y
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>7. train_test_split                  — 80/10/10 train/val/test
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>8. build_feature_pipeline(config)    — ColumnTransformer
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>9. Pipeline(features + model).fit()  — for each of 7 models
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>10. compute_metrics(val, test)       — RMSE, R², MAE, RMSLE
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>11. mlflow.log_metrics/params/model  — per run
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>12. joblib.dump(best_pipeline)       — models/best_model.pkl
+</code></pre></div>
+<h2 id="data-flow-inference">Data Flow — Inference<a class="headerlink" href="#data-flow-inference" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>1. POST /v1/predict (JSON body)
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>2. Pydantic validates PredictionRequest
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>3. request.app.state.predictor.predict(body)
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>4. PredictionAdapter.to_dataframe(request)   — single-row DataFrame
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>5. engineer_base_features(df, target=&quot;aqi&quot;)  — same as training
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>6. pipeline.predict(df)                      — log-scale prediction
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>7. inverse_transform_target(prediction)      — expm1 → AQI scale
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>8. PredictionAdapter.to_response(aqi, version)
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>9. PredictionResponse returned as JSON
+</code></pre></div>
 <hr />
-<h2 id="skipping-hooks">Skipping Hooks<a class="headerlink" href="#skipping-hooks" title="Permanent link">&para;</a></h2>
-<p>For generated files like changelogs — skip pre-commit with <code>--no-verify</code>:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>git<span class="w"> </span>commit<span class="w"> </span>--no-verify<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;docs: update changelog for v0.2.0&quot;</span>
-</code></pre></div></p>
-<p>Use sparingly. Never skip on feature commits.</p>
+<h2 id="configuration-architecture">Configuration Architecture<a class="headerlink" href="#configuration-architecture" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>pyproject.toml          — package metadata, dependency groups
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>configs/delhi.yaml      — dataset-specific: features, leakage, target
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>configs/model_config.yaml — training: models, hyperparams, MLflow, artifacts
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>.env.example            — template for all environment variables
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>.env.dev                — local overrides (gitignored)
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>.env.prod               — production overrides (gitignored)
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>src/core/config.py      — pydantic-settings reads .env, exposes settings singleton
+</code></pre></div>
+<p>All runtime configuration is accessible via <code>from src.core import settings</code>.</p>
 
 
 

@@ -12,13 +12,13 @@
         <meta name="author" content="Chitrank Agnihoti">
       
       
-        <link rel="canonical" href="https://chitrank2050.github.io/airsense-ml/development/pre_commit/">
+        <link rel="canonical" href="https://chitrank2050.github.io/airsense-ml/ml/training/">
       
       
-        <link rel="prev" href="../log/">
+        <link rel="prev" href="../feature_engineering/">
       
       
-        <link rel="next" href="../../changelog/">
+        <link rel="next" href="../metrics/">
       
       
         
@@ -29,7 +29,7 @@
     
     
       
-        <title>Pre-commit Hooks - AirSense ML</title>
+        <title>Model Training - AirSense ML</title>
       
     
     
@@ -82,7 +82,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#pre-commit-hooks" class="md-skip">
+        <a href="#model-training" class="md-skip">
           Skip to content
         </a>
       
@@ -116,7 +116,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pre-commit Hooks
+              Model Training
             
           </span>
         </div>
@@ -306,11 +306,13 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../ml/data_pipeline/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../data_pipeline/" class="md-tabs__link">
           
   
   
@@ -346,13 +348,11 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../tech_stack/" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../development/tech_stack/" class="md-tabs__link">
           
   
   
@@ -782,28 +782,31 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
-        
-          
-          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -821,7 +824,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
@@ -839,7 +842,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ml/data_pipeline/" class="md-nav__link">
+      <a href="../data_pipeline/" class="md-nav__link">
         
   
   
@@ -867,7 +870,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ml/feature_engineering/" class="md-nav__link">
+      <a href="../feature_engineering/" class="md-nav__link">
         
   
   
@@ -892,10 +895,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../../ml/training/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Model Training
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -911,6 +941,142 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#running-training" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running Training
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Models
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Models">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#linear-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linear Family
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tree-ensemble-family" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Tree Ensemble Family
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-tree-models-outperform-linear-by-45" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why Tree Models Outperform Linear by 45%
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mlflow-experiment-tracking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MLflow Experiment Tracking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serialisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serialisation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuration
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -923,7 +1089,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ml/metrics/" class="md-nav__link">
+      <a href="../metrics/" class="md-nav__link">
         
   
   
@@ -1044,31 +1210,28 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
         
           
-          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
             
   
   
@@ -1086,7 +1249,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_7">
             <span class="md-nav__icon md-icon"></span>
             
@@ -1104,7 +1267,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tech_stack/" class="md-nav__link">
+      <a href="../../development/tech_stack/" class="md-nav__link">
         
   
   
@@ -1132,7 +1295,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../log/" class="md-nav__link">
+      <a href="../../development/log/" class="md-nav__link">
         
   
   
@@ -1157,37 +1320,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Pre-commit Hooks
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../development/pre_commit/" class="md-nav__link">
         
   
   
@@ -1203,131 +1339,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#hooks-configured" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Hooks Configured
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Installation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-install-dev-dependencies" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Install dev dependencies
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-install-pre-commit-hooks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Install pre-commit hooks
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-install-commit-msg-hook-conventional-commits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Install commit-msg hook (conventional commits)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Usage
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#conventional-commit-format" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Conventional Commit Format
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Configuration
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#skipping-hooks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Skipping Hooks
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1394,10 +1405,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#hooks-configured" class="md-nav__link">
+  <a href="#running-training" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Hooks Configured
+        Running Training
       
     </span>
   </a>
@@ -1405,22 +1416,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
+  <a href="#models" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation
+        Models
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Installation">
+    <nav class="md-nav" aria-label="Models">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#1-install-dev-dependencies" class="md-nav__link">
+  <a href="#linear-family" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Install dev dependencies
+        Linear Family
       
     </span>
   </a>
@@ -1428,21 +1439,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-install-pre-commit-hooks" class="md-nav__link">
+  <a href="#tree-ensemble-family" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Install pre-commit hooks
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-install-commit-msg-hook-conventional-commits" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Install commit-msg hook (conventional commits)
+        Tree Ensemble Family
       
     </span>
   </a>
@@ -1455,10 +1455,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
+  <a href="#why-tree-models-outperform-linear-by-45" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Usage
+        Why Tree Models Outperform Linear by 45%
       
     </span>
   </a>
@@ -1466,10 +1466,43 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#conventional-commit-format" class="md-nav__link">
+  <a href="#mlflow-experiment-tracking" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conventional Commit Format
+        MLflow Experiment Tracking
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#model-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Model Selection
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cross-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Cross-Validation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#serialisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serialisation
       
     </span>
   </a>
@@ -1481,17 +1514,6 @@
     <span class="md-ellipsis">
       
         Configuration
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#skipping-hooks" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Skipping Hooks
       
     </span>
   </a>
@@ -1518,138 +1540,182 @@
   
 
 
-<h1 id="pre-commit-hooks">Pre-commit Hooks<a class="headerlink" href="#pre-commit-hooks" title="Permanent link">&para;</a></h1>
-<p>AirSense ML uses pre-commit hooks to enforce code quality and conventional
-commit messages on every commit automatically.</p>
+<h1 id="model-training">Model Training<a class="headerlink" href="#model-training" title="Permanent link">&para;</a></h1>
+<p>AirSense ML trains 7 models in a single pipeline run and automatically selects the best performer.</p>
 <hr />
-<h2 id="hooks-configured">Hooks Configured<a class="headerlink" href="#hooks-configured" title="Permanent link">&para;</a></h2>
+<h2 id="running-training">Running Training<a class="headerlink" href="#running-training" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>make<span class="w"> </span>train
+</code></pre></div>
+<p>Trains all 7 models, logs everything to MLflow, saves the best model to <code>models/best_model.pkl</code>.</p>
+<p>For production-optimised training (XGBoost + LightGBM only):</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>make<span class="w"> </span>train-prod
+</code></pre></div>
+<hr />
+<h2 id="models">Models<a class="headerlink" href="#models" title="Permanent link">&para;</a></h2>
+<p>Two families are trained — linear models as interpretable baselines, tree ensembles for performance.</p>
+<h3 id="linear-family">Linear Family<a class="headerlink" href="#linear-family" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Hook</th>
+<th>Model</th>
 <th>Purpose</th>
+<th>Key Parameter</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>ruff</code></td>
-<td>Lint Python files, auto-fix where possible</td>
+<td>Linear Regression</td>
+<td>Raw baseline — no regularisation</td>
+<td>None</td>
 </tr>
 <tr>
-<td><code>ruff-format</code></td>
-<td>Format Python files</td>
+<td>Ridge</td>
+<td>L2 regularisation — handles multicollinearity</td>
+<td><code>alpha</code></td>
 </tr>
 <tr>
-<td><code>conventional-pre-commit</code></td>
-<td>Enforce conventional commit message format</td>
+<td>Lasso</td>
+<td>L1 regularisation — automatic feature selection</td>
+<td><code>alpha</code></td>
+</tr>
+<tr>
+<td>ElasticNet</td>
+<td>Combined L1+L2</td>
+<td><code>alpha</code>, <code>l1_ratio</code></td>
 </tr>
 </tbody>
 </table>
-<hr />
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<h3 id="1-install-dev-dependencies">1. Install dev dependencies<a class="headerlink" href="#1-install-dev-dependencies" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>uv<span class="w"> </span>sync<span class="w"> </span>--all-groups
-</code></pre></div>
-<h3 id="2-install-pre-commit-hooks">2. Install pre-commit hooks<a class="headerlink" href="#2-install-pre-commit-hooks" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install
-</code></pre></div>
-<h3 id="3-install-commit-msg-hook-conventional-commits">3. Install commit-msg hook (conventional commits)<a class="headerlink" href="#3-install-commit-msg-hook-conventional-commits" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>install<span class="w"> </span>--hook-type<span class="w"> </span>commit-msg
-</code></pre></div>
-<hr />
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p>Hooks run automatically on every <code>git commit</code>. No manual steps needed.</p>
-<p>To run hooks manually against all files:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
-</code></pre></div></p>
-<p>To update hook versions:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pre-commit<span class="w"> </span>autoupdate
-</code></pre></div></p>
-<hr />
-<h2 id="conventional-commit-format">Conventional Commit Format<a class="headerlink" href="#conventional-commit-format" title="Permanent link">&para;</a></h2>
-<p>All commit messages must follow this format:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>&lt;type&gt;: &lt;description&gt;
-</code></pre></div></p>
-<p><strong>Allowed types:</strong></p>
+<p>Linear models establish the performance floor. If tree models don't significantly outperform linear models, it suggests the relationship is mostly linear and simpler models are sufficient.</p>
+<h3 id="tree-ensemble-family">Tree Ensemble Family<a class="headerlink" href="#tree-ensemble-family" title="Permanent link">&para;</a></h3>
 <table>
 <thead>
 <tr>
-<th>Type</th>
-<th>When to use</th>
+<th>Model</th>
+<th>Strength</th>
+<th>Memory</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>feat</code></td>
-<td>New feature</td>
+<td>Random Forest</td>
+<td>Stable, parallel trees, interpretable importance</td>
+<td>~400MB</td>
 </tr>
 <tr>
-<td><code>fix</code></td>
-<td>Bug fix</td>
+<td>XGBoost</td>
+<td>Sequential boosting, speed + accuracy</td>
+<td>~50MB</td>
 </tr>
 <tr>
-<td><code>chore</code></td>
-<td>Maintenance, dependency updates</td>
-</tr>
-<tr>
-<td><code>docs</code></td>
-<td>Documentation changes</td>
-</tr>
-<tr>
-<td><code>refactor</code></td>
-<td>Code restructuring, no behaviour change</td>
-</tr>
-<tr>
-<td><code>perf</code></td>
-<td>Performance improvement</td>
-</tr>
-<tr>
-<td><code>test</code></td>
-<td>Adding or updating tests</td>
-</tr>
-<tr>
-<td><code>build</code></td>
-<td>Build system, Docker, Makefile changes</td>
+<td>LightGBM</td>
+<td>Fastest, leaf-wise growth, best for large data</td>
+<td>~15MB</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Examples:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>feat: add batch prediction endpoint
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>fix: resolve circular import in core.__init__
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>chore: update ruff to v0.15.6
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>docs: update development log phases
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>refactor: split feature_engineering into separate modules
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>build: optimise Docker image — strip nvidia packages
-</code></pre></div></p>
-<p><strong>Rejected examples:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Update Makefile          ← no type prefix
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>fixed bug                ← no type prefix
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>WIP                      ← not descriptive
-</code></pre></div></p>
+<p>Tree models handle non-linear interactions automatically — they learn "high humidity + low wind + winter = severe AQI" without manual feature engineering.</p>
+<hr />
+<h2 id="why-tree-models-outperform-linear-by-45">Why Tree Models Outperform Linear by 45%<a class="headerlink" href="#why-tree-models-outperform-linear-by-45" title="Permanent link">&para;</a></h2>
+<p>AQI is not a linear function of weather. The relationship depends on combinations:</p>
+<ul>
+<li>High humidity + low wind speed + winter → severe smog</li>
+<li>High temperature + monsoon season → pollution washout</li>
+<li>Night hours + residential areas → different baseline than daytime</li>
+</ul>
+<p>Linear models can only learn <code>AQI = a*temperature + b*humidity + ...</code>. They cannot learn "if temperature AND humidity AND season interact in this specific way". Tree models split on combinations of features, learning exactly these patterns.</p>
+<p><strong>Baseline results:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Model</th>
+<th>Val RMSE</th>
+<th>R²</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Linear Regression</td>
+<td>41.28</td>
+<td>0.942</td>
+</tr>
+<tr>
+<td>Random Forest</td>
+<td><strong>22.23</strong></td>
+<td><strong>0.983</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Random Forest reduces error by <strong>46%</strong> over linear regression.</p>
+<hr />
+<h2 id="mlflow-experiment-tracking">MLflow Experiment Tracking<a class="headerlink" href="#mlflow-experiment-tracking" title="Permanent link">&para;</a></h2>
+<p>Every training run logs:</p>
+<ul>
+<li><strong>Parameters</strong> — model hyperparameters from config</li>
+<li><strong>Metrics</strong> — <code>val_rmse</code>, <code>val_r2</code>, <code>val_mae</code>, <code>val_rmsle</code>, <code>test_rmse</code>, <code>test_r2</code>, <code>cv_rmse</code></li>
+<li><strong>Artifacts</strong> — the full serialised pipeline (features + model)</li>
+</ul>
+<p>View all runs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>make<span class="w"> </span>mlflow
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># Open http://127.0.0.1:5000</span>
+</code></pre></div>
+<p>Experiments are stored in <code>mlruns.db</code> (SQLite). Never commit this file — it's gitignored.</p>
+<hr />
+<h2 id="model-selection">Model Selection<a class="headerlink" href="#model-selection" title="Permanent link">&para;</a></h2>
+<p>The best model is selected by <strong>lowest validation RMSE</strong> — not test RMSE.</p>
+<p>Test set is held out completely and used only for final reporting. Using test RMSE for selection would leak test information into the model choice.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Primary metric from model_config.yaml</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">primary_metric</span><span class="p">:</span> <span class="n">rmse</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># Selection logic in train.py</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">if</span> <span class="n">val_metrics</span><span class="o">.</span><span class="n">rmse</span> <span class="o">&lt;</span> <span class="n">best_metric</span><span class="p">:</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">best_metric</span> <span class="o">=</span> <span class="n">val_metrics</span><span class="o">.</span><span class="n">rmse</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">best_model_name</span> <span class="o">=</span> <span class="n">model_name</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">best_pipeline</span> <span class="o">=</span> <span class="n">full_pipeline</span>
+</code></pre></div>
+<hr />
+<h2 id="cross-validation">Cross-Validation<a class="headerlink" href="#cross-validation" title="Permanent link">&para;</a></h2>
+<p>5-fold cross-validation runs on the training set for each model. This gives a more reliable estimate of generalisation than a single train/val split.</p>
+<p>CV RMSE is reported in log space (the model is trained on <code>log1p(AQI)</code>) — it cannot be directly compared to Val/Test RMSE which is reported on the original AQI scale.</p>
+<p>Use CV RMSE only to compare model consistency across folds — lower CV RMSE means more stable performance.</p>
+<hr />
+<h2 id="serialisation">Serialisation<a class="headerlink" href="#serialisation" title="Permanent link">&para;</a></h2>
+<p>The full sklearn <code>Pipeline</code> object (feature transformer + model) is saved with <code>joblib</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>models/best_model.pkl
+</code></pre></div>
+<p>The pipeline contains everything needed for inference:
+- <code>ColumnTransformer</code> with fitted <code>StandardScaler</code> and <code>OneHotEncoder</code>
+- Fitted model (Random Forest, XGBoost, or LightGBM)</p>
+<p>This guarantees that inference applies identical transformations to training — no training/serving skew.</p>
 <hr />
 <h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
-<p>Hooks are defined in <code>.pre-commit-config.yaml</code> at project root:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">repos</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/astral-sh/ruff-pre-commit</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v0.15.6</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">--fix</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ruff-format</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/compilerla/conventional-pre-commit</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v3.4.0</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conventional-pre-commit</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="w">        </span><span class="nt">stages</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">commit-msg</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="w">        </span><span class="nt">args</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">feat</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">fix</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">chore</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">docs</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">refactor</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">perf</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">test</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">build</span><span class="p p-Indicator">]</span>
-</code></pre></div></p>
-<hr />
-<h2 id="skipping-hooks">Skipping Hooks<a class="headerlink" href="#skipping-hooks" title="Permanent link">&para;</a></h2>
-<p>For generated files like changelogs — skip pre-commit with <code>--no-verify</code>:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>git<span class="w"> </span>commit<span class="w"> </span>--no-verify<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;docs: update changelog for v0.2.0&quot;</span>
-</code></pre></div></p>
-<p>Use sparingly. Never skip on feature commits.</p>
+<p>All training parameters are in <code>configs/model_config.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nt">training</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="nt">test_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.2</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span><span class="nt">val_size</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">  </span><span class="nt">random_state</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">42</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="nt">cv_folds</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">5</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">  </span><span class="nt">shuffle</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nt">models</span><span class="p">:</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">  </span><span class="nt">random_forest</span><span class="p">:</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nt">params</span><span class="p">:</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">      </span><span class="nt">n_estimators</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">200</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">      </span><span class="nt">max_depth</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">15</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="w">      </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="nt">evaluation</span><span class="p">:</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">  </span><span class="nt">primary_metric</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">rmse</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="nt">mlflow</span><span class="p">:</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="w">  </span><span class="nt">experiment_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">airsense-aqi-regression</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">  </span><span class="nt">tracking_uri</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sqlite:///mlruns.db</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="nt">artifacts</span><span class="p">:</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">  </span><span class="nt">model_dir</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">models/</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">  </span><span class="nt">best_model_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">best_model.pkl</span>
+</code></pre></div>
+<p>To disable a model, set <code>enabled: false</code>. To change hyperparameters, update <code>params</code>. No code changes required.</p>
 
 
 

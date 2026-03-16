@@ -9,6 +9,18 @@
          <lastmod>2026-03-16</lastmod>
     </url>
     <url>
+         <loc>https://chitrank2050.github.io/airsense-ml/api/endpoints/</loc>
+         <lastmod>2026-03-16</lastmod>
+    </url>
+    <url>
+         <loc>https://chitrank2050.github.io/airsense-ml/architecture/overview/</loc>
+         <lastmod>2026-03-16</lastmod>
+    </url>
+    <url>
+         <loc>https://chitrank2050.github.io/airsense-ml/architecture/structure/</loc>
+         <lastmod>2026-03-16</lastmod>
+    </url>
+    <url>
          <loc>https://chitrank2050.github.io/airsense-ml/data/sources/</loc>
          <lastmod>2026-03-16</lastmod>
     </url>
@@ -25,7 +37,27 @@
          <lastmod>2026-03-16</lastmod>
     </url>
     <url>
+         <loc>https://chitrank2050.github.io/airsense-ml/getting_started/installation/</loc>
+         <lastmod>2026-03-16</lastmod>
+    </url>
+    <url>
+         <loc>https://chitrank2050.github.io/airsense-ml/getting_started/quickstart/</loc>
+         <lastmod>2026-03-16</lastmod>
+    </url>
+    <url>
+         <loc>https://chitrank2050.github.io/airsense-ml/ml/data_pipeline/</loc>
+         <lastmod>2026-03-16</lastmod>
+    </url>
+    <url>
+         <loc>https://chitrank2050.github.io/airsense-ml/ml/feature_engineering/</loc>
+         <lastmod>2026-03-16</lastmod>
+    </url>
+    <url>
          <loc>https://chitrank2050.github.io/airsense-ml/ml/metrics/</loc>
+         <lastmod>2026-03-16</lastmod>
+    </url>
+    <url>
+         <loc>https://chitrank2050.github.io/airsense-ml/ml/training/</loc>
          <lastmod>2026-03-16</lastmod>
     </url>
 </urlset>
