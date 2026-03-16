@@ -11,6 +11,17 @@
 
 ---
 
+## Links
+
+| | URL |
+|---|---|
+<!-- | 🌐 Live API | https://airsense-ml.onrender.com | -->
+| 📚 Documentation | https://chitrank2050.github.io/airsense-ml |
+<!-- | 📊 API Docs (Swagger) | https://airsense-ml.onrender.com/docs | -->
+| 👤 Portfolio | https://chitrankagnihotri.com |
+<!-- | 🗺️ Frontend | https://airsense.vercel.app | -->
+
+---
 ## What It Does
 
 AirSense ML predicts Air Quality Index (AQI) for Delhi from weather and location features — temperature, humidity, wind speed, visibility, station, and time. It is not a Kaggle notebook. It is an end-to-end ML system built to production engineering standards.

@@ -80,7 +80,7 @@ nav:
     - Tech Stack: development/tech_stack.md
     - Development Log: development/log.md
     - Pre-commit Hooks: development/pre_commit.md
-  - Changelog: ../CHANGELOG.md
+  - Changelog: changelog.md
 
 extra:
   social:
@@ -93,4 +93,5 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: https://www.linkedin.com/in/chitrank-agnihotri/
       name: LinkedIn
+
 copyright: Copyright &copy; 2026 Chitrank Agnihoti
