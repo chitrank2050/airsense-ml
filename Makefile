@@ -225,12 +225,12 @@ python-version:
 # ─────────────────────────────────────────────────────────────────────────────
 
 git-release:
-	@VERSION=$$(grep '^version' pyproject.toml | head -1 | sed 's/version = "\(.*\)"/\1/'); \
-	@echo "📦 Releasing v$$VERSION..."; \
-	@git cliff --output CHANGELOG.md; \
-	@git add CHANGELOG.md pyproject.toml; \
-	@git diff --cached --quiet || git commit -m "chore: release v$$VERSION"; \
-	@git tag "v$$VERSION" -m "Release v$$VERSION"; \
-	@git push && git push --tags; \
-	@echo "✅ Released v$$VERSION — create GitHub Release at:"; \
+	@VERSION=$$(grep '^version' pyproject.toml | head -1 | sed 's/version = "\(.*\)"/\1/');
+	@echo "📦 Releasing v$$VERSION...";
+	@git cliff --output CHANGELOG.md;
+	@git add CHANGELOG.md pyproject.toml;
+	@git diff --cached --quiet || git commit -m "chore: release v$$VERSION";
+	@git tag "v$$VERSION" -m "Release v$$VERSION";
+	@git push && git push --tags;
+	@echo "✅ Released v$$VERSION — create GitHub Release at:";
 	@echo "   https://github.com/chitrank2050/airsense-ml/releases/new?tag=v$$VERSION"
