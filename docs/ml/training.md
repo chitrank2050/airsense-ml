@@ -161,7 +161,7 @@ mlflow:
 
 artifacts:
   model_dir: models/
-  best_model_name: best_model.pkl
+  best_model_name: best_model_tuned.pkl
 ```
 
 To disable a model, set `enabled: false`. To change hyperparameters, update `params`. No code changes required.

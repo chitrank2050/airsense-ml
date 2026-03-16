@@ -83,7 +83,7 @@ class _Settings(BaseSettings):
     # ----------------------------------------------------------------
     # 🤖  Model
     # ----------------------------------------------------------------
-    MODEL_NAME: str = "best_model.pkl"
+    MODEL_NAME: str = "best_model_tuned.pkl"
     MODEL_DIR: str = "models"
     DATASET_CONFIG: str = "configs/delhi.yaml"
     MODEL_CONFIG: str = "configs/model_config.yaml"
