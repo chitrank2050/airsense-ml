@@ -4,6 +4,16 @@ All notable changes to AirSense ML.
 
 ## [Unreleased]
 
+### Maintenance
+
+- Update Makefile.
+
+### Build
+
+- Update Makefile targets and commands.
+
+## [] - 2026-03-16
+
 ### Features
 
 - Add git-cliff for automated changelog generation and configure its settings.
@@ -11,6 +21,7 @@ All notable changes to AirSense ML.
 ### Maintenance
 
 - Update Makefile.
+- Release v
 
 ## [0.1.0] - 2026-03-16
 
