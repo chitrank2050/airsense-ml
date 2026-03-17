@@ -16,7 +16,8 @@ APP_ENV = dev
         lint format tree python-version obliviate \
 				changelog changelog-preview changelog-since git-tag git-release \
 				docs-build docs-deploy docs \
-				db-migrate db-migration db-rollback
+				db-migrate db-migration db-rollback \
+				test airflow-up airflow-down airflow-logs clean clean-all
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Help
@@ -54,6 +55,14 @@ help:
 	@echo "  make lint           - Ruff check"
 	@echo "  make format         - Ruff format"
 	@echo ""
+	@echo "Testing:"
+	@echo "  make test           - Run pytest suite"
+	@echo ""
+	@echo "Airflow Orchestration:"
+	@echo "  make airflow-up     - Start Airflow using docker-compose"
+	@echo "  make airflow-down   - Stop Airflow"
+	@echo "  make airflow-logs   - Tail Airflow logs"
+	@echo ""
 	@echo "Docs:"
 	@echo "  make docs           - Start MkDocs dev server"
 	@echo "  make docs-build     - Build static site"
@@ -67,6 +76,8 @@ help:
 	@echo ""
 	@echo "Maintenance:"
 	@echo "  make tree           - Print project structure"
+	@echo "  make clean          - Remove cache and log files"
+	@echo "  make clean-all      - Remove cache, logs, models, and virtual env"
 	@echo "  make obliviate      - Interactive reset menu"
 	@echo ""
 	@echo "  make db-migrate     - Run database migrations"
@@ -192,6 +203,28 @@ format:
 	$(UV) run --no-sync ruff format .
 
 # ─────────────────────────────────────────────────────────────────────────────
+# Testing
+# ─────────────────────────────────────────────────────────────────────────────
+test:
+	@echo "🧪 Running test suite..."
+	$(UV) run pytest
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Airflow Orchestration
+# ─────────────────────────────────────────────────────────────────────────────
+airflow-up:
+	@echo "🌬️  Starting Airflow cluster..."
+	@docker compose -f docker-compose.airflow.yaml up -d
+
+airflow-down:
+	@echo "🌬️  Stopping Airflow cluster..."
+	@docker compose -f docker-compose.airflow.yaml down
+
+airflow-logs:
+	@echo "📋 Tailing Airflow logs..."
+	@docker compose -f docker-compose.airflow.yaml logs -f
+
+# ─────────────────────────────────────────────────────────────────────────────
 # Maintenance
 # ─────────────────────────────────────────────────────────────────────────────
 tree:
@@ -204,6 +237,12 @@ tree:
 		-not -path './.dvc/*' \
 		-not -path './.ruff_cache/*' \
 		| sort | sed 's/[^/]*\//  /g'
+
+clean: _clean_cache _clean_logs
+	@echo "✅ Basic cleanup complete."
+
+clean-all: clean _clean_models _clean_mlflow _clean_venv
+	@echo "💥 Deep clean complete. Run 'make init && make install' to rebuild."
 
 _clean_mlflow:
 	@echo "⚠️  Removing MLflow experiment database (mlruns.db)..."
