@@ -9,7 +9,7 @@ Endpoints:
     GET /v1/monitoring/report — generate and return drift report
 """
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from api.schemas.monitoring import DriftReportResponse
@@ -32,11 +32,13 @@ router = APIRouter()
 )
 @limiter.limit("10/minute")
 async def drift_report(
+    request: Request,
     db: AsyncSession = Depends(get_db),
 ) -> DriftReportResponse:
     """Generate Evidently drift report.
 
     Args:
+        request: FastAPI Request format for rate limiting.
         db: Database session — injected by FastAPI.
 
     Returns:

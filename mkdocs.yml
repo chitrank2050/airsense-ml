@@ -74,10 +74,13 @@ nav:
     - Feature Engineering: ml/feature_engineering.md
     - Model Training: ml/training.md
     - Evaluation Metrics: ml/metrics.md
+    - Orchestration: development/orchestration.md
   - Data:
     - Sources: data/sources.md
   - Development:
     - Tech Stack: development/tech_stack.md
+    - Continuous Integration: development/ci.md
+    - Testing: development/testing.md
     - Development Log: development/log.md
     - Pre-commit Hooks: development/pre_commit.md
   - Changelog: changelog.md
