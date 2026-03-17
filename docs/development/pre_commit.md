@@ -102,7 +102,7 @@ repos:
       - id: ruff-format
 
   - repo: https://github.com/compilerla/conventional-pre-commit
-    rev: v3.4.0
+    rev: v4.4.0
     hooks:
       - id: conventional-pre-commit
         stages: [commit-msg]

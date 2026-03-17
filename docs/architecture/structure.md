@@ -8,6 +8,7 @@ Every folder and file has a single responsibility. Nothing is arbitrary.
 
 ```
 airsense-ml/
+├── api/            # FastAPI application — top-level for clean separation
 ├── bruno/          # API client collection — executable requests, not docs
 ├── configs/        # YAML configuration — dataset and model parameters
 ├── data/           # Data files — tracked by DVC, never committed to git
@@ -15,7 +16,7 @@ airsense-ml/
 ├── models/         # Trained model artifacts — tracked by DVC
 ├── notebooks/      # EDA exploration — never imported by src/
 ├── scripts/        # Dev tooling — interactive Makefile menus
-├── src/            # Application code — the only folder that matters for the system
+├── src/            # Core ML logic and shared utilities
 ├── tests/          # Test suite
 ├── .env.example    # Environment variable template
 ├── Dockerfile      # Multi-stage production build
@@ -25,24 +26,30 @@ airsense-ml/
 
 ---
 
-## `src/` — Application Code
+## `api/` — HTTP Layer
+ 
+ ```
+ api/
+ ├── adapters/           # Translates between API schemas and ML pipeline
+ │   └── prediction_adapter.py
+ ├── schemas/            # Pydantic request/response contracts
+ │   ├── prediction.py   # PredictionRequest, PredictionResponse
+ │   ├── batch.py        # BatchPredictionRequest, BatchPredictionResponse
+ │   ├── health.py       # HealthResponse
+ │   └── model_info.py   # ModelInfoResponse
+ ├── v1/                 # Versioned route handlers
+ │   ├── predict.py      # POST /v1/predict, POST /v1/predict/batch
+ │   ├── health.py       # GET /v1/health
+ │   └── model_info.py   # GET /v1/model/info
+ └── app.py              # FastAPI app factory — wires everything together
+ ```
+ 
+ ---
+ 
+ ## `src/` — ML Logic & Core
 
 ```
 src/
-├── api/                    # HTTP layer — FastAPI only
-│   ├── adapters/           # Translates between API schemas and ML pipeline
-│   │   └── prediction_adapter.py
-│   ├── schemas/            # Pydantic request/response contracts
-│   │   ├── prediction.py   # PredictionRequest, PredictionResponse
-│   │   ├── batch.py        # BatchPredictionRequest, BatchPredictionResponse
-│   │   ├── health.py       # HealthResponse
-│   │   └── model_info.py   # ModelInfoResponse
-│   ├── v1/                 # Versioned route handlers
-│   │   ├── predict.py      # POST /v1/predict, POST /v1/predict/batch
-│   │   ├── health.py       # GET /v1/health
-│   │   └── model_info.py   # GET /v1/model/info
-│   └── app.py              # FastAPI app factory — wires everything together
-│
 ├── core/                   # Application foundation — base layer, no ML logic
 │   ├── config.py           # All settings via pydantic-settings
 │   ├── logger.py           # Loguru setup, stdlib interception

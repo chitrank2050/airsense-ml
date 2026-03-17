@@ -30,11 +30,12 @@ help:
 	@echo "Setup:"
 	@echo "  make init           - Create virtual environment"
 	@echo "  make install        - Install all dependencies"
-	@echo "  make install-prod   - Install production dependencies only"
+	@echo "  make install-prod   - Install production dependencies only (Lightweight)"
 	@echo ""
 	@echo "ML Pipeline:"
 	@echo "  make dev            - Run full pipeline"
 	@echo "  make train          - Train all 7 models locally"
+	@echo "  make train-prod     - Train memory-optimized production models"
 	@echo "  make tune           - Hyperparameter tuning (Optuna)"
 	@echo "  make mlflow         - Start MLflow UI"
 	@echo ""
@@ -91,6 +92,10 @@ dev:
 train:
 	@echo "🤖 Running training pipeline..."
 	$(UV) run python -m src.models.train
+
+train-prod:
+	@echo "🤖 Running production training pipeline..."
+	$(UV) run python -m src.models.train --config configs/model_config.prod.yaml
 
 tune:
 	@echo "🔬 Running hyperparameter tuning..."

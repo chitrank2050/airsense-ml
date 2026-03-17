@@ -12,7 +12,7 @@ MLOps pipeline for air quality prediction.
 | Data Validation       | Great Expectations                | ❌ Not started  |
 | Feature Store         | Local Parquet                     | ❌ Not started  |
 | Experiment Tracking   | MLflow                            | ✅ Done         |
-| Orchestration         | Python scripts                    | ✅ Done         |
+| Orchestration         | Apache Airflow                    | ✅ Done         |
 | Model Training        | Scikit-learn + XGBoost + LightGBM | ✅ Done         |
 | Hyperparameter Tuning | Optuna                            | ❌ Not started  |
 | Model Registry        | MLflow                            | ✅ Done         |

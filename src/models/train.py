@@ -144,5 +144,14 @@ def train(
 
 
 if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--config", type=str, help="Path to model config YAML")
+    args = parser.parse_args()
+
     bootstrap()
-    train()
+    if args.config:
+        train(model_config_path=args.config)
+    else:
+        train()
