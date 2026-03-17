@@ -12,12 +12,12 @@ APP_ENV = dev
 
 .DEFAULT_GOAL := help
 .PHONY: help init install dev train tune mlflow api \
-        docker-build docker-run docker-stop docker-logs docker-shell docker-clean docker-clean-build docker-push docker-deploy \
+        docker docker-run _docker-build _docker-run _docker-stop _docker-logs _docker-shell _docker-clean _docker-clean-build _docker-push _docker-deploy \
         lint format tree python-version obliviate \
-				changelog changelog-preview changelog-since git-tag git-release \
-				docs-build docs-deploy docs \
-				db-migrate db-migration db-rollback \
-				test airflow-up airflow-down airflow-logs clean clean-all
+				git _changelog _changelog-preview _changelog-since _git-tag _git-release \
+				docs _docs-build _docs-deploy _docs \
+				db _db-migrate _db-migration _db-rollback \
+				test airflow _airflow-up _airflow-down _airflow-logs clean clean-all
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Help
@@ -41,48 +41,21 @@ help:
 	@echo "API:"
 	@echo "  make api            - Start FastAPI server"
 	@echo ""
-	@echo "Docker:"
-	@echo "  make docker-build   - Build image (linux/amd64)"
-	@echo "  make docker-run     - Run container locally"
-	@echo "  make docker-stop    - Stop container"
-	@echo "  make docker-logs    - Tail container logs"
-	@echo "  make docker-shell   - Shell into container"
-	@echo "  make docker-push    - Push to Docker Hub"
-	@echo "  make docker-deploy  - Build + push (full deploy)"
-	@echo "  make docker-clean   - Prune Docker system"
+	@echo "Interactive Menus:"
+	@echo "  make docker         - Manage Docker containers & images"
+	@echo "  make airflow        - Manage Airflow orchestration"
+	@echo "  make docs           - Manage & deploy MkDocs documentation"
+	@echo "  make git            - Generate changelogs & releases"
+	@echo "  make db             - Manage Alembic database migrations"
+	@echo "  make obliviate      - Interactive clean menu"
 	@echo ""
-	@echo "Code Quality:"
+	@echo "Code Quality & Testing:"
 	@echo "  make lint           - Ruff check"
 	@echo "  make format         - Ruff format"
-	@echo ""
-	@echo "Testing:"
 	@echo "  make test           - Run pytest suite"
-	@echo ""
-	@echo "Airflow Orchestration:"
-	@echo "  make airflow-up     - Start Airflow using docker-compose"
-	@echo "  make airflow-down   - Stop Airflow"
-	@echo "  make airflow-logs   - Tail Airflow logs"
-	@echo ""
-	@echo "Docs:"
-	@echo "  make docs           - Start MkDocs dev server"
-	@echo "  make docs-build     - Build static site"
-	@echo "  make docs-deploy    - Deploy to GitHub Pages"
-	@echo ""
-	@echo "Git:"
-	@echo "  make changelog      - Generate CHANGELOG.md"
-	@echo "  make changelog-preview - Preview unreleased changes"
-	@echo "  make git-tag        - Tag version from pyproject.toml"
-	@echo "  make git-release    - Tag + changelog + GitHub release"
 	@echo ""
 	@echo "Maintenance:"
 	@echo "  make tree           - Print project structure"
-	@echo "  make clean          - Remove cache and log files"
-	@echo "  make clean-all      - Remove cache, logs, models, and virtual env"
-	@echo "  make obliviate      - Interactive reset menu"
-	@echo ""
-	@echo "  make db-migrate     - Run database migrations"
-	@echo "  make db-migration   - Create new migration"
-	@echo "  make db-rollback    - Rollback last migration"
 	@echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -137,14 +110,20 @@ api:
 # ─────────────────────────────────────────────────────────────────────────────
 # Docker
 # ─────────────────────────────────────────────────────────────────────────────
-docker-build:
+# ─────────────────────────────────────────────────────────────────────────────
+# Docker
+# ─────────────────────────────────────────────────────────────────────────────
+docker:
+	$(UV) run --with questionary scripts/menu.py docker
+
+_docker-build:
 	@echo "🐳 Building Docker image: $(IMAGE_NAME)..."
 	@docker build --platform linux/amd64 -t $(IMAGE_NAME) .
 	@echo "✅ Build complete. Image size:"
 	@docker images $(IMAGE_NAME) --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}"
 	@echo "🚀 Run 'make docker-run' to start."
 
-docker-run:
+_docker-run:
 	@if [ ! -f .env.prod ]; then \
 		echo "⚠️  .env.prod not found — copying from .env.example"; \
 		cp .env.example .env.prod; \
@@ -153,31 +132,31 @@ docker-run:
 	@echo "🐳 Running container: $(IMAGE_NAME)..."
 	@docker run -p 8000:8000 --env-file .env.prod --name $(IMAGE_NAME) $(IMAGE_NAME)
 
-docker-stop:
+_docker-stop:
 	@echo "🐳 Stopping container: $(IMAGE_NAME)..."
 	@docker stop $(IMAGE_NAME) 2>/dev/null || true
 	@docker rm $(IMAGE_NAME) 2>/dev/null || true
 	@echo "✅ Container stopped and removed."
 
-docker-logs:
+_docker-logs:
 	@echo "📋 Tailing logs for: $(IMAGE_NAME)..."
 	@docker logs -f $(IMAGE_NAME)
 
-docker-shell:
+_docker-shell:
 	@echo "🐚 Opening shell in: $(IMAGE_NAME)..."
 	@docker exec -it $(IMAGE_NAME) /bin/bash
 
-docker-clean:
+_docker-clean:
 	@echo "🧹 Pruning Docker system..."
 	@docker system prune -a -f --volumes
 	@echo "✅ Docker system cleaned."
 
-docker-clean-build:
-	@make docker-stop
-	@make docker-clean
-	@make docker-build
+_docker-clean-build:
+	@make _docker-stop
+	@make _docker-clean
+	@make _docker-build
 
-docker-push:
+_docker-push:
 	@echo "🐳 Pushing image to Docker Hub..."
 	@docker tag $(IMAGE_NAME) $(DOCKER_HUB_IMAGE):latest
 	@docker tag $(IMAGE_NAME) $(DOCKER_HUB_IMAGE):v$(shell grep '^version' pyproject.toml | head -1 | tr -d '"' | tr -d ' ' | cut -d'=' -f2)
@@ -185,10 +164,10 @@ docker-push:
 	@docker push $(DOCKER_HUB_IMAGE):v$(shell grep '^version' pyproject.toml | head -1 | tr -d '"' | tr -d ' ' | cut -d'=' -f2)
 	@echo "✅ Pushed — $(DOCKER_HUB_IMAGE):latest"
 
-docker-deploy:
+_docker-deploy:
 	@echo "🚀 Building and deploying..."
-	@$(MAKE) docker-clean-build
-	@$(MAKE) docker-push
+	@$(MAKE) _docker-clean-build
+	@$(MAKE) _docker-push
 	@echo "✅ Deployed — $(API_DEPLOYMENT_PLATFORM) will pull latest automatically"
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -212,15 +191,21 @@ test:
 # ─────────────────────────────────────────────────────────────────────────────
 # Airflow Orchestration
 # ─────────────────────────────────────────────────────────────────────────────
-airflow-up:
+# ─────────────────────────────────────────────────────────────────────────────
+# Airflow Orchestration
+# ─────────────────────────────────────────────────────────────────────────────
+airflow:
+	$(UV) run --with questionary scripts/menu.py airflow
+
+_airflow-up:
 	@echo "🌬️  Starting Airflow cluster..."
 	@docker compose -f docker-compose.airflow.yaml up -d
 
-airflow-down:
+_airflow-down:
 	@echo "🌬️  Stopping Airflow cluster..."
 	@docker compose -f docker-compose.airflow.yaml down
 
-airflow-logs:
+_airflow-logs:
 	@echo "📋 Tailing Airflow logs..."
 	@docker compose -f docker-compose.airflow.yaml logs -f
 
@@ -237,12 +222,6 @@ tree:
 		-not -path './.dvc/*' \
 		-not -path './.ruff_cache/*' \
 		| sort | sed 's/[^/]*\//  /g'
-
-clean: _clean_cache _clean_logs
-	@echo "✅ Basic cleanup complete."
-
-clean-all: clean _clean_models _clean_mlflow _clean_venv
-	@echo "💥 Deep clean complete. Run 'make init && make install' to rebuild."
 
 _clean_mlflow:
 	@echo "⚠️  Removing MLflow experiment database (mlruns.db)..."
@@ -301,7 +280,13 @@ python-version:
 # ─────────────────────────────────────────────────────────────────────────────
 # Git Command
 # ─────────────────────────────────────────────────────────────────────────────
-changelog:
+# ─────────────────────────────────────────────────────────────────────────────
+# Git Command
+# ─────────────────────────────────────────────────────────────────────────────
+git:
+	$(UV) run --with questionary scripts/menu.py git
+
+_changelog:
 	@echo "📝 Generating changelog..."
 	@$(UV) run git-cliff --output CHANGELOG.md
 	@git add CHANGELOG.md
@@ -309,23 +294,24 @@ changelog:
 	@git push
 	@echo "✅ Changelog updated."
 
-changelog-preview:
+_changelog-preview:
 	@echo "📝 Preview unreleased changes..."
 	@$(UV) run git-cliff --unreleased --strip all
 
-changelog-since:
+_changelog-since:
 	@read -p "Since tag (e.g. v0.1.0): " tag; \
 	echo "📝 Changelog since $$tag..."; \
 	$(UV) run git-cliff "$$tag"..HEAD --strip all
 
-git-tag:
+
+_git-tag:
 	@VERSION=$$(grep '^version' pyproject.toml | head -1 | tr -d '"' | tr -d ' ' | cut -d'=' -f2); \
 	echo "🏷️  Tagging v$$VERSION..."; \
 	git tag "v$$VERSION" -m "Release v$$VERSION"; \
 	git push --tags; \
 	echo "✅ Tagged v$$VERSION"
 
-git-release:
+_git-release:
 	@VERSION=$$(grep '^version' pyproject.toml | head -1 | tr -d '"' | tr -d ' ' | cut -d'=' -f2); \
 	echo "📦 Releasing v$$VERSION..."; \
 	$(UV) run git-cliff --output CHANGELOG.md; \
@@ -345,18 +331,24 @@ git-release:
 # ─────────────────────────────────────────────────────────────────────────────
 # Docs
 # ─────────────────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# Docs
+# ─────────────────────────────────────────────────────────────────────────────
 docs:
+	$(UV) run --with questionary scripts/menu.py docs
+
+_docs:
 	@echo "📚 Starting MkDocs server..."
 	@cp CHANGELOG.md docs/changelog.md
 	@$(UV) run mkdocs serve
 
-docs-build:
+_docs-build:
 	@echo "📚 Building docs site..."
 	@cp CHANGELOG.md docs/changelog.md
 	@$(UV) run mkdocs build
 	@echo "✅ Docs built in site/"
 
-docs-deploy:
+_docs-deploy:
 	@echo "📚 Deploying to GitHub Pages..."
 	@cp CHANGELOG.md docs/changelog.md
 	@$(UV) run mkdocs gh-deploy --force
@@ -365,18 +357,24 @@ docs-deploy:
 # ─────────────────────────────────────────────────────────────────────────────
 # Database
 # ─────────────────────────────────────────────────────────────────────────────
-db-migrate:
+# ─────────────────────────────────────────────────────────────────────────────
+# Database
+# ─────────────────────────────────────────────────────────────────────────────
+db:
+	$(UV) run --with questionary scripts/menu.py db
+
+_db-migrate:
 	@echo "🗄️  Running database migrations..."
-	@APP_ENV=dev $(UV) run alembic upgrade head
+	$(UV) run alembic upgrade head
 	@echo "✅ Migrations complete."
 
-db-migration:
+_db-migration:
 	@read -p "Migration name: " name; \
 	echo "🗄️  Creating migration: $$name..."; \
-	APP_ENV=dev $(UV) run alembic revision --autogenerate -m "$$name"; \
+	$(UV) run alembic revision --autogenerate -m "$$name"; \
 	echo "✅ Migration created."
 
-db-rollback:
+_db-rollback:
 	@echo "🗄️  Rolling back last migration..."
-	@APP_ENV=dev $(UV) run alembic downgrade -1
+	@$(UV) run alembic downgrade -1
 	@echo "✅ Rolled back."
