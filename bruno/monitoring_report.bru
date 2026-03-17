@@ -1,0 +1,61 @@
+meta {
+  name: Monitoring Report
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{baseUrl}}/v1/monitoring/report
+  body: none
+  auth: none
+}
+
+headers {
+  Accept: application/json
+}
+
+docs {
+  # Drift Report
+
+  Generates a data drift report comparing recent production predictions against the training reference data.
+  Requires at least 10 production predictions in the database to generate a meaningful report.
+
+  ## Response
+
+  | Field | Type | Description |
+  |---|---|---|
+  | dataset_drift_detected | boolean | True if dataset drift is detected |
+  | drift_score | float | Proportion of features that drifted |
+  | n_features_drifted | int | Number of drifted features |
+  | n_features_total | int | Total features monitored |
+  | n_production_samples | int | Production samples analysed |
+  | n_reference_samples | int | Reference samples used |
+
+  ## Status Codes
+
+  - `200` — report generated successfully
+  - `400` — insufficient production data (e.g. fewer than 10 samples)
+  - `500` — report generation failed
+}
+
+tests {
+  test("status is 200", function() {
+    expect(res.status).to.equal(200);
+  });
+
+  test("dataset_drift_detected is a boolean", function() {
+    expect(res.body.dataset_drift_detected).to.be.a("boolean");
+  });
+
+  test("drift_score is a number", function() {
+    expect(res.body.drift_score).to.be.a("number");
+  });
+
+  test("n_features_total is a number", function() {
+    expect(res.body.n_features_total).to.be.a("number");
+  });
+
+  test("n_production_samples is a number", function() {
+    expect(res.body.n_production_samples).to.be.a("number");
+  });
+}
