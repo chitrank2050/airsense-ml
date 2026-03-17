@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+from airflow.providers.standard.operators.bash import BashOperator
 
 default_args = {
     "owner": "airsense-ml",
@@ -14,7 +14,7 @@ dag = DAG(
     "airsense_training_pipeline",
     default_args=default_args,
     description="Orchestrates the AirSense ML training pipeline",
-    schedule_interval=None,  # Set to '@daily' or similar when ready for automated runs
+    schedule=None,  # Set to '@daily' or similar when ready for automated runs
     catchup=False,
 )
 
