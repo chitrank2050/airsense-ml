@@ -204,15 +204,17 @@ airflow:
 
 _airflow-up:
 	@echo "🌬️  Starting Airflow cluster..."
-	@docker compose -f docker-compose.airflow.yaml up -d
+	@AIRFLOW_UID=$$(id -u) docker compose -f docker-compose.airflow.yaml up -d
+	@echo "✅ Airflow is running at http://localhost:8080"
+	@echo "   User: admin | Pass: admin"
 
 _airflow-down:
 	@echo "🌬️  Stopping Airflow cluster..."
-	@docker compose -f docker-compose.airflow.yaml down
+	@AIRFLOW_UID=$$(id -u) docker compose -f docker-compose.airflow.yaml down -v
 
 _airflow-logs:
 	@echo "📋 Tailing Airflow logs..."
-	@docker compose -f docker-compose.airflow.yaml logs -f
+	@AIRFLOW_UID=$$(id -u) docker compose -f docker-compose.airflow.yaml logs -f
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Maintenance
