@@ -185,11 +185,11 @@ docker-deploy:
 # ─────────────────────────────────────────────────────────────────────────────
 lint:
 	@echo "🔍 Checking code quality..."
-	$(UV) run --no-sync ruff check src/ --fix
+	$(UV) run --no-sync ruff check . --fix
 
 format:
 	@echo "✨ Formatting code..."
-	$(UV) run --no-sync ruff format src/
+	$(UV) run --no-sync ruff format .
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Maintenance

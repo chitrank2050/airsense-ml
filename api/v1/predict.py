@@ -1,5 +1,4 @@
-"""src/api/v1/predict.py
-
+"""
 Prediction endpoints for the AirSense ML API.
 
 Exposes single and batch AQI prediction over HTTP. Both endpoints

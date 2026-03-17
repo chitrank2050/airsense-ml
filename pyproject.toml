@@ -120,7 +120,7 @@ split-on-trailing-comma = true
 
 [tool.ruff.lint.per-file-ignores]
 "src/models/registry.py" = ["F401"]  # MODEL_MAP exports are used externally
-"src/api/schemas/*" = ["UP007"]  # Pydantic v2 needs Optional in some cases
+"api/schemas/*" = ["UP007"]  # Pydantic v2 needs Optional in some cases
 "notebooks/*" = ["ALL"]  # never lint notebooks
 
 [tool.ruff.format]

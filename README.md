@@ -79,7 +79,7 @@ MLflow Experiment Tracking       mlruns.db
     ↓
 Best Model Saved                 models/best_model.pkl
     ↓
-FastAPI Inference API            src/api/
+FastAPI Inference API            api/
     POST /v1/predict
     POST /v1/predict/batch
     GET  /v1/health

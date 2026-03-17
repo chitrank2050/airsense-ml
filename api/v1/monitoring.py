@@ -1,5 +1,4 @@
-"""src/api/v1/monitoring.py
-
+"""
 Monitoring endpoints for AirSense ML API.
 
 Exposes drift detection reports comparing production prediction

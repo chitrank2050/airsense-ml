@@ -135,9 +135,9 @@ bruno/
 
 | Content | Location | Reason |
 |---|---|---|
-| HTTP routes | `src/api/v1/` | Transport layer only |
-| Request/response shapes | `src/api/schemas/` | Single contract source |
-| Schema ↔ pipeline translation | `src/api/adapters/` | Decouples API from ML |
+| HTTP routes | `api/v1/` | Transport layer only |
+| Request/response shapes | `api/schemas/` | Single contract source |
+| Schema ↔ pipeline translation | `api/adapters/` | Decouples API from ML |
 | Model loading + inference | `src/models/predict.py` | ML layer, not API layer |
 | Feature transformations | `src/features/` | Reused by train and inference |
 | Column names, target | `configs/*.yaml` | Config, not code |

@@ -58,7 +58,7 @@ Level 3 — imports from Level 0, 1, 2
     src/models/*
 
 Level 4 — imports from everything below
-    src/api/*
+    api/*
 ```
 
 Violating this rule creates circular imports. Every circular import we encountered during development was caused by a Level N module importing from Level N+1.

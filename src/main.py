@@ -2,7 +2,7 @@
 AirSense ML — unified command-line entry point.
 
 Provides a single interface for all ML pipeline operations.
-The API is run separately via src/api/app.py.
+The API is run separately via api/app.py.
 
 Usage:
     make train
