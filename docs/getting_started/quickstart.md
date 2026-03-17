@@ -106,6 +106,8 @@ All requests include automated tests that validate the response structure.
 make mlflow
 ```
 
+*Note: You can also use the interactive menu: `make ml` (planned) or explore results via `mlflow`.*
+
 Open `http://127.0.0.1:5000` to see all 7 models compared across RMSE, R², MAE, and RMSLE.
 
 ---

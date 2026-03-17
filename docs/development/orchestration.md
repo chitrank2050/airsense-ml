@@ -13,8 +13,10 @@ Airflow requires a database (PostgreSQL) and webserver + scheduler components. Y
 Ensure Docker is running, then spin up the cluster:
 
 ```bash
-docker compose -f docker-compose.airflow.yaml up -d
+make airflow
+# Select "Start Airflow cluster"
 ```
+*(Alternatively: `make _airflow-up` to run directly)*
 
 This will pull the required images, run database migrations, and create a default admin user.
 
@@ -37,6 +39,8 @@ The DAG will install dependencies inside the container and then execute `make tr
 When you are done monitoring the pipeline, you can tear down the cluster to free up system resources:
 
 ```bash
-docker compose -f docker-compose.airflow.yaml down -v
+make airflow
+# Select "Stop Airflow cluster"
 ```
+*(Alternatively: `make _airflow-down` to run directly)*
 *(The `-v` flag removes the associated volume so you start fresh next time).*

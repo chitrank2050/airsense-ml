@@ -109,6 +109,7 @@ git commit -m "chore: track raw data with DVC"
 make tree        # check project structure
 make train       # run training pipeline
 make api         # start API server
+make docker      # manage Docker images & containers (interactive)
 ```
 
 If all three run without errors — installation is complete.

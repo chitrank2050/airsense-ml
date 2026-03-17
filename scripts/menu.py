@@ -3,7 +3,7 @@
 scripts/menu.py — Polished interactive checkbox menu for ML-Notebook-Library.
 
 Usage (via Makefile):
-  uv run --with questionary scripts/menu.py [clean|obliviate|wizard]
+  uv run --with questionary scripts/menu.py [obliviate|docker|airflow|docs|git|db]
 """
 
 import os

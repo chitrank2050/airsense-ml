@@ -133,13 +133,11 @@ uv sync --all-groups
 # https://www.kaggle.com/datasets/sohails07/delhi-weather-and-aqi-dataset-2025
 ```
 
-### Train
-
 ```bash
 make train
 ```
 
-Trains 7 models, logs all metrics to MLflow, saves the best model to `models/best_model.pkl`.
+Trains 7 models, logs metrics to MLflow, and saves the best model to `models/best_model.pkl`. Use the interactive menu `make ml` (planned) or `make train` for the full suite.
 
 ### View Experiment Results
 
@@ -167,7 +165,10 @@ make docker-build
 make docker-run
 
 # Test
-curl http://localhost:8000/v1/health
+make test
+
+# Manage with Docker (interactive)
+make docker
 ```
 
 ---
@@ -298,42 +299,29 @@ make help           # Show all commands
 # Setup
 make init           # Create virtual environment
 make install        # Install all dependencies
-make install-prod   # Install production dependencies only
 
 # ML Pipeline
+make dev            # Run full pipeline
 make train          # Train all 7 models
-make train-prod     # Train production models only (XGBoost + LightGBM)
 make tune           # Hyperparameter tuning (Optuna)
 make mlflow         # Start MLflow UI
 
 # API
 make api            # Start FastAPI server locally
 
-# Docker
-make docker-build   # Build image (linux/amd64)
-make docker-run     # Run container locally
-make docker-stop    # Stop container
-make docker-logs    # Tail container logs
-make docker-shell   # Shell into container
-make docker-push    # Push to Docker Hub
-make docker-deploy  # Build + push in one command
+# Interactive Menus
+make docker         # Manage Docker (build, run, push, deploy, logs...)
+make airflow        # Manage Airflow orchestration (up, down, logs)
+make docs           # Manage MkDocs (build, deploy, serve)
+make git            # Manage Git (changelog, tag, release)
+make db             # Manage Database (migrate, revision, rollback)
 
-# Docs
-make docs           # Start MkDocs dev server
-make docs-build     # Build static site
-make docs-deploy    # Deploy to GitHub Pages
-
-# Code Quality
+# Quality & Maintenance
 make lint           # Ruff check
 make format         # Ruff format
-
-# Release
-make git-tag        # Tag version from pyproject.toml
-make git-release    # Tag + changelog + GitHub release
-
-# Maintenance
+make test           # Run pytest suite
 make tree           # Print project structure
-make obliviate      # Interactive reset menu
+make obliviate      # Interactive clean menu (cache, venv, models...)
 ```
 
 ---

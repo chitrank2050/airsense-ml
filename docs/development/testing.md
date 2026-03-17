@@ -13,7 +13,7 @@ We split tests logically into:
 To run the full test suite locally:
 
 ```bash
-uv run pytest tests/
+make test
 ```
 
 To run a specific test file:
