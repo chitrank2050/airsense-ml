@@ -169,8 +169,8 @@ def mode_docker() -> None:
         "🐳 Docker — select actions",
         choices=[
             Choice("Build image", value="_docker-build"),
-            Choice("Run container locally", value="_docker-run"),
-            Choice("Stop container", value="_docker-stop"),
+            Choice("Run unified stack (API + Airflow + DB)", value="_docker-run"),
+            Choice("Stop unified stack", value="_docker-stop"),
             Choice("Tail container logs", value="_docker-logs"),
             Choice("Shell into container", value="_docker-shell"),
             Choice("Push to Docker Hub", value="_docker-push"),

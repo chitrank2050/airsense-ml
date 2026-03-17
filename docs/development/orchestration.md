@@ -6,7 +6,7 @@ Airflow provides a high-level overview of task dependencies, job failures, and l
 
 ## Setting Up Airflow Locally
 
-Airflow requires a database (PostgreSQL) and webserver + scheduler components. You do not need to install these heavily into your local environment. Instead, we use `docker-compose`.
+Airflow requires a database (PostgreSQL) and webserver + scheduler components. Instead of manual setup, we use a **Unified Docker Stack** that bundles Airflow, the FastAPI service, and Postgres together.
 
 ### 1. Start the Environment
 

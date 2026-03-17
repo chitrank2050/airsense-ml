@@ -64,7 +64,7 @@ env/
 ENV/
 ai-env/
 .uv/
-.python-version
+# .python-version
 env.bak/
 venv.bak/
 .env.dev

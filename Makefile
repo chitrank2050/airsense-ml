@@ -129,18 +129,15 @@ _docker-build:
 	@echo "🚀 Run 'make docker-run' to start."
 
 _docker-run:
-	@if [ ! -f .env.prod ]; then \
-		echo "⚠️  .env.prod not found — copying from .env.example"; \
-		cp .env.example .env.prod; \
-		echo "⚠️  Update .env.prod with production values before deploying."; \
-	fi
-	@echo "🐳 Running container: $(IMAGE_NAME)..."
-	@docker run -p 8000:8000 --env-file .env.prod --name $(IMAGE_NAME) $(IMAGE_NAME)
+	@echo "🐳 Starting the unified stack (API + Airflow + DB)..."
+	@AIRFLOW_UID=$$(id -u) docker compose up -d
+	@echo "✅ Stack is up."
+	@echo "   API:     http://localhost:8000"
+	@echo "   Airflow: http://localhost:8080"
 
 _docker-stop:
-	@echo "🐳 Stopping container: $(IMAGE_NAME)..."
-	@docker stop $(IMAGE_NAME) 2>/dev/null || true
-	@docker rm $(IMAGE_NAME) 2>/dev/null || true
+	@echo "🐳 Stopping the unified stack..."
+	@AIRFLOW_UID=$$(id -u) docker compose down
 	@echo "✅ Container stopped and removed."
 
 _docker-logs:
@@ -204,17 +201,17 @@ airflow:
 
 _airflow-up:
 	@echo "🌬️  Starting Airflow cluster..."
-	@AIRFLOW_UID=$$(id -u) docker compose -f docker-compose.airflow.yaml up -d
+	@AIRFLOW_UID=$$(id -u) docker compose up -d
 	@echo "✅ Airflow is running at http://localhost:8080"
 	@echo "   User: admin | Pass: admin"
 
 _airflow-down:
 	@echo "🌬️  Stopping Airflow cluster..."
-	@AIRFLOW_UID=$$(id -u) docker compose -f docker-compose.airflow.yaml down -v
+	@AIRFLOW_UID=$$(id -u) docker compose down -v
 
 _airflow-logs:
 	@echo "📋 Tailing Airflow logs..."
-	@AIRFLOW_UID=$$(id -u) docker compose -f docker-compose.airflow.yaml logs -f
+	@AIRFLOW_UID=$$(id -u) docker compose logs -f
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Maintenance
